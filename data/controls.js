@@ -73,6 +73,10 @@ export const demoControls={
   ,'fx-visual-anodized':['color','color2','radius','scale'],'fx-visual-sandmetal':['radius','scale'],'fx-visual-terrazzo':['color','color2','scale'],'fx-visual-cork':['radius','rotate','scale'],'fx-visual-woven':['color','radius','scale']
   ,'fx-visual-crystal':['color','color2','scale'],'fx-visual-water':['scale'],'fx-visual-heathaze':['rotate','scale'],'fx-visual-bloom':['color','color2','scale'],'fx-visual-laser':['color','color2','rotate','scale']
   ,'fx-visual-plasma':['color','color2','scale'],'fx-visual-starfield':['color','scale'],'fx-visual-circuit':['color','color2','scale'],'fx-visual-topoglow':['color','scale'],'fx-visual-ferro':['scale']
+  ,'fx-visual-electroglass':['color','color2','radius','scale'],'fx-visual-cracked':['scale'],'fx-visual-ice':['color','scale'],'fx-visual-opal':['color','color2','scale'],'fx-visual-resin':['color','color2','radius','scale']
+  ,'fx-visual-enamel':['color','radius','scale'],'fx-visual-rubber':['color','color2','radius','scale'],'fx-visual-silicone':['color','radius','scale'],'fx-visual-leather':['radius','scale'],'fx-visual-wood':['radius','scale']
+  ,'fx-visual-concrete':['scale'],'fx-visual-marble':['radius','scale'],'fx-visual-hologrid':['color','color2','scale'],'fx-visual-moirelight':['color','color2','scale'],'fx-visual-colorfog':['color','color2','scale']
+  ,'fx-visual-rays':['rotate','scale'],'fx-visual-arc':['color','color2','scale'],'fx-visual-nebula':['color','color2','scale'],'fx-visual-sonar':['color','color2','scale'],'fx-visual-datarain':['color','color2','scale']
 };
 
 export const controlsForDemo=demo=>{

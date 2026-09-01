@@ -44,9 +44,10 @@ let builtIndex=indexSource.replaceAll('UI WIKI / OPEN DESIGN KNOWLEDGE BASE / 20
  .replace(currentCount,`<div class="stat"><b>${terms.length}</b><span>设计效果</span>`)
  .replace(/<a class="brand".*?<\/a>/,brand('index.html'))
  .replace('OPEN DESIGN KNOWLEDGE BASE / 2026','UI WIKI / OPEN DESIGN KNOWLEDGE BASE / 2026')
+ .replace(/浏览、调节并拆解 \d+ 种/g,`浏览、调节并拆解 ${terms.length} 种`)
  .replace(/<div class="sidebar-foot">.*?<\/div>/,`<div class="sidebar-foot"><strong>UI WIKI / OPEN SOURCE</strong><br>${terms.length} EFFECTS · 6 CATEGORIES</div>`);
 if(!builtIndex.includes('property="og:title"')){
- const description='浏览、调节并拆解 640 种 UI、视觉、版式、字体与交互动效。';
+ const description=`浏览、调节并拆解 ${terms.length} 种 UI、视觉、版式、字体与交互动效。`;
  builtIndex=builtIndex.replace('</head>',`${seoTags({title:'UI Wiki — 设计效果的开放图谱',description,schema:{'@context':'https://schema.org','@type':'WebSite',name:'UI Wiki',url:`${siteUrl}/`,description,inLanguage:'zh-CN'}})}</head>`);
 }
 await writeFile('index.html',builtIndex);

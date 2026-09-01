@@ -15,9 +15,9 @@
     <text x="101" y="58" fill="#94a3b8" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">OPEN DESIGN KNOWLEDGE BASE</text>
   </g>
   <text x="76" y="278" fill="#f4f7fb" font-family="Arial,'PingFang SC',sans-serif" font-size="68" font-weight="800" letter-spacing="-2">设计效果的开放图谱</text>
-  <text x="78" y="338" fill="#b9c7da" font-family="Arial,'PingFang SC',sans-serif" font-size="24">浏览、调节并拆解 640 种设计效果与交互模式</text>
+  <text x="78" y="338" fill="#b9c7da" font-family="Arial,'PingFang SC',sans-serif" font-size="24">浏览、调节并拆解 660 种设计效果与交互模式</text>
   <g transform="translate(78 410)" font-family="Arial,sans-serif">
-    <rect width="182" height="54" rx="27" fill="url(#accent)"/><text x="91" y="34" text-anchor="middle" fill="#07111f" font-size="16" font-weight="800">640 EFFECTS</text>
+    <rect width="182" height="54" rx="27" fill="url(#accent)"/><text x="91" y="34" text-anchor="middle" fill="#07111f" font-size="16" font-weight="800">660 EFFECTS</text>
     <rect x="198" width="182" height="54" rx="27" fill="none" stroke="#53d7d0" stroke-opacity=".5"/><text x="289" y="34" text-anchor="middle" fill="#c8f4f0" font-size="14" font-weight="700">STATIC · OPEN</text>
   </g>
   <text x="78" y="560" fill="#738399" font-family="monospace" font-size="15">xvshiting.github.io/ui-wiki</text>
