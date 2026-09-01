@@ -434,4 +434,126 @@ export const extraTerms=[
   ,{id:'drop-cap',cat:'type-layout',name:'首字下沉',en:'Drop Cap',tags:['排版','首字'],summary:'放大首字并跨越多行建立段落开端。',usage:'杂志、小说和专题页。',principle:'首字与正文保持基线关系。',demo:'fx-type-dropcap'}
   ,{id:'small-caps',cat:'type-layout',name:'小型大写字母',en:'Small Caps',tags:['排版','大写'],summary:'用缩小的大写字母强调标签而不破坏行高。',usage:'目录、注释和导航。',principle:'字高与小写字母协调。',demo:'fx-type-smallcaps'}
   ,{id:'text-measure',cat:'type-layout',name:'舒适行长',en:'Readable Text Measure',tags:['排版','阅读'],summary:'控制每行字符数以提升长文本的阅读速度。',usage:'文章、文档和知识库。',principle:'行长与字号和行高共同调整。',demo:'fx-type-measure'}
+  ,{id:'wavy-type',cat:'type-display',name:'波浪字体',en:'Wavy Type',tags:['标题','波浪'],summary:'字符沿波浪基线起伏，形成轻快的标题动势。',usage:'音乐、活动和社交视觉。',principle:'波幅不影响字间识别。',demo:'fx-display-wavy'}
+  ,{id:'arched-type',cat:'type-display',name:'弧形字体',en:'Arched Type',tags:['标题','弧形'],summary:'文字沿拱形路径排列，建立徽章式构图。',usage:'徽章、海报和包装。',principle:'弧度与字距共同控制密度。',demo:'fx-display-arched'}
+  ,{id:'circular-type',cat:'type-display',name:'圆环字体',en:'Circular Type',tags:['标题','圆环'],summary:'字符围绕圆环排列，形成完整的视觉符号。',usage:'标识、唱片和活动。',principle:'圆心留出足够呼吸空间。',demo:'fx-display-circular'}
+  ,{id:'perspective-type',cat:'type-display',name:'透视字体',en:'Perspective Type',tags:['标题','透视'],summary:'文字沿消失点缩放，制造空间延伸感。',usage:'电影、游戏和未来主题。',principle:'透视方向与构图一致。',demo:'fx-display-perspective'}
+  ,{id:'isometric-type',cat:'type-display',name:'等距立体字体',en:'Isometric Type',tags:['标题','等距'],summary:'按等距轴构造字形，呈现稳定的三维块面。',usage:'技术、建筑和游戏。',principle:'三条轴线角度保持统一。',demo:'fx-display-isometric'}
+  ,{id:'extruded-type',cat:'type-display',name:'挤压立体字体',en:'Extruded Type',tags:['标题','挤压'],summary:'复制偏移文字形成有厚度的挤压立体效果。',usage:'海报、标题和徽标。',principle:'挤压方向服务光源和阅读。',demo:'fx-display-extruded'}
+  ,{id:'inflated-type',cat:'type-display',name:'膨胀字体',en:'Inflated Type',tags:['标题','膨胀'],summary:'圆润膨胀的字形带来柔软、充气般的触感。',usage:'儿童、食品和潮流视觉。',principle:'轮廓膨胀后仍需保持字腔。',demo:'fx-display-inflated'}
+  ,{id:'liquid-type',cat:'type-display',name:'液化字体',en:'Liquid Type',tags:['标题','液化'],summary:'字形边缘流动融合，模拟液体变形。',usage:'音乐、实验和数字艺术。',principle:'液化程度与识别性平衡。',demo:'fx-display-liquid'}
+  ,{id:'mirrored-type',cat:'type-display',name:'镜像字体',en:'Mirrored Type',tags:['标题','镜像'],summary:'文字沿轴线镜像形成对称而神秘的标题。',usage:'时尚、音乐和海报。',principle:'保留原字作为阅读锚点。',demo:'fx-display-mirrored'}
+  ,{id:'kaleidoscopic-type',cat:'type-display',name:'万花筒字体',en:'Kaleidoscopic Type',tags:['标题','万花筒'],summary:'字形片段旋转复制形成万花筒般的图案。',usage:'唱片、节庆和实验图形。',principle:'中心结构保持视觉秩序。',demo:'fx-display-kaleido'}
+  ,{id:'metallic-type',cat:'type-material',name:'金属字体',en:'Metallic Type',tags:['材质','金属'],summary:'渐变高光和倒影让文字呈现金属表面。',usage:'科技、汽车和徽章。',principle:'高光方向保持统一。',demo:'fx-material-metaltype'}
+  ,{id:'glass-type',cat:'type-material',name:'玻璃字体',en:'Glass Type',tags:['材质','玻璃'],summary:'半透明、折射和高光模拟玻璃质感。',usage:'科技、奢侈品和界面。',principle:'透明度不能牺牲可读性。',demo:'fx-material-glasstype'}
+  ,{id:'furry-type',cat:'type-material',name:'毛绒字体',en:'Furry Type',tags:['材质','毛绒'],summary:'柔软边缘和细小纤维模拟毛绒文字。',usage:'儿童、玩具和生活方式。',principle:'纹理密度保持轮廓清晰。',demo:'fx-material-furrytype'}
+  ,{id:'clay-type',cat:'type-material',name:'黏土字体',en:'Clay Type',tags:['材质','黏土'],summary:'圆钝体积和柔和阴影呈现手捏黏土效果。',usage:'儿童、手工和教育。',principle:'高光与阴影共同表达体积。',demo:'fx-material-claytype'}
+  ,{id:'paper-type',cat:'type-material',name:'纸张字体',en:'Paper Type',tags:['材质','纸张'],summary:'纸张边缘和纤维纹理赋予文字手工触感。',usage:'出版、文创和手账。',principle:'纸纹不要覆盖字形细节。',demo:'fx-material-papertype'}
+  ,{id:'woodcut-type',cat:'type-material',name:'木刻字体',en:'Woodcut Type',tags:['材质','木刻'],summary:'粗细不一的刻痕模拟木版印刷字形。',usage:'海报、民俗和出版。',principle:'刻痕方向形成统一纹理。',demo:'fx-material-woodtype'}
+  ,{id:'halftone-type',cat:'type-material',name:'半调字体',en:'Halftone Type',tags:['材质','半调'],summary:'点阵密度构成复古印刷风格的文字。',usage:'漫画、海报和报刊。',principle:'点阵尺寸适配输出分辨率。',demo:'fx-material-halftype'}
+  ,{id:'grainy-type',cat:'type-material',name:'颗粒字体',en:'Grainy Type',tags:['材质','颗粒'],summary:'随机颗粒打破纯色边缘，形成胶片般的粗粝感。',usage:'音乐、电影和复古品牌。',principle:'颗粒强度保持字面可辨。',demo:'fx-material-graintype'}
+  ,{id:'neon-type',cat:'type-material',name:'霓虹字体',en:'Neon Type',tags:['材质','霓虹'],summary:'发光描边与色彩晕染模拟霓虹灯管。',usage:'夜生活、音乐和游戏。',principle:'发光半径与背景对比明确。',demo:'fx-material-neontype'}
+  ,{id:'embroidered-type',cat:'type-material',name:'刺绣字体',en:'Embroidered Type',tags:['材质','刺绣'],summary:'重复线迹和织物底纹构成手工刺绣文字。',usage:'服饰、手工和生活方式。',principle:'针脚方向与字形曲线一致。',demo:'fx-material-embrotype'}
+  ,{id:'weight-breathing-type',cat:'type-motion',name:'字重呼吸',en:'Weight Breathing Type',tags:['动态','字重'],summary:'字重缓慢变粗变细，像呼吸一样产生节奏。',usage:'加载、标题和数字体验。',principle:'变化幅度不影响识别。',demo:'fx-motion-weighttype'}
+  ,{id:'width-morphing-type',cat:'type-motion',name:'字宽伸缩',en:'Width Morphing Type',tags:['动态','字宽'],summary:'文字在窄体与宽体之间平滑变形。',usage:'标题、品牌和交互反馈。',principle:'变形锚点保持稳定。',demo:'fx-motion-widthtype'}
+  ,{id:'random-glyph-cycling',cat:'type-motion',name:'字符随机替换',en:'Random Glyph Cycling',tags:['动态','字符'],summary:'字符在目标字形前短暂随机循环，制造解码感。',usage:'科技、游戏和加载状态。',principle:'最终结果必须及时稳定。',demo:'fx-motion-randomglyph'}
+  ,{id:'text-scramble',cat:'type-motion',name:'文本扰动',en:'Text Scramble',tags:['动态','扰动'],summary:'文本在切换时经历字符扰动再恢复清晰。',usage:'导航、标题和数据刷新。',principle:'扰动时间短且可预测。',demo:'fx-motion-scramble'}
+  ,{id:'typewriter-motion',cat:'type-motion',name:'打字机动效',en:'Typewriter Motion',tags:['动态','打字机'],summary:'字符按顺序出现并配合光标闪烁模拟打字。',usage:'终端、故事和引导。',principle:'动画可暂停并支持跳过。',demo:'fx-motion-typewriter'}
+  ,{id:'glyph-cascade',cat:'type-motion',name:'字符瀑布',en:'Glyph Cascade',tags:['动态','瀑布'],summary:'字符按列或行依次落下，形成瀑布般的进入节奏。',usage:'标题、数据和音乐。',principle:'错峰延迟保持整体节奏。',demo:'fx-motion-cascadeglyph'}
+  ,{id:'audio-reactive-type',cat:'type-motion',name:'音频响应字体',en:'Audio-reactive Type',tags:['动态','音频'],summary:'字形尺度或字重随音量变化。',usage:'音乐、播客和现场视觉。',principle:'响应幅度限制在可读范围。',demo:'fx-motion-audiotype'}
+  ,{id:'cursor-reactive-type',cat:'type-motion',name:'鼠标响应字体',en:'Cursor-reactive Type',tags:['动态','鼠标'],summary:'文字局部字重或位移随指针靠近而变化。',usage:'作品集、实验和品牌页。',principle:'响应区域边界清楚。',demo:'fx-motion-cursortype'}
+  ,{id:'generative-letterforms',cat:'type-motion',name:'生成式字形',en:'Generative Letterforms',tags:['生成','字形'],summary:'通过规则或随机参数生成不断变化的字形轮廓。',usage:'艺术、研究和海报。',principle:'随机性仍需受系统约束。',demo:'fx-motion-generative'}
+  ,{id:'multi-axis-variable-type',cat:'type-motion',name:'可变字体多轴动画',en:'Multi-axis Variable Type',tags:['动态','可变字体'],summary:'字重、字宽和倾斜等轴线同步动画。',usage:'品牌、标题和数字封面。',principle:'多轴运动保持缓和协调。',demo:'fx-motion-variabletype'}
+  ,{id:'top-app-bar',cat:'ui-layout',name:'顶部应用栏',en:'Top App Bar',tags:['导航','外壳'],summary:'将品牌、页面标题和关键操作集中在顶部栏。',usage:'后台、文档和移动应用。',principle:'主操作保持可见且不拥挤。',demo:'fx-layout-topbar'}
+  ,{id:'dual-level-navigation',cat:'ui-layout',name:'双层导航',en:'Dual-level Navigation',tags:['导航','层级'],summary:'一级全局导航与二级上下文导航协同工作。',usage:'大型网站和企业应用。',principle:'两层职责和当前状态清晰区分。',demo:'fx-layout-dualnav'}
+  ,{id:'mega-menu-layout',cat:'ui-layout',name:'巨型菜单',en:'Mega Menu',tags:['导航','菜单'],summary:'展开式多列菜单展示大量分类与快捷入口。',usage:'电商、门户和知识库。',principle:'分组与扫描路径优先。',demo:'fx-layout-mega'}
+  ,{id:'bottom-navigation',cat:'ui-layout',name:'底部导航',en:'Bottom Navigation',tags:['导航','移动端'],summary:'将核心目的地固定在移动端底部触达区域。',usage:'移动应用和轻量工具。',principle:'目的地数量保持克制。',demo:'fx-layout-bottomnav'}
+  ,{id:'floating-navigation-island',cat:'ui-layout',name:'浮动导航岛',en:'Floating Navigation Island',tags:['导航','浮动'],summary:'悬浮胶囊承载主要导航与快捷动作。',usage:'创意工具和沉浸式网页。',principle:'浮动元素不遮挡内容焦点。',demo:'fx-layout-navisland'}
+  ,{id:'navigation-drawer-layout',cat:'ui-layout',name:'抽屉式导航',en:'Navigation Drawer',tags:['导航','抽屉'],summary:'从边缘滑出的面板容纳分层导航与账户入口。',usage:'移动端和响应式后台。',principle:'打开状态提供明确关闭路径。',demo:'fx-layout-drawer'}
+  ,{id:'collapsible-sidebar-layout',cat:'ui-layout',name:'可折叠侧栏',en:'Collapsible Sidebar',tags:['导航','侧栏'],summary:'侧栏在完整导航与图标轨道之间切换。',usage:'后台、编辑器和工作台。',principle:'折叠后仍能辨识图标语义。',demo:'fx-layout-collapsibleside'}
+  ,{id:'icon-rail-layout',cat:'ui-layout',name:'图标轨道布局',en:'Icon Rail Layout',tags:['导航','图标'],summary:'窄轨道以图标提供高密度的一级导航。',usage:'设计工具和专业软件。',principle:'选中态与提示文本配套。',demo:'fx-layout-iconrail'}
+  ,{id:'command-palette-layout',cat:'ui-layout',name:'命令面板布局',en:'Command Palette Layout',tags:['导航','命令'],summary:'居中的搜索命令面板快速跳转功能与内容。',usage:'开发工具、后台和生产力应用。',principle:'键盘路径和分类反馈清楚。',demo:'fx-layout-palette'}
+  ,{id:'breadcrumb-workspace',cat:'ui-layout',name:'面包屑工作区',en:'Breadcrumb Workspace',tags:['导航','层级'],summary:'面包屑路径与当前工作区内容并置，帮助定位层级。',usage:'文件管理、文档和电商。',principle:'当前层级与可返回节点易区分。',demo:'fx-layout-breadcrumb'}
+  ,{id:'single-column-reading-flow',cat:'ui-layout',name:'单栏阅读流',en:'Single-column Reading Flow',tags:['阅读','单栏'],summary:'以窄幅单栏维持连续、专注的阅读路径。',usage:'文章、文档和知识库。',principle:'行长与行距保持舒适。',demo:'fx-layout-singlecolumn'}
+  ,{id:'two-column-article',cat:'ui-layout',name:'双栏文章布局',en:'Two-column Article',tags:['阅读','双栏'],summary:'正文与辅助信息并列，提升长文的上下文效率。',usage:'杂志、研究和专题页。',principle:'主次栏宽度差异明确。',demo:'fx-layout-twocolumn'}
+  ,{id:'newspaper-columns',cat:'ui-layout',name:'多栏报纸布局',en:'Newspaper Columns',tags:['阅读','多栏'],summary:'多列文本构成高密度的报刊式信息流。',usage:'新闻、档案和编辑页面。',principle:'列间距和阅读方向一致。',demo:'fx-layout-newspaper'}
+  ,{id:'table-of-contents-layout',cat:'ui-layout',name:'目录伴随布局',en:'Table-of-contents Layout',tags:['阅读','目录'],summary:'固定目录伴随正文滚动，持续提示章节位置。',usage:'文档、教程和长篇文章。',principle:'当前章节状态明显。',demo:'fx-layout-toc'}
+  ,{id:'sidenote-layout',cat:'ui-layout',name:'脚注边栏布局',en:'Sidenote Layout',tags:['阅读','脚注'],summary:'注释沿正文外侧排列，减少主文流中断。',usage:'学术、出版和注释型内容。',principle:'注释与锚点关系清楚。',demo:'fx-layout-sidenote'}
+  ,{id:'pullquote-layout',cat:'ui-layout',name:'引文穿插布局',en:'Pull-quote Layout',tags:['阅读','引文'],summary:'放大的关键引文穿插在正文中形成视觉呼吸。',usage:'杂志、访谈和品牌故事。',principle:'引文不替代正文语义。',demo:'fx-layout-pullquote'}
+  ,{id:'chapter-panel-layout',cat:'ui-layout',name:'章节分镜布局',en:'Chapter Panel Layout',tags:['阅读','章节'],summary:'把章节拆为连续面板，像分镜一样组织内容。',usage:'漫画、教程和叙事页面。',principle:'面板顺序和转场清楚。',demo:'fx-layout-chapter'}
+  ,{id:'immersive-reading-layout',cat:'ui-layout',name:'沉浸阅读布局',en:'Immersive Reading Layout',tags:['阅读','沉浸'],summary:'隐藏干扰元素，让正文成为唯一的视觉焦点。',usage:'小说、诗歌和专注工具。',principle:'仍需保留退出与进度入口。',demo:'fx-layout-immersive'}
+  ,{id:'annotated-canvas-layout',cat:'ui-layout',name:'注释画布布局',en:'Annotated Canvas',tags:['阅读','注释'],summary:'在自由画布上将内容与批注以连线关联。',usage:'研究、评审和视觉分析。',principle:'批注层级和连线不遮挡主体。',demo:'fx-layout-annotated'}
+  ,{id:'document-comparison-layout',cat:'ui-layout',name:'文档对照布局',en:'Document Comparison Layout',tags:['阅读','对照'],summary:'并列展示两份文档，帮助逐段比较差异。',usage:'翻译、审核和版本管理。',principle:'滚动与差异标记保持同步。',demo:'fx-layout-compare'}
+  ,{id:'compact-data-list',cat:'ui-layout',name:'紧凑数据列表',en:'Compact Data List',tags:['列表','数据'],summary:'以紧凑行高承载高密度数据与快速扫描。',usage:'后台、库存和日志。',principle:'字段对齐优先于装饰。',demo:'fx-layout-compactlist'}
+  ,{id:'media-object-list',cat:'ui-layout',name:'媒体对象列表',en:'Media Object List',tags:['列表','媒体'],summary:'缩略图、标题和元信息组合成可扫描列表项。',usage:'内容、消息和文件。',principle:'缩略图比例保持一致。',demo:'fx-layout-mediaobject'}
+  ,{id:'grouped-list',cat:'ui-layout',name:'分组列表',en:'Grouped List',tags:['列表','分组'],summary:'按标题或日期分组，帮助理解集合结构。',usage:'联系人、设置和历史记录。',principle:'分组标签与项目层级区分。',demo:'fx-layout-groupedlist'}
+  ,{id:'alphabetical-index-list',cat:'ui-layout',name:'字母索引列表',en:'Alphabetical Index',tags:['列表','索引'],summary:'使用字母索引快速定位长列表内容。',usage:'通讯录、词典和目录。',principle:'索引与滚动位置保持同步。',demo:'fx-layout-alphaindex'}
+  ,{id:'horizontal-card-rail',cat:'ui-layout',name:'横向卡片轨道',en:'Horizontal Card Rail',tags:['列表','横向'],summary:'横向滚动卡片轨道在有限高度展示更多内容。',usage:'推荐、媒体和商品。',principle:'露出下一张卡提示可滚动。',demo:'fx-layout-cardrail'}
+  ,{id:'infinite-gallery',cat:'ui-layout',name:'无限画廊',en:'Infinite Gallery',tags:['列表','画廊'],summary:'连续加载图片或项目形成无尽浏览画廊。',usage:'作品集、图库和电商。',principle:'加载状态和当前位置可感知。',demo:'fx-layout-gallery'}
+  ,{id:'clustered-cards',cat:'ui-layout',name:'聚类卡片布局',en:'Clustered Cards',tags:['列表','聚类'],summary:'相关卡片以视觉簇组合，表达项目之间的关联。',usage:'仪表盘、研究和灵感库。',principle:'簇间距大于簇内间距。',demo:'fx-layout-cluster'}
+  ,{id:'honeycomb-grid',cat:'ui-layout',name:'蜂窝网格',en:'Honeycomb Grid',tags:['列表','网格'],summary:'六边形单元紧密拼接，形成独特集合布局。',usage:'分类、游戏和图形导航。',principle:'单元尺寸与标签长度平衡。',demo:'fx-layout-honeycomb'}
+  ,{id:'tiled-pill-layout',cat:'ui-layout',name:'圆角砖块布局',en:'Tiled Pill Layout',tags:['列表','圆角'],summary:'圆角砖块以统一间距排列，兼顾标签与操作。',usage:'筛选器、技能和标签。',principle:'文字长度变化不破坏节奏。',demo:'fx-layout-pilltiles'}
+  ,{id:'tag-cloud-layout',cat:'ui-layout',name:'标签云布局',en:'Tag Cloud Layout',tags:['列表','标签'],summary:'通过字号和位置差异表达标签权重。',usage:'搜索、内容分类和数据探索。',principle:'不要只用大小表达唯一语义。',demo:'fx-layout-tagcloud'}
+  ,{id:'kpi-overview-layout',cat:'ui-layout',name:'KPI 总览布局',en:'KPI Overview Layout',tags:['工作台','指标'],summary:'以高优先级指标卡快速概览业务状态。',usage:'运营、财务和增长后台。',principle:'指标、趋势和时间范围就近呈现。',demo:'fx-layout-kpi'}
+  ,{id:'trading-terminal-layout',cat:'ui-layout',name:'交易终端布局',en:'Trading Terminal Layout',tags:['工作台','交易'],summary:'行情、订单簿与下单面板组成高密度交易工作区。',usage:'金融、交易和监控。',principle:'关键数字优先且更新稳定。',demo:'fx-layout-trading'}
+  ,{id:'multi-pane-workspace',cat:'ui-layout',name:'多窗口工作台',en:'Multi-pane Workspace',tags:['工作台','多窗'],summary:'多个可调整窗格并列承载互相关联的任务。',usage:'编辑器、分析和专业工具。',principle:'窗格边界与焦点状态清楚。',demo:'fx-layout-multipane'}
+  ,{id:'master-detail-layout',cat:'ui-layout',name:'主从详情布局',en:'Master-detail Layout',tags:['工作台','详情'],summary:'列表主区与选中项详情区同步浏览。',usage:'邮件、文件和数据管理。',principle:'选择状态与返回路径明确。',demo:'fx-layout-masterdetail'}
+  ,{id:'inspector-panel-layout',cat:'ui-layout',name:'检查器面板布局',en:'Inspector Panel Layout',tags:['工作台','检查器'],summary:'右侧检查器集中展示当前对象属性与设置。',usage:'设计工具、编辑器和表格。',principle:'属性按层级分组并支持折叠。',demo:'fx-layout-inspector'}
+  ,{id:'dockable-panels',cat:'ui-layout',name:'可停靠面板',en:'Dockable Panels',tags:['工作台','停靠'],summary:'面板可在边缘停靠、浮动或重新排序。',usage:'开发工具和创意软件。',principle:'停靠位置有明确视觉反馈。',demo:'fx-layout-dockable'}
+  ,{id:'pivot-workspace',cat:'ui-layout',name:'数据透视布局',en:'Pivot Workspace',tags:['工作台','透视'],summary:'通过行列维度切换探索聚合数据。',usage:'分析、报表和运营。',principle:'维度与指标选择可回溯。',demo:'fx-layout-pivot'}
+  ,{id:'filter-results-layout',cat:'ui-layout',name:'筛选结果布局',en:'Filter-results Layout',tags:['工作台','筛选'],summary:'筛选条件与结果集合并置，实时反馈范围变化。',usage:'搜索、电商和管理后台。',principle:'已选条件与结果数量同步。',demo:'fx-layout-filterresults'}
+  ,{id:'alert-center-layout',cat:'ui-layout',name:'告警中心',en:'Alert Center Layout',tags:['工作台','告警'],summary:'按严重程度和时间集中呈现告警与处理状态。',usage:'监控、运维和安全。',principle:'未处理告警优先突出。',demo:'fx-layout-alertcenter'}
+  ,{id:'control-room-wall',cat:'ui-layout',name:'控制室大屏',en:'Control Room Wall',tags:['工作台','大屏'],summary:'多屏指标与状态模块组成远距离可读的大屏。',usage:'运营中心、工厂和交通。',principle:'核心状态使用大字号和高对比。',demo:'fx-layout-controlwall'}
+  ,{id:'long-form-layout',cat:'ui-layout',name:'单页长表单',en:'Long-form Layout',tags:['表单','流程'],summary:'将复杂字段按章节组织在一页连续表单中。',usage:'申请、设置和资料录入。',principle:'分组和进度提示减少迷失。',demo:'fx-layout-longform'}
+  ,{id:'stepper-wizard',cat:'ui-layout',name:'分步向导',en:'Stepper Wizard',tags:['表单','步骤'],summary:'用步骤条拆分任务并显示当前完成进度。',usage:'注册、导入和配置。',principle:'每步目标单一且可回退。',demo:'fx-layout-stepper'}
+  ,{id:'split-form-layout',cat:'ui-layout',name:'分栏表单',en:'Split Form Layout',tags:['表单','分栏'],summary:'字段与辅助说明左右并列，提升宽屏录入效率。',usage:'后台、资料和结账。',principle:'字段顺序在窄屏保持自然。',demo:'fx-layout-splitform'}
+  ,{id:'conversational-form',cat:'ui-layout',name:'对话式表单',en:'Conversational Form',tags:['表单','对话'],summary:'将字段逐个呈现为对话式问题，降低一次性压力。',usage:'入职、调研和引导。',principle:'问题语气清晰并支持跳过。',demo:'fx-layout-conversation'}
+  ,{id:'inline-editing-layout',cat:'ui-layout',name:'内联编辑布局',en:'Inline Editing Layout',tags:['表单','编辑'],summary:'直接在内容位置编辑字段，减少页面跳转。',usage:'表格、资料和设置。',principle:'编辑态与阅读态边界明显。',demo:'fx-layout-inlineedit'}
+  ,{id:'review-confirm-layout',cat:'ui-layout',name:'审核确认布局',en:'Review-and-confirm Layout',tags:['表单','确认'],summary:'提交前汇总展示输入内容，便于审阅和确认。',usage:'申请、支付和发布。',principle:'修改入口靠近对应字段。',demo:'fx-layout-review'}
+  ,{id:'conditional-form-layout',cat:'ui-layout',name:'条件字段布局',en:'Conditional Form Layout',tags:['表单','条件'],summary:'根据前置选择动态展开相关字段。',usage:'保险、问卷和配置器。',principle:'新增字段出现时保持上下文。',demo:'fx-layout-conditional'}
+  ,{id:'bulk-editing-layout',cat:'ui-layout',name:'批量编辑布局',en:'Bulk Editing Layout',tags:['表单','批量'],summary:'选择多条记录后在统一工具栏中批量修改。',usage:'内容、库存和权限管理。',principle:'影响范围和撤销能力明确。',demo:'fx-layout-bulkedit'}
+  ,{id:'checkout-flow-layout',cat:'ui-layout',name:'结账流程布局',en:'Checkout Flow Layout',tags:['表单','结账'],summary:'购物车、地址、支付和确认按清晰流程排列。',usage:'电商、订阅和票务。',principle:'费用与当前步骤持续可见。',demo:'fx-layout-checkout'}
+  ,{id:'application-progress-layout',cat:'ui-layout',name:'申请进度布局',en:'Application Progress Layout',tags:['表单','进度'],summary:'申请状态、待办事项和时间节点集中展示。',usage:'金融、招聘和政务。',principle:'下一步行动必须明确。',demo:'fx-layout-application'}
+  ,{id:'saas-hero-layout',cat:'ui-layout',name:'SaaS 首屏布局',en:'SaaS Hero Layout',tags:['商业','首屏'],summary:'价值主张、产品预览与行动按钮组成 SaaS 首屏。',usage:'软件产品和服务官网。',principle:'首屏只保留一个主行动。',demo:'fx-layout-saashero'}
+  ,{id:'feature-matrix-layout',cat:'ui-layout',name:'产品功能矩阵',en:'Feature Matrix Layout',tags:['商业','功能'],summary:'按维度并列比较产品功能与方案差异。',usage:'定价页、销售和产品文档。',principle:'比较维度保持同一顺序。',demo:'fx-layout-featurematrix'}
+  ,{id:'pricing-table-layout',cat:'ui-layout',name:'定价表布局',en:'Pricing Table Layout',tags:['商业','定价'],summary:'将方案、价格、权益和行动入口并列展示。',usage:'SaaS、订阅和服务。',principle:'推荐方案有明确但克制的强调。',demo:'fx-layout-pricing'}
+  ,{id:'case-study-layout',cat:'ui-layout',name:'案例研究布局',en:'Case Study Layout',tags:['内容','案例'],summary:'以问题、过程、结果组织可验证的案例叙事。',usage:'作品集、咨询和品牌。',principle:'证据与结论相互对应。',demo:'fx-layout-casestudy'}
+  ,{id:'testimonial-wall',cat:'ui-layout',name:'用户证言墙',en:'Testimonial Wall',tags:['内容','证言'],summary:'多条用户评价以墙面式布局形成社会证明。',usage:'产品官网和招聘。',principle:'来源、头像和引用关系清楚。',demo:'fx-layout-testimonial'}
+  ,{id:'brand-story-scrollytelling',cat:'ui-layout',name:'品牌故事长页',en:'Brand Story Scrollytelling',tags:['内容','叙事'],summary:'通过滚动节奏逐段讲述品牌历史与价值。',usage:'品牌、机构和活动。',principle:'每段只推进一个叙事节点。',demo:'fx-layout-brandstory'}
+  ,{id:'career-listing-layout',cat:'ui-layout',name:'招聘职位布局',en:'Career Listing Layout',tags:['商业','招聘'],summary:'职位筛选、列表和详情组成高效招聘浏览布局。',usage:'招聘和企业站。',principle:'地点、类型和申请入口易扫读。',demo:'fx-layout-career'}
+  ,{id:'event-agenda-layout',cat:'ui-layout',name:'活动议程布局',en:'Event Agenda Layout',tags:['内容','活动'],summary:'按时间轴展示活动场次、地点与讲者信息。',usage:'会议、展览和课程。',principle:'冲突场次与当前时段突出显示。',demo:'fx-layout-agenda'}
+  ,{id:'course-catalog-layout',cat:'ui-layout',name:'课程目录布局',en:'Course Catalog Layout',tags:['内容','课程'],summary:'课程卡片、分类筛选和学习进度组合呈现。',usage:'教育、培训和知识库。',principle:'难度、时长和进度同层表达。',demo:'fx-layout-course'}
+  ,{id:'help-center-layout',cat:'ui-layout',name:'帮助中心布局',en:'Help Center Layout',tags:['内容','帮助'],summary:'搜索、主题分类和热门文章构成支持入口。',usage:'产品帮助和客服。',principle:'从问题到答案的路径最短。',demo:'fx-layout-help'}
+  ,{id:'map-sidebar-layout',cat:'ui-layout',name:'地图侧栏布局',en:'Map Sidebar Layout',tags:['空间','地图'],summary:'地图与筛选、图层或地点列表并置。',usage:'出行、房产和数据地图。',principle:'地图操作不被侧栏遮挡。',demo:'fx-layout-mapsidebar'}
+  ,{id:'map-overlay-cards',cat:'ui-layout',name:'地图浮卡',en:'Map Overlay Cards',tags:['空间','浮卡'],summary:'地点卡片悬浮在地图上方，展示选中对象信息。',usage:'地图、旅行和配送。',principle:'浮卡锚点与地图位置对应。',demo:'fx-layout-mapcards'}
+  ,{id:'floor-plan-navigation',cat:'ui-layout',name:'平面图导航',en:'Floor-plan Navigation',tags:['空间','平面图'],summary:'以楼层平面图作为空间导航与定位界面。',usage:'园区、商场和展馆。',principle:'方向、楼层和当前位置明确。',demo:'fx-layout-floorplan'}
+  ,{id:'coordinate-canvas-layout',cat:'ui-layout',name:'坐标画布布局',en:'Coordinate Canvas',tags:['空间','坐标'],summary:'在二维坐标画布上定位与比较对象。',usage:'研究、规划和数据探索。',principle:'坐标轴、比例和缩放可见。',demo:'fx-layout-coordinate'}
+  ,{id:'node-graph-canvas',cat:'ui-layout',name:'节点关系画布',en:'Node Graph Canvas',tags:['空间','关系'],summary:'节点与连线组成可探索的关系网络。',usage:'知识图谱、流程和依赖管理。',principle:'节点层级和连接方向清楚。',demo:'fx-layout-nodegraph'}
+  ,{id:'infinite-whiteboard',cat:'ui-layout',name:'白板无限画布',en:'Infinite Whiteboard',tags:['空间','白板'],summary:'不受固定页面限制的自由协作画布。',usage:'头脑风暴、计划和远程协作。',principle:'缩放与当前位置始终可感知。',demo:'fx-layout-whiteboard'}
+  ,{id:'minimap-canvas',cat:'ui-layout',name:'缩略图导航画布',en:'Minimap Canvas',tags:['空间','缩略图'],summary:'缩略图概览帮助在大画布中快速定位。',usage:'编辑器、地图和流程图。',principle:'缩略图视口与主画布同步。',demo:'fx-layout-minimap'}
+  ,{id:'geographic-story-layout',cat:'ui-layout',name:'地理故事布局',en:'Geographic Story Layout',tags:['空间','叙事'],summary:'沿地理路径逐段讲述地点与事件。',usage:'旅行、历史和新闻。',principle:'地点顺序与故事进度一致。',demo:'fx-layout-geostory'}
+  ,{id:'route-planner-layout',cat:'ui-layout',name:'路线规划布局',en:'Route Planner Layout',tags:['空间','路线'],summary:'起终点、途经点与路线详情在同一工作区协同。',usage:'出行、物流和户外。',principle:'总时长和下一步始终可见。',demo:'fx-layout-route'}
+  ,{id:'spatial-zone-layout',cat:'ui-layout',name:'空间分区布局',en:'Spatial Zone Layout',tags:['空间','分区'],summary:'用区域和边界组织复杂空间中的对象。',usage:'仓储、场馆和运营。',principle:'区域标签与对象状态统一。',demo:'fx-layout-zones'}
+  ,{id:'container-query-layout',cat:'ui-layout',name:'容器查询布局',en:'Container-query Layout',tags:['响应式','容器'],summary:'组件根据自身容器宽度而非视口变化布局。',usage:'组件库、卡片和嵌入模块。',principle:'断点随容器职责定义。',demo:'fx-layout-containerquery'}
+  ,{id:'content-priority-reflow',cat:'ui-layout',name:'内容优先重排',en:'Content-priority Reflow',tags:['响应式','重排'],summary:'窄屏时优先保留核心内容并重新排序次要模块。',usage:'内容站、后台和电商。',principle:'优先级规则可解释。',demo:'fx-layout-priorityreflow'}
+  ,{id:'mobile-stack-layout',cat:'ui-layout',name:'移动端堆叠布局',en:'Mobile Stack Layout',tags:['响应式','移动端'],summary:'多列内容在小屏自然堆叠为单列流。',usage:'落地页、表单和卡片。',principle:'堆叠顺序符合阅读逻辑。',demo:'fx-layout-mobilestack'}
+  ,{id:'tablet-dual-pane',cat:'ui-layout',name:'平板双窗布局',en:'Tablet Dual-pane',tags:['响应式','平板'],summary:'平板宽度下保持列表与详情双窗并列。',usage:'阅读、邮件和文件管理。',principle:'分栏宽度可调整。',demo:'fx-layout-tabletpane'}
+  ,{id:'foldable-spanning-layout',cat:'ui-layout',name:'折叠屏跨屏布局',en:'Foldable Spanning Layout',tags:['响应式','折叠屏'],summary:'跨折叠屏展开内容，同时避开铰链区域。',usage:'阅读、地图和工具。',principle:'铰链位置有安全间隙。',demo:'fx-layout-foldable'}
+  ,{id:'ultrawide-layout',cat:'ui-layout',name:'超宽屏布局',en:'Ultrawide Layout',tags:['响应式','超宽'],summary:'在超宽屏利用额外空间扩展辅助栏而不拉长正文。',usage:'工作台、媒体和监控。',principle:'正文最大宽度受控。',demo:'fx-layout-ultrawide'}
+  ,{id:'ten-foot-ui-layout',cat:'ui-layout',name:'电视十英尺布局',en:'Ten-foot UI Layout',tags:['响应式','电视'],summary:'为远距离观看放大文字、焦点和操作区域。',usage:'电视、会议和展陈。',principle:'焦点移动路径简单。',demo:'fx-layout-tenfoot'}
+  ,{id:'orientation-adaptive-layout',cat:'ui-layout',name:'横竖屏自适应',en:'Orientation-adaptive Layout',tags:['响应式','方向'],summary:'根据屏幕方向切换布局结构与内容密度。',usage:'移动端、平板和相机。',principle:'旋转后状态与位置可恢复。',demo:'fx-layout-orientation'}
+  ,{id:'density-adaptive-layout',cat:'ui-layout',name:'密度自适应布局',en:'Density-adaptive Layout',tags:['响应式','密度'],summary:'根据用户密度偏好调整间距、行高和信息量。',usage:'后台、表格和阅读工具。',principle:'密度变化不隐藏关键操作。',demo:'fx-layout-density'}
+  ,{id:'type-driven-responsive-layout',cat:'ui-layout',name:'字号驱动布局',en:'Type-driven Responsive Layout',tags:['响应式','字体'],summary:'以字号和可读行长作为布局伸缩的主要约束。',usage:'阅读、文档和多语言界面。',principle:'优先保证字级与行长。',demo:'fx-layout-typeresponsive'}
+  ,{id:'freeform-canvas-layout',cat:'ui-layout',name:'自由画布构图',en:'Freeform Canvas Layout',tags:['实验','画布'],summary:'元素在自由画布中按视觉关系而非固定网格排列。',usage:'灵感板、展览和实验网页。',principle:'自由布局仍需阅读锚点。',demo:'fx-layout-freeform'}
+  ,{id:'broken-grid-layout',cat:'ui-layout',name:'破格网格',en:'Broken Grid Layout',tags:['实验','网格'],summary:'部分元素越出网格边界，制造张力与层次。',usage:'海报、杂志和品牌页。',principle:'破格范围受视觉秩序约束。',demo:'fx-layout-brokengrid'}
+  ,{id:'diagonal-grid-layout',cat:'ui-layout',name:'对角网格',en:'Diagonal Grid Layout',tags:['实验','对角'],summary:'沿对角轴组织模块，形成方向性的阅读动势。',usage:'活动、体育和宣传页。',principle:'对角线方向保持一致。',demo:'fx-layout-diagonal'}
+  ,{id:'triangular-partition',cat:'ui-layout',name:'三角分区布局',en:'Triangular Partition',tags:['实验','分区'],summary:'用三角分区切割画布并安排内容焦点。',usage:'海报、封面和数据视觉。',principle:'分区边界不切断核心信息。',demo:'fx-layout-triangular'}
+  ,{id:'concentric-layout',cat:'ui-layout',name:'同心环布局',en:'Concentric Layout',tags:['实验','同心'],summary:'围绕中心层层排布内容，形成聚焦结构。',usage:'仪表盘、品牌和信息图。',principle:'中心与环层级清晰。',demo:'fx-layout-concentric'}
+  ,{id:'spiral-layout',cat:'ui-layout',name:'螺旋布局',en:'Spiral Layout',tags:['实验','螺旋'],summary:'沿螺旋路径安排内容，引导视线逐步深入。',usage:'故事页、海报和展览。',principle:'入口与终点明确。',demo:'fx-layout-spiral'}
+  ,{id:'orbital-layout',cat:'ui-layout',name:'轨道式布局',en:'Orbital Layout',tags:['实验','轨道'],summary:'次级元素围绕中心主体形成轨道关系。',usage:'产品、数据和品牌页。',principle:'轨道密度与中心权重匹配。',demo:'fx-layout-orbital'}
+  ,{id:'fan-menu-layout',cat:'ui-layout',name:'扇形菜单布局',en:'Fan Menu Layout',tags:['实验','菜单'],summary:'从单一锚点扇形展开多个快捷入口。',usage:'移动端、游戏和创作工具。',principle:'扇区角度与触达范围一致。',demo:'fx-layout-fan'}
+  ,{id:'perspective-space-layout',cat:'ui-layout',name:'透视空间布局',en:'Perspective Space Layout',tags:['实验','透视'],summary:'用透视缩放构建具有远近关系的空间界面。',usage:'作品集、游戏和叙事网页。',principle:'远近层级不影响导航。',demo:'fx-layout-perspective'}
+  ,{id:'isometric-layout',cat:'ui-layout',name:'等距视角布局',en:'Isometric Layout',tags:['实验','等距'],summary:'以等距轴排列模块，表现稳定的三维工作区。',usage:'建筑、游戏和技术展示。',principle:'轴线角度和比例统一。',demo:'fx-layout-isometric'}
+  ,{id:'empty-state-layout',cat:'ui-layout',name:'空状态布局',en:'Empty-state Layout',tags:['状态','布局'],summary:'在没有内容时提供清晰说明与下一步行动。',usage:'列表、项目和搜索结果。',principle:'空状态应帮助用户开始，而非只显示无数据。',demo:'fx-layout-emptystate'}
+  ,{id:'error-recovery-layout',cat:'ui-layout',name:'错误恢复布局',en:'Error Recovery Layout',tags:['状态','错误'],summary:'集中呈现错误原因、影响范围与恢复操作。',usage:'网络、表单和后台。',principle:'恢复动作优先于技术细节。',demo:'fx-layout-errorrecovery'}
 ];

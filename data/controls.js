@@ -52,6 +52,19 @@ export const demoControls={
   ,'fx-type-geometric':[],'fx-type-humanist':[],'fx-type-neogrotesk':[],'fx-type-transitional':[],'fx-type-didone':[],'fx-type-oldstyle':[],'fx-type-slab':[],'fx-type-mono':[],'fx-type-rounded':[],'fx-type-contrastpair':[]
   ,'fx-type-chamfer':[],'fx-type-modular':[],'fx-type-constructed':[],'fx-type-dotmatrix':[],'fx-type-pixel':[],'fx-type-segment':[],'fx-type-inktrap':[],'fx-type-ligature':[],'fx-type-monoline':[],'fx-type-reverse':[]
   ,'fx-type-scale':[],'fx-type-fluid':[],'fx-type-responsive':[],'fx-type-rhythm':[],'fx-type-baselinegrid':[],'fx-type-hanging':[],'fx-type-optical':[],'fx-type-dropcap':[],'fx-type-smallcaps':[],'fx-type-measure':[]
+  ,'fx-display-wavy':[],'fx-display-arched':[],'fx-display-circular':[],'fx-display-perspective':[],'fx-display-isometric':[],'fx-display-extruded':[],'fx-display-inflated':[],'fx-display-liquid':[],'fx-display-mirrored':[],'fx-display-kaleido':[]
+  ,'fx-material-metaltype':[],'fx-material-glasstype':[],'fx-material-furrytype':[],'fx-material-claytype':[],'fx-material-papertype':[],'fx-material-woodtype':[],'fx-material-halftype':[],'fx-material-graintype':[],'fx-material-neontype':[],'fx-material-embrotype':[]
+  ,'fx-motion-weighttype':[],'fx-motion-widthtype':[],'fx-motion-randomglyph':[],'fx-motion-scramble':[],'fx-motion-typewriter':[],'fx-motion-cascadeglyph':[],'fx-motion-audiotype':[],'fx-motion-cursortype':[],'fx-motion-generative':[],'fx-motion-variabletype':[]
+  ,'fx-layout-topbar':[],'fx-layout-dualnav':[],'fx-layout-mega':[],'fx-layout-bottomnav':[],'fx-layout-navisland':[],'fx-layout-drawer':[],'fx-layout-collapsibleside':[],'fx-layout-iconrail':[],'fx-layout-palette':[],'fx-layout-breadcrumb':[]
+  ,'fx-layout-singlecolumn':[],'fx-layout-twocolumn':[],'fx-layout-newspaper':[],'fx-layout-toc':[],'fx-layout-sidenote':[],'fx-layout-pullquote':[],'fx-layout-chapter':[],'fx-layout-immersive':[],'fx-layout-annotated':[],'fx-layout-compare':[]
+  ,'fx-layout-compactlist':[],'fx-layout-mediaobject':[],'fx-layout-groupedlist':[],'fx-layout-alphaindex':[],'fx-layout-cardrail':[],'fx-layout-gallery':[],'fx-layout-cluster':[],'fx-layout-honeycomb':[],'fx-layout-pilltiles':[],'fx-layout-tagcloud':[]
+  ,'fx-layout-kpi':[],'fx-layout-trading':[],'fx-layout-multipane':[],'fx-layout-masterdetail':[],'fx-layout-inspector':[],'fx-layout-dockable':[],'fx-layout-pivot':[],'fx-layout-filterresults':[],'fx-layout-alertcenter':[],'fx-layout-controlwall':[]
+  ,'fx-layout-longform':[],'fx-layout-stepper':[],'fx-layout-splitform':[],'fx-layout-conversation':[],'fx-layout-inlineedit':[],'fx-layout-review':[],'fx-layout-conditional':[],'fx-layout-bulkedit':[],'fx-layout-checkout':[],'fx-layout-application':[]
+  ,'fx-layout-saashero':[],'fx-layout-featurematrix':[],'fx-layout-pricing':[],'fx-layout-casestudy':[],'fx-layout-testimonial':[],'fx-layout-brandstory':[],'fx-layout-career':[],'fx-layout-agenda':[],'fx-layout-course':[],'fx-layout-help':[]
+  ,'fx-layout-mapsidebar':[],'fx-layout-mapcards':[],'fx-layout-floorplan':[],'fx-layout-coordinate':[],'fx-layout-nodegraph':[],'fx-layout-whiteboard':[],'fx-layout-minimap':[],'fx-layout-geostory':[],'fx-layout-route':[],'fx-layout-zones':[]
+  ,'fx-layout-containerquery':[],'fx-layout-priorityreflow':[],'fx-layout-mobilestack':[],'fx-layout-tabletpane':[],'fx-layout-foldable':[],'fx-layout-ultrawide':[],'fx-layout-tenfoot':[],'fx-layout-orientation':[],'fx-layout-density':[],'fx-layout-typeresponsive':[]
+  ,'fx-layout-freeform':[],'fx-layout-brokengrid':[],'fx-layout-diagonal':[],'fx-layout-triangular':[],'fx-layout-concentric':[],'fx-layout-spiral':[],'fx-layout-orbital':[],'fx-layout-fan':[],'fx-layout-perspective':[],'fx-layout-isometric':[]
+  ,'fx-layout-emptystate':[],'fx-layout-errorrecovery':[]
 };
 
 export const controlsForDemo=demo=>{
