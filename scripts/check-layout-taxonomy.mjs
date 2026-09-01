@@ -3,7 +3,7 @@ import {terms} from '../data/lexicon.js';
 
 const [app,styles]=await Promise.all([
   readFile('assets/app.js','utf8'),
-  readFile('assets/fx-style.css','utf8')
+  readFile('assets/layout-refresh.css','utf8')
 ]);
 const failures=[];
 const layoutTerms=terms.filter(term=>term.cat==='ui-layout');

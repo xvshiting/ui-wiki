@@ -1,0 +1,16 @@
+/* Layout preview canvas: layout patterns must show spatial relationships, not a 78px component strip. */
+.term-card .preview [class*="d-fx-layout-"]{
+  width:100%;height:100%;min-height:0;max-width:none;margin:0;
+  border-radius:10px;box-shadow:0 12px 28px #0004;
+}
+.stage [class*="d-fx-layout-"]{
+  width:min(92%,680px);height:auto;min-height:0;max-height:80%;
+  aspect-ratio:16/10;margin:auto;border-radius:14px;box-shadow:0 24px 60px #0006;
+}
+.layout-groups{display:flex;gap:8px;overflow-x:auto;margin:0 0 20px;padding:3px 2px 8px;scrollbar-width:thin}
+.layout-groups button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:rgba(17,28,44,.76);color:var(--muted);padding:9px 12px;cursor:pointer;font:11px ui-monospace,SFMono-Regular,Menlo,monospace;transition:border-color .18s,background .18s,color .18s}
+.layout-groups button:hover{border-color:rgba(83,215,208,.4);color:var(--ink)}
+.layout-groups button.active{border-color:rgba(83,215,208,.52);background:rgba(83,215,208,.13);color:#bdf3ef}
+.layout-groups button b{margin-left:4px;color:inherit;opacity:.64}
+.term-card[hidden]{display:none}
+@media(max-width:620px){.stage [class*="d-fx-layout-"]{width:94%;max-height:76%}}
