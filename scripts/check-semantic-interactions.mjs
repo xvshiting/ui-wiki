@@ -12,6 +12,8 @@ const checks=[
   ['image preview follows the active target',app.includes('motion-pointer-preview')&&app.includes('--preview-x')],
   ['blend cursor follows pointer',app.includes('motion-pointer-blend')&&app.includes('--cursor-x')],
   ['blend cursor uses difference blending',pointerCss.includes('mix-blend-mode:difference')&&pointerCss.includes('is-pointer-active')],
+  ['repulsion is driven by pointer distance',app.includes("closest('.d-motion-pointer-repel')")&&app.includes('--repel-x')&&app.includes('Math.hypot')],
+  ['repulsion returns without canned animation',pointerCss.includes('.d-motion-pointer-repel button{')&&pointerCss.includes('animation:none')&&pointerCss.includes('--repel-x')],
   ['depth focus exposes two focus targets',demos.includes('data-focus="near"')&&demos.includes('data-focus="far"')],
   ['depth focus swaps foreground and background blur',physicsCss.includes('focus-far')&&physicsCss.includes('--near-blur')&&physicsCss.includes('--far-blur')]
 ];

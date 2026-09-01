@@ -3,6 +3,12 @@ import {controlDefinitions,controlsForDemo} from '../data/controls.js';
 import {getExtraDemoMarkup} from './extra-demos.js';
 
 const base = location.pathname.includes('/categories/') || location.pathname.includes('/terms/') ? '../' : './';
+const FAVORITES_KEY='ui-wiki-favorites';
+const RECENT_KEY='ui-wiki-recent';
+const COMPARE_KEY='ui-wiki-compare';
+const readList=key=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}};
+const writeList=(key,list)=>{try{localStorage.setItem(key,JSON.stringify(list))}catch{}};
+const toggleList=(key,id,limit=30)=>{const list=readList(key),next=list.includes(id)?list.filter(item=>item!==id):[id,...list].slice(0,limit);writeList(key,next);return next};
 const demoMarkup = type => {
   const extraMarkup=getExtraDemoMarkup(type);if(extraMarkup)return extraMarkup;
   if(['grid','bento','asym','layers'].includes(type)) return `<div class="demo d-${type}"><i></i><i></i><i></i><i></i><i></i></div>`;
@@ -60,8 +66,21 @@ function shell(active=''){
     results.classList.add('open');
   });
   document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open')});
+  mountCompareTray();
 }
-function termCard(term){return `<a class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}" href="${base}terms/${term.id}.html"><div class="preview">${demoMarkup(term.demo)}</div><small>${getCategory(term.cat).name}</small><h3>${term.name}</h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></a>`}
+function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function mountCompareTray(){
+  if(document.querySelector('.compare-tray'))return;
+  const tray=document.createElement('aside');tray.className='compare-tray';tray.setAttribute('aria-live','polite');document.body.append(tray);
+  const render=()=>{const ids=readList(COMPARE_KEY).filter(id=>getTerm(id));if(!ids.length){tray.classList.remove('open');tray.innerHTML='';return}tray.classList.add('open');tray.innerHTML=`<div class="compare-tray-head"><strong>效果对比 (${ids.length}/3)</strong><button type="button" data-clear-compare>清空</button></div><div class="compare-items">${ids.map(id=>{const t=getTerm(id);return `<a href="${base}terms/${t.id}.html"><span>${t.name}</span><b data-remove-compare="${t.id}" aria-label="移除 ${t.name}">×</b></a>`}).join('')}</div><p>选择 2–3 个效果，在详情页查看。</p>`};
+  render();tray._render=render;
+}
+function mountTermActions(term){
+  const stage=document.querySelector('.stage');if(!stage||document.querySelector('.term-actions'))return;
+  const saved=readList(FAVORITES_KEY).includes(term.id),compared=readList(COMPARE_KEY).includes(term.id);
+  const actions=document.createElement('div');actions.className='term-actions';actions.innerHTML=`<button type="button" data-term-favorite aria-pressed="${saved}">${saved?'★ 已收藏':'☆ 收藏'}</button><button type="button" data-term-compare aria-pressed="${compared}">${compared?'✓ 已加入对比':'＋ 加入对比'}</button><button type="button" data-export-css>复制 CSS</button>`;stage.insertAdjacentElement('afterend',actions);
+}
+function recordRecent(term){writeList(RECENT_KEY,[term.id,...readList(RECENT_KEY).filter(id=>id!==term.id)].slice(0,12))}
 
 const page=document.body.dataset.page;
 const controls=controlDefinitions;
@@ -135,11 +154,23 @@ if(page==='home'){
   document.querySelector('[data-back]').textContent=`← 返回${cat.name}`;
   mountCopyActions(term);
   mountSequenceNav(term);
+  recordRecent(term);
+  mountTermActions(term);
   mountConfigurator(term);
   mountSourceLab(term);
 }
 
 document.addEventListener('click',e=>{
+  const favorite=e.target.closest('[data-favorite]');
+  if(favorite){e.preventDefault();const id=favorite.dataset.favorite,saved=toggleList(FAVORITES_KEY,id).includes(id);favorite.classList.toggle('is-saved',saved);favorite.setAttribute('aria-pressed',saved);favorite.setAttribute('aria-label',`${saved?'取消收藏':'收藏'} ${getTerm(id)?.name||''}`);favorite.textContent=saved?'★':'☆';return}
+  const termFavorite=e.target.closest('[data-term-favorite]');
+  if(termFavorite){e.preventDefault();const id=document.body.dataset.id,saved=toggleList(FAVORITES_KEY,id).includes(id);termFavorite.setAttribute('aria-pressed',saved);termFavorite.textContent=saved?'★ 已收藏':'☆ 收藏';return}
+  const termCompare=e.target.closest('[data-term-compare]');
+  if(termCompare){e.preventDefault();const id=document.body.dataset.id,ids=readList(COMPARE_KEY);if(!ids.includes(id)&&ids.length>=3){termCompare.textContent='对比最多 3 项';return}const next=toggleList(COMPARE_KEY,id,3),active=next.includes(id);termCompare.setAttribute('aria-pressed',active);termCompare.textContent=active?'✓ 已加入对比':'＋ 加入对比';document.querySelector('.compare-tray')?._render?.();return}
+  const exportCSS=e.target.closest('[data-export-css]');
+  if(exportCSS){e.preventDefault();const term=getTerm(document.body.dataset.id);if(term){const text=relatedCSS(term);navigator.clipboard?.writeText(text).catch(()=>{});exportCSS.textContent='✓ CSS 已复制';setTimeout(()=>exportCSS.textContent='复制 CSS',1400)}return}
+  const clearCompare=e.target.closest('[data-clear-compare]');if(clearCompare){writeList(COMPARE_KEY,[]);document.querySelector('.compare-tray')?._render?.();return}
+  const removeCompare=e.target.closest('[data-remove-compare]');if(removeCompare){e.preventDefault();toggleList(COMPARE_KEY,removeCompare.dataset.removeCompare);document.querySelector('.compare-tray')?._render?.();return}
   const preview=e.target.closest('.term-card .preview');
   if(preview){e.preventDefault();preview.closest('.term-card').classList.toggle('preview-active')}
   const b=e.target.closest('.d-micro button');if(b){e.preventDefault();b.textContent=b.textContent.includes('♡')?'♥ Liked':'♡ Like'}
@@ -161,12 +192,16 @@ document.addEventListener('click',e=>{
   const nav=e.target.closest('.d-motion-nav-shared,.d-motion-nav-container,.d-motion-nav-circular,.d-motion-nav-blinds,.d-motion-nav-wipe,.d-motion-nav-pixel,.d-motion-nav-ink,.d-motion-nav-card,.d-motion-nav-depth,.d-motion-nav-axis');if(nav&&e.target.closest('button')){e.preventDefault();nav.classList.toggle('is-open')}
 });
 
+document.addEventListener('keydown',e=>{const preview=e.target.closest('.term-card .preview');if(preview&&(e.key==='Enter'||e.key===' ')){e.preventDefault();preview.closest('.term-card').classList.toggle('preview-active')}});
+
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-magnetic');if(!box)return;const b=box.querySelector('button'),r=box.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.12}px)`});
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-tilt');if(!box)return;const card=box.firstElementChild,r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`rotateX(${-y*12}deg) rotateY(${x*12}deg)`});
 document.addEventListener('pointerout',e=>{const box=e.target.closest('.d-tilt');if(box&&!box.contains(e.relatedTarget))box.firstElementChild.style.transform=''});
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-fx-motion-spotlight');if(!box)return;const r=box.getBoundingClientRect();box.style.setProperty('--spot-x',`${((e.clientX-r.left)/r.width)*100}%`);box.style.setProperty('--spot-y',`${((e.clientY-r.top)/r.height)*100}%`)});
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-motion-pointer-blend');if(!box)return;const r=box.getBoundingClientRect();box.style.setProperty('--cursor-x',`${e.clientX-r.left}px`);box.style.setProperty('--cursor-y',`${e.clientY-r.top}px`);box.classList.add('is-pointer-active')});
 document.addEventListener('pointerout',e=>{const box=e.target.closest('.d-motion-pointer-blend');if(box&&!box.contains(e.relatedTarget))box.classList.remove('is-pointer-active')});
+document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-motion-pointer-repel');if(!box)return;const r=box.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),distance=Math.hypot(dx,dy),radius=Math.min(r.width,r.height)*.48,strength=Math.max(0,1-distance/radius),safeDistance=Math.max(distance,1),force=76*strength*strength;box.classList.remove('is-returning');box.classList.toggle('is-repelling',strength>0);box.style.setProperty('--repel-x',`${(-dx/safeDistance)*force}px`);box.style.setProperty('--repel-y',`${(-dy/safeDistance)*force}px`)});
+document.addEventListener('pointerout',e=>{const box=e.target.closest('.d-motion-pointer-repel');if(!box||box.contains(e.relatedTarget))return;box.classList.remove('is-repelling');box.classList.add('is-returning');box.style.setProperty('--repel-x','0px');box.style.setProperty('--repel-y','0px')});
 document.addEventListener('pointermove',e=>{const link=e.target.closest('.d-motion-pointer-preview [data-preview]');if(!link)return;const box=link.closest('.d-motion-pointer-preview'),r=box.getBoundingClientRect();box.style.setProperty('--preview-x',`${Math.min(e.clientX-r.left,r.width-155)}px`);box.style.setProperty('--preview-y',`${Math.max(48,Math.min(e.clientY-r.top,r.height-48))}px`);box.classList.add('is-preview-active');box.querySelectorAll('.cursor-preview i').forEach(item=>item.classList.toggle('active',item.id===link.dataset.preview))});
 document.addEventListener('pointerout',e=>{const box=e.target.closest('.d-motion-pointer-preview');if(box&&!box.contains(e.relatedTarget))box.classList.remove('is-preview-active')});
 document.addEventListener('focusin',e=>{const link=e.target.closest('.d-motion-pointer-preview [data-preview]');if(!link)return;const box=link.closest('.d-motion-pointer-preview');box.style.setProperty('--preview-x','35%');box.style.setProperty('--preview-y','50%');box.classList.add('is-preview-active');box.querySelectorAll('.cursor-preview i').forEach(item=>item.classList.toggle('active',item.id===link.dataset.preview))});
