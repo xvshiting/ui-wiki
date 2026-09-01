@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Aesthetic Lexicon — 交互式美学与UI术语词典</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#11182d;
+      --panel-2:#161f38;
+      --text:#eef3ff;
+      --muted:#94a3c7;
+      --line:rgba(255,255,255,.09);
+      --accent:#8da2ff;
+      --accent-2:#61e7c8;
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(141,162,255,.15), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(97,231,200,.09), transparent 22%),
+        var(--bg);
+      min-height:100vh;
+    }
+    button,input{font:inherit}
+    .app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+    aside{
+      position:sticky;top:0;height:100vh;padding:28px 20px;
+      border-right:1px solid var(--line);
+      background:rgba(8,13,26,.82);
+      backdrop-filter:blur(18px);
+      z-index:5;
+    }
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:0 10px 30px rgba(141,162,255,.25);
+      position:relative;overflow:hidden;
+    }
+    .logo:after{
+      content:"";position:absolute;width:18px;height:18px;border:3px solid #081120;
+      border-radius:50%;left:9px;top:9px;
+    }
+    .brand h1{font-size:16px;margin:0}
+    .brand p{font-size:12px;margin:3px 0 0;color:var(--muted)}
+    .search{
+      width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+      background:#0e1528;color:var(--text);outline:none;margin-bottom:18px;
+    }
+    .search:focus{border-color:rgba(141,162,255,.65);box-shadow:0 0 0 4px rgba(141,162,255,.08)}
+    .nav-title{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6f7fa7;margin:16px 10px 8px}
+    nav a{
+      display:flex;justify-content:space-between;align-items:center;text-decoration:none;
+      color:#cbd6f3;padding:10px 12px;border-radius:12px;margin:4px 0;font-size:14px;
+    }
+    nav a:hover{background:rgba(255,255,255,.05)}
+    .count{font-size:11px;color:#7180a6}
+    main{padding:34px clamp(24px,4vw,64px) 100px}
+    .hero{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;
+      padding:42px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+      box-shadow:var(--shadow);overflow:hidden;position:relative;
+    }
+    .hero:before{
+      content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;
+      background:radial-gradient(circle,rgba(141,162,255,.24),transparent 65%);
+    }
+    .eyebrow{color:var(--accent-2);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+    .hero h2{font-size:clamp(38px,6vw,76px);line-height:.98;margin:12px 0 18px;letter-spacing:-.05em}
+    .hero p{max-width:760px;color:#aebadc;font-size:16px;line-height:1.7}
+    .hero-card{
+      min-height:260px;border-radius:24px;background:linear-gradient(180deg,#1a2442,#11182b);
+      border:1px solid var(--line);padding:20px;position:relative;
+    }
+    .orb{width:92px;height:92px;border-radius:50%;background:linear-gradient(135deg,#87a3ff,#70f3d2);
+      position:absolute;left:24px;top:32px;animation:float 4s ease-in-out infinite;box-shadow:0 25px 60px rgba(112,243,210,.18)}
+    .glass{
+      position:absolute;right:22px;bottom:28px;width:72%;padding:18px;border-radius:18px;
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px)
+    }
+    @keyframes float{50%{transform:translateY(22px) rotate(8deg)}}
+
+    .section{margin-top:54px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}
+    .section-head h3{font-size:28px;margin:0;letter-spacing:-.03em}
+    .section-head p{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .term{
+      border:1px solid var(--line);border-radius:24px;background:rgba(16,23,42,.8);
+      padding:18px;box-shadow:0 12px 32px rgba(0,0,0,.16);
+      transition:.25s ease;overflow:hidden;
+    }
+    .term:hover{transform:translateY(-3px);border-color:rgba(141,162,255,.24)}
+    .term-top{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:14px}
+    .term h4{margin:0;font-size:18px}
+    .term small{display:block;color:#7484aa;margin-top:4px}
+    .tag{font-size:11px;padding:6px 8px;border-radius:999px;background:rgba(141,162,255,.09);color:#a9b8ff;border:1px solid rgba(141,162,255,.18)}
+    .desc{font-size:13px;line-height:1.65;color:#9eabd0;margin:0 0 14px}
+    .demo{
+      height:220px;border-radius:18px;background:#0b1222;border:1px solid var(--line);
+      padding:14px;position:relative;overflow:hidden;
+    }
+    .demo-label{position:absolute;left:12px;top:10px;font-size:10px;color:#5f6f95;letter-spacing:.08em;text-transform:uppercase}
+
+    /* Grid */
+    .grid-demo{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:24px;height:100%}
+    .grid-demo div{border-radius:12px;background:linear-gradient(145deg,#243354,#18223a);border:1px solid var(--line)}
+    .grid-demo div:nth-child(1){grid-column:span 2}
+    .grid-demo div:nth-child(4){grid-column:span 2}
+
+    /* Bento */
+    .bento{display:grid;grid-template-columns:1.2fr .8fr;grid-template-rows:1fr 1fr;gap:10px;padding-top:24px;height:100%}
+    .bento div{border-radius:14px;background:linear-gradient(145deg,#1f2d4e,#151f36);border:1px solid var(--line)}
+    .bento .big{grid-row:span 2;background:linear-gradient(145deg,#283866,#18233d)}
+
+    /* asymmetry */
+    .asym{position:relative;height:100%}
+    .asym .a,.asym .b,.asym .c{position:absolute;border-radius:16px;border:1px solid var(--line)}
+    .asym .a{width:46%;height:65%;left:7%;top:24%;background:#202e50;transform:rotate(-5deg)}
+    .asym .b{width:34%;height:42%;right:8%;top:17%;background:#1d2947;transform:rotate(8deg)}
+    .asym .c{width:30%;height:26%;right:20%;bottom:10%;background:#293a63}
+
+    /* whitespace */
+    .white-space-demo{display:flex;align-items:center;justify-content:center;height:100%;padding-top:20px}
+    .white-space-demo .micro{width:62%;padding:18px;border-radius:14px;border:1px solid var(--line);background:#121b31}
+    .line{height:8px;border-radius:10px;background:#253455;margin:8px 0}
+    .line.short{width:55%}.line.tiny{width:36%}
+
+    /* glass */
+    .glass-demo{background:radial-gradient(circle at 30% 30%,#576fff 0 16%,transparent 17%),radial-gradient(circle at 72% 65%,#38d7b0 0 13%,transparent 14%),#10182d}
+    .glass-panel{position:absolute;inset:40px 34px 28px;border-radius:18px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(16px);box-shadow:0 25px 60px rgba(0,0,0,.22)}
+
+    /* neu */
+    .neo{background:#151d30;display:flex;align-items:center;justify-content:center}
+    .neo button{width:90px;height:90px;border-radius:26px;border:0;color:#d7e1fb;background:#151d30;box-shadow:12px 12px 26px #0b101c,-10px -10px 24px #1f2a44}
+    .neo button:active{box-shadow:inset 8px 8px 18px #0b101c,inset -8px -8px 18px #202c48}
+
+    /* gradient mesh */
+    .mesh{background:
+      radial-gradient(circle at 18% 22%,#6b7cff 0 8%,transparent 28%),
+      radial-gradient(circle at 78% 28%,#43dfb1 0 7%,transparent 28%),
+      radial-gradient(circle at 54% 82%,#b45cff 0 6%,transparent 28%),
+      #12172a;filter:saturate(.95)}
+
+    /* hover */
+    .hover-demo{display:flex;align-items:center;justify-content:center}
+    .hover-card{width:70%;height:60%;border:1px solid var(--line);border-radius:18px;background:#17213a;padding:18px;transition:.3s cubic-bezier(.2,.8,.2,1)}
+    .hover-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 24px 50px rgba(0,0,0,.35);border-color:rgba(141,162,255,.4)}
+
+    /* micro interaction */
+    .like-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid var(--line);background:#17213a;color:#c9d5f4;border-radius:16px;padding:14px 20px;cursor:pointer}
+    .like-btn.bump{animation:bump .45s ease}
+    @keyframes bump{35%{transform:translate(-50%,-50%) scale(1.18)}70%{transform:translate(-50%,-50%) scale(.96)}}
+    .spark{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent-2);animation:spark .6s ease forwards}
+    @keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+
+    /* spring */
+    .spring-wrap{display:flex;align-items:center;justify-content:center;height:100%}
+    .spring-ball{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));cursor:pointer}
+    .spring-ball.spring{animation:spring .8s cubic-bezier(.2,1.6,.4,1)}
+    @keyframes spring{0%{transform:scale(1)}30%{transform:scale(1.45,.65)}60%{transform:scale(.85,1.15)}80%{transform:scale(1.06,.96)}100%{transform:scale(1)}}
+
+    /* magnetic */
+    .magnet-area{height:100%;display:flex;align-items:center;justify-content:center}
+    .magnet{width:140px;height:50px;border-radius:16px;border:1px solid rgba(141,162,255,.28);background:#18233d;color:#e9efff;transition:transform .1s linear;cursor:pointer}
+
+    /* accordion */
+    .accordion{padding-top:24px}
+    .acc-item{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+    .acc-head{padding:11px 12px;cursor:pointer;background:#151f36;display:flex;justify-content:space-between;font-size:13px}
+    .acc-body{max-height:0;overflow:hidden;color:#8fa0c7;font-size:12px;line-height:1.5;padding:0 12px;transition:max-height .35s ease,padding .35s ease}
+    .acc-item.open .acc-body{max-height:80px;padding:10px 12px 13px}
+
+    /* morph */
+    .morph-wrap{height:100%;display:flex;align-items:center;justify-content:center}
+    .morph{width:94px;height:94px;background:linear-gradient(135deg,#7488ff,#52e3be);border-radius:26% 74% 55% 45%/54% 34% 66% 46%;animation:morph 5s ease-in-out infinite}
+    @keyframes morph{50%{border-radius:66% 34% 28% 72%/35% 58% 42% 65%;transform:rotate(25deg) scale(1.1)}}
+
+    /* skeleton */
+    .skeleton{padding-top:28px}
+    .sk{border-radius:8px;background:linear-gradient(90deg,#17213a 25%,#23304d 38%,#17213a 63%);background-size:400% 100%;animation:shimmer 1.3s infinite}
+    .sk.avatar{width:44px;height:44px;border-radius:50%;margin-bottom:12px}.sk.row{height:10px;margin:8px 0}.sk.w60{width:60%}.sk.w85{width:85%}
+    @keyframes shimmer{to{background-position:-100% 0}}
+
+    /* progressive */
+    .progressive{padding-top:28px}
+    .prog-card{border-radius:14px;border:1px solid var(--line);padding:14px;background:#131d33}
+    .prog-card .more{max-height:0;opacity:0;overflow:hidden;transition:.35s ease;color:#8fa0c7;font-size:12px;line-height:1.6}
+    .prog-card.open .more{max-height:100px;opacity:1;margin-top:10px}
+    .reveal{margin-top:12px;background:#1d2947;color:#dce6ff;border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+
+    .hidden-card{display:none}
+    .footer{color:#65759b;font-size:12px;margin-top:46px;text-align:center}
+    @media (max-width:980px){.app{grid-template-columns:1fr}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <div class="logo"></div>
+      <div><h1>UI Aesthetic Lexicon</h1><p>视觉、布局、动效、交互</p></div>
+    </div>
+    <input id="search" class="search" placeholder="搜索术语，如：玻璃拟态 / Hover" />
+    <div class="nav-title">Categories</div>
+    <nav>
+      <a href="#layout">布局 <span class="count">4</span></a>
+      <a href="#visual">视觉风格 <span class="count">4</span></a>
+      <a href="#motion">动画 / Motion <span class="count">4</span></a>
+      <a href="#interaction">交互模式 <span class="count">4</span></a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Interactive Design Glossary</div>
+        <h2>把抽象 UI 术语<br>变成可玩的演示。</h2>
+        <p>适合做产品设计参考、前端灵感库、UI 设计教学页，也可以直接扩展成你自己的 Design System 知识库。</p>
+      </div>
+      <div class="hero-card">
+        <div class="orb"></div>
+        <div class="glass">
+          <strong>Interactive by default</strong>
+          <p style="margin:7px 0 0;color:#9daccc;font-size:12px;line-height:1.6">悬停、点击、拖动鼠标，感受每个术语对应的真实 UI 行为。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="layout" class="section">
+      <div class="section-head"><div><h3>布局 Layout</h3><p>空间如何被组织，是视觉层级的基础。</p></div></div>
+      <div class="grid">
+        <article class="term" data-key="网格 grid layout 布局">
+          <div class="term-top"><div><h4>Grid Layout</h4><small>网格布局</small></div><span class="tag">Layout</span></div>
+          <p class="desc">通过列、行和间距建立稳定秩序，常见于仪表盘、卡片流、后台系统。</p>
+          <div class="demo"><span class="demo-label">demo</span><div class="grid-demo"><div></div><div></div><div></div><div></div></div></div>
+        </article>
+        <article class="term" data-key="bento 便当布局 卡片">
+          <div class="term-top"><div><h4>Bento Grid</h4><small>便当盒布局</small></div><span class="tag">Layout</span></div>
+          <p class="desc">不等面积模块形成强弱层级，适合产品主页、功能总览和品牌展示。</p>
+          <div class="demo"><span class="demo-label">demo</span><div class="bento"><div class="big"></div><div></div><div></div></div></div>
+        </article>
+        <article class="term" data-key="asymmetrical 不对称布局">
+          <div class="term-top"><div><h4>Asymmetrical Layout</h4><small>不对称布局</small></div><span class="tag">Composition</span></div>
+          <p class="desc">通过偏移、旋转和不等比例创造张力，常用于杂志化、创意型页面。</p>
+          <div class="demo"><span class="demo-label">demo</span><div class="asym"><div class="a"></div><div class="b"></div><div class="c"></div></div></div>
+        </article>
+        <article class="term" data-key="white space whitespace 留白">
+          <div class="term-top"><div><h4>Whitespace</h4><small>留白</small></div><span class="tag">Spacing</span></div>
+          <p class="desc">不是“空”，而是用空间降低认知负担，让主要内容拥有呼吸感和高级感。</p>
+          <div class="demo"><span class="demo-label">demo</span><div class="white-space-demo"><div class="micro"><div class="line short"></div><div class="line"></div><div class="line tiny"></div></div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="visual" class="section">
+      <div class="section-head"><div><h3>视觉风格 Visual</h3><p>材质、层次与颜色决定界面的“气质”。</p></div></div>
+      <div class="grid">
+        <article class="term" data-key="glassmorphism 玻璃拟态 毛玻璃">
+          <div class="term-top"><div><h4>Glassmorphism</h4><small>玻璃拟态</small></div><span class="tag">Material</span></div>
+          <p class="desc">半透明 + 模糊背景 + 细边框，营造悬浮玻璃层的感觉。</p>
+          <div class="demo glass-demo"><span class="demo-label">demo</span><div class="glass-panel"></div></div>
+        </article>
+        <article class="term" data-key="neumorphism 新拟态 软UI">
+          <div class="term-top"><div><h4>Neumorphism</h4><small>新拟态 / Soft UI</small></div><span class="tag">Material</span></div>
+          <p class="desc">利用同色系内外阴影营造凸起或按压效果。点击按钮体验 pressed state。</p>
+          <div class="demo neo"><span class="demo-label">click</span><button>Press</button></div>
+        </article>
+        <article class="term" data-key="gradient mesh 渐变 网状渐变">
+          <div class="term-top"><div><h4>Gradient Mesh</h4><small>网状渐变</small></div><span class="tag">Color</span></div>
+          <p class="desc">多组径向渐变叠加形成柔和色彩场，常见于 AI、创意工具和品牌页。</p>
+          <div class="demo mesh"><span class="demo-label">demo</span></div>
+        </article>
+        <article class="term" data-key="depth layering 层次 景深 elevation">
+          <div class="term-top"><div><h4>Elevation & Layering</h4><small>层级与悬浮</small></div><span class="tag">Depth</span></div>
+          <p class="desc">通过阴影、透明度、尺寸和模糊建立前后关系，让重要元素“浮”起来。</p>
+          <div class="demo hover-demo"><span class="demo-label">hover</span><div class="hover-card"><div class="line short"></div><div class="line"></div><div class="line tiny"></div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="motion" class="section">
+      <div class="section-head"><div><h3>动画 Motion</h3><p>让界面不仅“出现”，而是“有行为”。</p></div></div>
+      <div class="grid">
+        <article class="term" data-key="micro interaction 微交互 点赞">
+          <div class="term-top"><div><h4>Micro-interaction</h4><small>微交互</small></div><span class="tag">Motion</span></div>
+          <p class="desc">用户操作后的短反馈，例如点赞、保存、复制成功。点击按钮观察反馈。</p>
+          <div class="demo" id="microDemo"><span class="demo-label">click</span><button class="like-btn" id="likeBtn">♡ Like</button></div>
+        </article>
+        <article class="term" data-key="spring motion 弹簧动画 弹性">
+          <div class="term-top"><div><h4>Spring Motion</h4><small>弹性动画</small></div><span class="tag">Easing</span></div>
+          <p class="desc">模拟真实弹簧的超调和回弹，比线性运动更自然。点击圆球体验。</p>
+          <div class="demo"><span class="demo-label">click</span><div class="spring-wrap"><div class="spring-ball" id="springBall"></div></div></div>
+        </article>
+        <article class="term" data-key="morphing 形变 动画">
+          <div class="term-top"><div><h4>Morphing</h4><small>形变动画</small></div><span class="tag">Transformation</span></div>
+          <p class="desc">元素在形状之间平滑过渡，常见于 loading、音乐视觉和品牌动态。</p>
+          <div class="demo"><span class="demo-label">auto</span><div class="morph-wrap"><div class="morph"></div></div></div>
+        </article>
+        <article class="term" data-key="skeleton loading 骨架屏 shimmer">
+          <div class="term-top"><div><h4>Skeleton Loading</h4><small>骨架屏</small></div><span class="tag">Loading</span></div>
+          <p class="desc">加载期间先呈现内容结构，降低等待感；Shimmer 动画强化“正在加载”的暗示。</p>
+          <div class="demo"><span class="demo-label">loading</span><div class="skeleton"><div class="sk avatar"></div><div class="sk row w60"></div><div class="sk row w85"></div><div class="sk row"></div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="interaction" class="section">
+      <div class="section-head"><div><h3>交互 Interaction</h3><p>用户输入如何改变界面，决定产品的“手感”。</p></div></div>
+      <div class="grid">
+        <article class="term" data-key="hover reveal hover effect 悬停交互">
+          <div class="term-top"><div><h4>Hover Reveal</h4><small>悬停揭示</small></div><span class="tag">Pointer</span></div>
+          <p class="desc">鼠标悬停后才暴露次级信息或操作，让默认界面保持干净。</p>
+          <div class="demo hover-demo"><span class="demo-label">hover</span><div class="hover-card"><div class="line short"></div><div class="line"></div><div class="line tiny"></div></div></div>
+        </article>
+        <article class="term" data-key="magnetic button 磁吸按钮 pointer">
+          <div class="term-top"><div><h4>Magnetic Button</h4><small>磁吸按钮</small></div><span class="tag">Pointer</span></div>
+          <p class="desc">按钮会轻微追随鼠标位置，制造有“吸力”的互动感。把鼠标在按钮附近移动。</p>
+          <div class="demo magnet-area" id="magnetArea"><span class="demo-label">move cursor</span><button class="magnet" id="magnet">Explore</button></div>
+        </article>
+        <article class="term" data-key="accordion 折叠 面板 disclosure">
+          <div class="term-top"><div><h4>Accordion</h4><small>手风琴折叠</small></div><span class="tag">Disclosure</span></div>
+          <p class="desc">把复杂信息分层收起，只在需要时展开，典型于 FAQ、设置页和帮助中心。</p>
+          <div class="demo"><span class="demo-label">click</span><div class="accordion">
+            <div class="acc-item"><div class="acc-head">什么是渐进披露？ <b>+</b></div><div class="acc-body">只展示当前必要的信息，把复杂度延后到用户真正需要的时候。</div></div>
+            <div class="acc-item"><div class="acc-head">适合什么场景？ <b>+</b></div><div class="acc-body">FAQ、复杂表单、筛选器、高级设置、信息密集型产品。</div></div>
+          </div></div>
+        </article>
+        <article class="term" data-key="progressive disclosure 渐进披露 信息层级">
+          <div class="term-top"><div><h4>Progressive Disclosure</h4><small>渐进披露</small></div><span class="tag">UX Pattern</span></div>
+          <p class="desc">先给用户最重要的信息，再按需要展开细节，减少一次性认知负担。</p>
+          <div class="demo"><span class="demo-label">click</span><div class="progressive"><div class="prog-card" id="progCard">
+            <strong>基础设置</strong>
+            <div class="more">高级参数、边界条件、专家选项等内容默认隐藏，仅在需要时出现。</div>
+            <button class="reveal" id="revealBtn">显示高级选项</button>
+          </div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer">Single-file interactive UI glossary · HTML + CSS + JavaScript</div>
+  </main>
+</div>
+
+<script>
+  const search = document.getElementById('search');
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    document.querySelectorAll('.term').forEach(card => {
+      const text = (card.innerText + ' ' + (card.dataset.key || '')).toLowerCase();
+      card.classList.toggle('hidden-card', q && !text.includes(q));
+    });
+  });
+
+  const likeBtn = document.getElementById('likeBtn');
+  const microDemo = document.getElementById('microDemo');
+  likeBtn.addEventListener('click', () => {
+    likeBtn.textContent = likeBtn.textContent.includes('♡') ? '♥ Liked' : '♡ Like';
+    likeBtn.classList.remove('bump'); void likeBtn.offsetWidth; likeBtn.classList.add('bump');
+    for(let i=0;i<8;i++){
+      const s=document.createElement('i'); s.className='spark';
+      s.style.left='50%'; s.style.top='50%';
+      const a=(Math.PI*2/8)*i;
+      s.style.setProperty('--dx', Math.cos(a)*(35+Math.random()*18)+'px');
+      s.style.setProperty('--dy', Math.sin(a)*(35+Math.random()*18)+'px');
+      microDemo.appendChild(s); setTimeout(()=>s.remove(),700);
+    }
+  });
+
+  const springBall=document.getElementById('springBall');
+  springBall.addEventListener('click',()=>{springBall.classList.remove('spring');void springBall.offsetWidth;springBall.classList.add('spring')});
+
+  const magnetArea=document.getElementById('magnetArea');
+  const magnet=document.getElementById('magnet');
+  magnetArea.addEventListener('mousemove',e=>{
+    const r=magnet.getBoundingClientRect();
+    const dx=(e.clientX-(r.left+r.width/2))*0.16;
+    const dy=(e.clientY-(r.top+r.height/2))*0.16;
+    magnet.style.transform=`translate(${dx}px,${dy}px)`;
+  });
+  magnetArea.addEventListener('mouseleave',()=>magnet.style.transform='translate(0,0)');
+
+  document.querySelectorAll('.acc-head').forEach(head=>{
+    head.addEventListener('click',()=>{
+      const item=head.parentElement;
+      item.classList.toggle('open');
+      head.querySelector('b').textContent=item.classList.contains('open')?'−':'+';
+    });
+  });
+
+  const revealBtn=document.getElementById('revealBtn');
+  const progCard=document.getElementById('progCard');
+  revealBtn.addEventListener('click',()=>{
+    progCard.classList.toggle('open');
+    revealBtn.textContent=progCard.classList.contains('open')?'收起高级选项':'显示高级选项';
+  });
+</script>
+</body>
+</html>
