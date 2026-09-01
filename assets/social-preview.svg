@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#101d2e"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#53d7d0"/><stop offset="1" stop-color="#8da2ff"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#53d7d0" stop-opacity=".3"/><stop offset="1" stop-color="#53d7d0" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1010" cy="95" r="330" fill="url(#glow)"/>
+  <path d="M760 85h350v460H760z" fill="none" stroke="#b9c7da" stroke-opacity=".16"/>
+  <path d="M790 125h290M790 165h190M790 235h120v120H790zM930 235h150v54H930zM930 310h150v45H930zM790 382h290M790 422h220M790 462h255" fill="none" stroke="#53d7d0" stroke-width="3" stroke-opacity=".55"/>
+  <g transform="translate(76 70)">
+    <rect width="78" height="78" rx="21" fill="url(#accent)"/>
+    <text x="39" y="50" text-anchor="middle" fill="#07111f" font-family="Arial,sans-serif" font-size="25" font-weight="900">UW</text>
+    <text x="101" y="31" fill="#f4f7fb" font-family="Arial,sans-serif" font-size="22" font-weight="800" letter-spacing="6">UI WIKI</text>
+    <text x="101" y="58" fill="#94a3b8" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">OPEN DESIGN KNOWLEDGE BASE</text>
+  </g>
+  <text x="76" y="278" fill="#f4f7fb" font-family="Arial,'PingFang SC',sans-serif" font-size="68" font-weight="800" letter-spacing="-2">设计效果的开放图谱</text>
+  <text x="78" y="338" fill="#b9c7da" font-family="Arial,'PingFang SC',sans-serif" font-size="24">浏览、调节并拆解 640 种设计效果与交互模式</text>
+  <g transform="translate(78 410)" font-family="Arial,sans-serif">
+    <rect width="182" height="54" rx="27" fill="url(#accent)"/><text x="91" y="34" text-anchor="middle" fill="#07111f" font-size="16" font-weight="800">640 EFFECTS</text>
+    <rect x="198" width="182" height="54" rx="27" fill="none" stroke="#53d7d0" stroke-opacity=".5"/><text x="289" y="34" text-anchor="middle" fill="#c8f4f0" font-size="14" font-weight="700">STATIC · OPEN</text>
+  </g>
+  <text x="78" y="560" fill="#738399" font-family="monospace" font-size="15">xvshiting.github.io/ui-wiki</text>
+</svg>

@@ -1164,7 +1164,7 @@ function mountCompareTray(){
 function mountTermActions(term){
   const stage=document.querySelector('.stage');if(!stage||document.querySelector('.term-actions'))return;
   const saved=readList(FAVORITES_KEY).includes(term.id),compared=readList(COMPARE_KEY).includes(term.id);
-  const actions=document.createElement('div');actions.className='term-actions';actions.innerHTML=`<button type="button" data-term-favorite aria-pressed="${saved}">${saved?'★ 已收藏':'☆ 收藏'}</button><button type="button" data-term-compare aria-pressed="${compared}">${compared?'✓ 已加入对比':'＋ 加入对比'}</button><button type="button" data-export-css>复制 CSS</button>`;stage.insertAdjacentElement('afterend',actions);
+  const actions=document.createElement('div');actions.className='term-actions';actions.innerHTML=`<button type="button" data-term-favorite aria-pressed="${saved}">${saved?'★ 已收藏':'☆ 收藏'}</button><button type="button" data-term-compare aria-pressed="${compared}">${compared?'✓ 已加入对比':'＋ 加入对比'}</button><button type="button" data-share-term>分享词条</button><button type="button" data-export-css>复制 CSS</button>`;stage.insertAdjacentElement('afterend',actions);
 }
 function recordRecent(term){writeList(RECENT_KEY,[term.id,...readList(RECENT_KEY).filter(id=>id!==term.id)].slice(0,12))}
 
@@ -1242,6 +1242,7 @@ if(page==='home'){
   document.querySelector('.stat b').textContent=terms.length;
   document.querySelector('[data-categories]').innerHTML=categories.map(c=>`<a class="category-card" style="--card-color:${c.color}" href="categories/${c.id}.html"><small>${c.en}</small><h3>${c.name}</h3><p>${c.intro}</p><span class="card-count">${byCategory(c.id).length} EFFECTS →</span></a>`).join('');
   document.querySelector('[data-latest]').innerHTML=terms.slice(0,6).map(termCard).join('');
+  const community=document.createElement('section');community.className='section community-section';community.innerHTML=`<div class="community-copy"><div class="eyebrow">OPEN KNOWLEDGE / COMMUNITY</div><h2>一起扩展设计图谱</h2><p>发现缺少的效果、术语错误或更好的实现？推荐下一条内容，或直接参与这个纯静态开源项目。</p></div><div class="community-actions"><a href="https://github.com/xvshiting/ui-wiki/issues/new?template=effect-request.md" target="_blank" rel="noopener noreferrer">推荐一个效果 ↗</a><a href="https://github.com/xvshiting/ui-wiki/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">查看贡献指南 ↗</a></div>`;document.querySelector('.main').append(community);
   const recent=readList(RECENT_KEY).map(id=>getTerm(id)).filter(Boolean).slice(0,6);
   if(recent.length){const section=document.createElement('section');section.className='section recent-section';section.innerHTML=`<div class="section-head"><div><div class="eyebrow">YOUR HISTORY</div><h2>最近浏览</h2></div><p>仅保存在当前浏览器</p></div><div class="term-grid">${recent.map(termCard).join('')}</div>`;document.querySelector('.main').append(section)}
 }else if(page==='category'){
@@ -1277,7 +1278,7 @@ if(page==='home'){
   balanceTermLayout();
 }
 
-document.addEventListener('click',e=>{
+document.addEventListener('click',async e=>{
   const favorite=e.target.closest('[data-favorite]');
   if(favorite){e.preventDefault();const id=favorite.dataset.favorite,saved=toggleList(FAVORITES_KEY,id).includes(id);favorite.classList.toggle('is-saved',saved);favorite.setAttribute('aria-pressed',saved);favorite.setAttribute('aria-label',`${saved?'取消收藏':'收藏'} ${getTerm(id)?.name||''}`);favorite.textContent=saved?'★':'☆';return}
   const termFavorite=e.target.closest('[data-term-favorite]');
@@ -1286,6 +1287,8 @@ document.addEventListener('click',e=>{
   if(termCompare){e.preventDefault();const id=document.body.dataset.id,ids=readList(COMPARE_KEY);if(!ids.includes(id)&&ids.length>=3){termCompare.textContent='对比最多 3 项';return}const next=toggleList(COMPARE_KEY,id,3),active=next.includes(id);termCompare.setAttribute('aria-pressed',active);termCompare.textContent=active?'✓ 已加入对比':'＋ 加入对比';document.querySelector('.compare-tray')?._render?.();return}
   const exportCSS=e.target.closest('[data-export-css]');
   if(exportCSS){e.preventDefault();const term=getTerm(document.body.dataset.id);if(term){const text=relatedCSS(term);navigator.clipboard?.writeText(text).catch(()=>{});exportCSS.textContent='✓ CSS 已复制';setTimeout(()=>exportCSS.textContent='复制 CSS',1400)}return}
+  const shareTerm=e.target.closest('[data-share-term]');
+  if(shareTerm){e.preventDefault();const term=getTerm(document.body.dataset.id),url=location.href,title=term?`${term.name}（${term.en}）— UI Wiki`:document.title;try{if(navigator.share)await navigator.share({title,text:term?.summary||'',url});else{await copyText(url);shareTerm.textContent='✓ 链接已复制';setTimeout(()=>shareTerm.textContent='分享词条',1600)}}catch(error){if(error?.name!=='AbortError'){await copyText(url);shareTerm.textContent='✓ 链接已复制';setTimeout(()=>shareTerm.textContent='分享词条',1600)}}return}
   const clearCompare=e.target.closest('[data-clear-compare]');if(clearCompare){writeList(COMPARE_KEY,[]);document.querySelector('.compare-tray')?._render?.();return}
   const removeCompare=e.target.closest('[data-remove-compare]');if(removeCompare){e.preventDefault();toggleList(COMPARE_KEY,removeCompare.dataset.removeCompare);document.querySelector('.compare-tray')?._render?.();return}
   const preview=e.target.closest('.term-card .preview');

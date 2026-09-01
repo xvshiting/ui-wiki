@@ -10,7 +10,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/xvshiting/ui-wiki?style=for-the-badge&logo=github&label=STAR&labelColor=07111f&color=ff8066)](https://github.com/xvshiting/ui-wiki)
 [![Static Site](https://img.shields.io/badge/GitHub_Pages-纯静态站点-8da2ff?style=for-the-badge&logo=githubpages&labelColor=07111f)](https://xvshiting.github.io/ui-wiki/)
 
-**600 个设计效果 · 600 个独立详情页 · 无后端 · 无构建依赖 · 开箱即用**
+**640 个设计效果 · 640 个独立详情页 · 无后端 · 无构建依赖 · 开箱即用**
 
 </div>
 
@@ -28,19 +28,19 @@ UI Wiki 收录 UI、交互、平面、封面、色彩与字体领域的常用设
 
 |  | 能做什么 | 适合谁 |
 |---|---|---|
-| **浏览** | 按领域、标签与二级分组探索 600 个效果 | 设计师、学生 |
+| **浏览** | 按领域、标签与二级分组探索 640 个效果 | 设计师、学生 |
 | **试玩** | 直接操作点击、拖拽、滚动、指针与状态反馈 | 交互设计师、前端开发者 |
 | **调参** | 修改颜色、间距、圆角、旋转、缩放和动效速度 | 设计系统与原型工作 |
 | **拆解** | 查看、修改并重新运行当前效果的 HTML/CSS | 前端学习与实现参考 |
 | **整理** | 收藏词条、记录最近浏览、加入效果对比 | 灵感收集与方案评审 |
 | **复用** | 一键复制效果 CSS，带走当前设计思路 | 快速原型与实验 |
 
-## 600 个效果，六个领域
+## 640 个效果，六个领域
 
 | 分类 | 数量 | 包含内容 |
 |---|---:|---|
 | **UI 布局** | 107 | 导航、阅读、工作台、表单、地图、响应式与实验构图 |
-| **UI 视觉** | 18 | 玻璃、光影、材质、渐变与界面风格 |
+| **UI 视觉** | 58 | 玻璃、光影、实体材质、数字纹理与空间表面 |
 | **交互与动效** | 121 | 点击、导航转场、滚动、拖拽、手势、表单与反馈 |
 | **平面设计** | 118 | 现代主义、复古风格、印刷、摄影、拼贴与信息设计 |
 | **封面设计** | 118 | 字体、摄影、图像处理、插画、几何、材质与系列系统 |
@@ -50,7 +50,7 @@ UI Wiki 收录 UI、交互、平面、封面、色彩与字体领域的常用设
 
 ## 项目体验
 
-- **专属预览**：600 个词条均有与原理对应的 HTML 结构和 CSS 表现。
+- **专属预览**：640 个词条均有与原理对应的 HTML 结构和 CSS 表现。
 - **真实交互**：按钮形变、拖拽吸附、卡片翻转、指针聚光等都可以操作。
 - **参数实验室**：参数只影响当前预览，适合快速比较视觉差异。
 - **源码 Playground**：修改代码后可立即在页面中重新运行。
@@ -82,7 +82,7 @@ python3 -m http.server 8000
 ui-wiki/
 ├── index.html                  # 首页与六大领域入口
 ├── categories/                # 分类聚合页
-├── terms/                     # 600 个独立效果详情页
+├── terms/                     # 640 个独立效果详情页
 ├── data/
 │   ├── lexicon.js             # 分类、基础词条与查询方法
 │   ├── extra-terms.js         # 扩展效果数据
@@ -125,6 +125,8 @@ node scripts/check-semantic-interactions.mjs
 - 预览能够说明原理，而不是只展示一个装饰结果；
 - 控件与代码确实会改变当前效果；
 - 在窄屏和 `prefers-reduced-motion` 下仍然可用。
+
+完整流程见 **[CONTRIBUTING.md](CONTRIBUTING.md)**。也可以直接使用 [效果征集模板](https://github.com/xvshiting/ui-wiki/issues/new?template=effect-request.md) 推荐下一批内容。
 
 ---
 
