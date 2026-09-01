@@ -472,7 +472,7 @@ const extraTerms=[
   ,{id:'navigation-drawer-layout',cat:'ui-layout',name:'抽屉式导航',en:'Navigation Drawer',tags:['导航','抽屉'],summary:'从边缘滑出的面板容纳分层导航与账户入口。',usage:'移动端和响应式后台。',principle:'打开状态提供明确关闭路径。',demo:'fx-layout-drawer'}
   ,{id:'collapsible-sidebar-layout',cat:'ui-layout',name:'可折叠侧栏',en:'Collapsible Sidebar',tags:['导航','侧栏'],summary:'侧栏在完整导航与图标轨道之间切换。',usage:'后台、编辑器和工作台。',principle:'折叠后仍能辨识图标语义。',demo:'fx-layout-collapsibleside'}
   ,{id:'icon-rail-layout',cat:'ui-layout',name:'图标轨道布局',en:'Icon Rail Layout',tags:['导航','图标'],summary:'窄轨道以图标提供高密度的一级导航。',usage:'设计工具和专业软件。',principle:'选中态与提示文本配套。',demo:'fx-layout-iconrail'}
-  ,{id:'command-palette-layout',cat:'ui-layout',name:'命令面板布局',en:'Command Palette Layout',tags:['导航','命令'],summary:'居中的搜索命令面板快速跳转功能与内容。',usage:'开发工具、后台和生产力应用。',principle:'键盘路径和分类反馈清楚。',demo:'fx-layout-palette'}
+  ,{id:'command-palette-layout',cat:'interaction',name:'命令面板',en:'Command Palette',tags:['导航','命令'],summary:'通过可搜索的命令面板快速跳转功能与内容。',usage:'开发工具、后台和生产力应用。',principle:'键盘路径、匹配反馈和命令分组必须清楚。',demo:'fx-layout-palette'}
   ,{id:'breadcrumb-workspace',cat:'ui-layout',name:'面包屑工作区',en:'Breadcrumb Workspace',tags:['导航','层级'],summary:'面包屑路径与当前工作区内容并置，帮助定位层级。',usage:'文件管理、文档和电商。',principle:'当前层级与可返回节点易区分。',demo:'fx-layout-breadcrumb'}
   ,{id:'single-column-reading-flow',cat:'ui-layout',name:'单栏阅读流',en:'Single-column Reading Flow',tags:['阅读','单栏'],summary:'以窄幅单栏维持连续、专注的阅读路径。',usage:'文章、文档和知识库。',principle:'行长与行距保持舒适。',demo:'fx-layout-singlecolumn'}
   ,{id:'two-column-article',cat:'ui-layout',name:'双栏文章布局',en:'Two-column Article',tags:['阅读','双栏'],summary:'正文与辅助信息并列，提升长文的上下文效率。',usage:'杂志、研究和专题页。',principle:'主次栏宽度差异明确。',demo:'fx-layout-twocolumn'}
@@ -554,8 +554,8 @@ const extraTerms=[
   ,{id:'fan-menu-layout',cat:'ui-layout',name:'扇形菜单布局',en:'Fan Menu Layout',tags:['实验','菜单'],summary:'从单一锚点扇形展开多个快捷入口。',usage:'移动端、游戏和创作工具。',principle:'扇区角度与触达范围一致。',demo:'fx-layout-fan'}
   ,{id:'perspective-space-layout',cat:'ui-layout',name:'透视空间布局',en:'Perspective Space Layout',tags:['实验','透视'],summary:'用透视缩放构建具有远近关系的空间界面。',usage:'作品集、游戏和叙事网页。',principle:'远近层级不影响导航。',demo:'fx-layout-perspective'}
   ,{id:'isometric-layout',cat:'ui-layout',name:'等距视角布局',en:'Isometric Layout',tags:['实验','等距'],summary:'以等距轴排列模块，表现稳定的三维工作区。',usage:'建筑、游戏和技术展示。',principle:'轴线角度和比例统一。',demo:'fx-layout-isometric'}
-  ,{id:'empty-state-layout',cat:'ui-layout',name:'空状态布局',en:'Empty-state Layout',tags:['状态','布局'],summary:'在没有内容时提供清晰说明与下一步行动。',usage:'列表、项目和搜索结果。',principle:'空状态应帮助用户开始，而非只显示无数据。',demo:'fx-layout-emptystate'}
-  ,{id:'error-recovery-layout',cat:'ui-layout',name:'错误恢复布局',en:'Error Recovery Layout',tags:['状态','错误'],summary:'集中呈现错误原因、影响范围与恢复操作。',usage:'网络、表单和后台。',principle:'恢复动作优先于技术细节。',demo:'fx-layout-errorrecovery'}
+  ,{id:'empty-state-layout',cat:'interaction',name:'空状态引导',en:'Empty-state Guidance',tags:['状态','引导'],summary:'在没有内容时提供清晰说明与下一步行动。',usage:'列表、项目和搜索结果。',principle:'空状态应帮助用户开始，而非只显示无数据。',demo:'fx-layout-emptystate'}
+  ,{id:'error-recovery-layout',cat:'interaction',name:'错误恢复',en:'Error Recovery',tags:['状态','错误'],summary:'集中呈现错误原因、影响范围与恢复操作。',usage:'网络、表单和后台。',principle:'恢复动作优先于技术细节。',demo:'fx-layout-errorrecovery'}
 ];
 
 
@@ -914,6 +914,23 @@ const COMPARE_KEY='ui-wiki-compare';
 const readList=key=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}};
 const writeList=(key,list)=>{try{localStorage.setItem(key,JSON.stringify(list))}catch{}};
 const toggleList=(key,id,limit=30)=>{const list=readList(key),next=list.includes(id)?list.filter(item=>item!==id):[id,...list].slice(0,limit);writeList(key,next);return next};
+const layoutGroups=[
+  {id:'foundations',name:'基础结构',start:'grid-layout'},
+  {id:'navigation',name:'导航结构',start:'top-app-bar'},
+  {id:'reading',name:'阅读与内容',start:'single-column-reading-flow'},
+  {id:'collections',name:'列表与集合',start:'compact-data-list'},
+  {id:'workspace',name:'工作台与数据',start:'kpi-overview-layout'},
+  {id:'flows',name:'表单与流程',start:'long-form-layout'},
+  {id:'marketing',name:'营销与内容页',start:'saas-hero-layout'},
+  {id:'spatial',name:'地图与空间',start:'map-sidebar-layout'},
+  {id:'responsive',name:'响应式布局',start:'container-query-layout'},
+  {id:'experimental',name:'实验性构图',start:'freeform-canvas-layout'}
+];
+const layoutGroupFor=term=>{
+  if(term.cat!=='ui-layout')return null;
+  const list=byCategory('ui-layout'),index=list.findIndex(item=>item.id===term.id);
+  return [...layoutGroups].reverse().find(group=>index>=list.findIndex(item=>item.id===group.start))||layoutGroups[0];
+};
 const demoMarkup = type => {
   const extraMarkup=getExtraDemoMarkup(type);if(extraMarkup)return extraMarkup;
   if(['grid','bento','asym','layers'].includes(type)) return `<div class="demo d-${type}"><i></i><i></i><i></i><i></i><i></i></div>`;
@@ -973,7 +990,15 @@ function shell(active=''){
   document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open')});
   mountCompareTray();
 }
-function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id),group=layoutGroupFor(term);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"${group?` data-layout-group="${group.id}"`:''}><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${group?`${getCategory(term.cat).name} · ${group.name}`:getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function mountLayoutGroups(){
+  const grid=document.querySelector('[data-terms]');if(!grid)return;
+  const bar=document.createElement('nav');bar.className='layout-groups';bar.setAttribute('aria-label','布局二级分组');
+  const counts=Object.fromEntries(layoutGroups.map(group=>[group.id,grid.querySelectorAll(`[data-layout-group="${group.id}"]`).length]));
+  bar.innerHTML=`<button class="active" type="button" data-layout-filter="all">全部 <b>${grid.children.length}</b></button>${layoutGroups.filter(group=>counts[group.id]).map(group=>`<button type="button" data-layout-filter="${group.id}">${group.name} <b>${counts[group.id]}</b></button>`).join('')}`;
+  grid.before(bar);
+  bar.addEventListener('click',event=>{const button=event.target.closest('[data-layout-filter]');if(!button)return;bar.querySelectorAll('button').forEach(item=>item.classList.toggle('active',item===button));grid.querySelectorAll('.term-card').forEach(card=>card.hidden=button.dataset.layoutFilter!=='all'&&card.dataset.layoutGroup!==button.dataset.layoutFilter)});
+}
 function mountCompareTray(){
   if(document.querySelector('.compare-tray'))return;
   const tray=document.createElement('aside');tray.className='compare-tray';tray.setAttribute('aria-live','polite');document.body.append(tray);
@@ -1044,6 +1069,7 @@ if(page==='home'){
   document.querySelector('[data-intro]').textContent=cat.intro;
   document.querySelector('[data-count]').textContent=byCategory(cat.id).length;
   document.querySelector('[data-terms]').innerHTML=byCategory(cat.id).map(termCard).join('');
+  if(cat.id==='ui-layout')mountLayoutGroups();
 }else if(page==='term'){
   const term=getTerm(document.body.dataset.id),cat=getCategory(term.cat); shell(cat.id);
   document.title=`${term.name} — 设计效果百科`;

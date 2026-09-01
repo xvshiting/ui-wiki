@@ -9,6 +9,23 @@ const COMPARE_KEY='ui-wiki-compare';
 const readList=key=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}};
 const writeList=(key,list)=>{try{localStorage.setItem(key,JSON.stringify(list))}catch{}};
 const toggleList=(key,id,limit=30)=>{const list=readList(key),next=list.includes(id)?list.filter(item=>item!==id):[id,...list].slice(0,limit);writeList(key,next);return next};
+const layoutGroups=[
+  {id:'foundations',name:'基础结构',start:'grid-layout'},
+  {id:'navigation',name:'导航结构',start:'top-app-bar'},
+  {id:'reading',name:'阅读与内容',start:'single-column-reading-flow'},
+  {id:'collections',name:'列表与集合',start:'compact-data-list'},
+  {id:'workspace',name:'工作台与数据',start:'kpi-overview-layout'},
+  {id:'flows',name:'表单与流程',start:'long-form-layout'},
+  {id:'marketing',name:'营销与内容页',start:'saas-hero-layout'},
+  {id:'spatial',name:'地图与空间',start:'map-sidebar-layout'},
+  {id:'responsive',name:'响应式布局',start:'container-query-layout'},
+  {id:'experimental',name:'实验性构图',start:'freeform-canvas-layout'}
+];
+const layoutGroupFor=term=>{
+  if(term.cat!=='ui-layout')return null;
+  const list=byCategory('ui-layout'),index=list.findIndex(item=>item.id===term.id);
+  return [...layoutGroups].reverse().find(group=>index>=list.findIndex(item=>item.id===group.start))||layoutGroups[0];
+};
 const demoMarkup = type => {
   const extraMarkup=getExtraDemoMarkup(type);if(extraMarkup)return extraMarkup;
   if(['grid','bento','asym','layers'].includes(type)) return `<div class="demo d-${type}"><i></i><i></i><i></i><i></i><i></i></div>`;
@@ -68,7 +85,15 @@ function shell(active=''){
   document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open')});
   mountCompareTray();
 }
-function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id),group=layoutGroupFor(term);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"${group?` data-layout-group="${group.id}"`:''}><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${group?`${getCategory(term.cat).name} · ${group.name}`:getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function mountLayoutGroups(){
+  const grid=document.querySelector('[data-terms]');if(!grid)return;
+  const bar=document.createElement('nav');bar.className='layout-groups';bar.setAttribute('aria-label','布局二级分组');
+  const counts=Object.fromEntries(layoutGroups.map(group=>[group.id,grid.querySelectorAll(`[data-layout-group="${group.id}"]`).length]));
+  bar.innerHTML=`<button class="active" type="button" data-layout-filter="all">全部 <b>${grid.children.length}</b></button>${layoutGroups.filter(group=>counts[group.id]).map(group=>`<button type="button" data-layout-filter="${group.id}">${group.name} <b>${counts[group.id]}</b></button>`).join('')}`;
+  grid.before(bar);
+  bar.addEventListener('click',event=>{const button=event.target.closest('[data-layout-filter]');if(!button)return;bar.querySelectorAll('button').forEach(item=>item.classList.toggle('active',item===button));grid.querySelectorAll('.term-card').forEach(card=>card.hidden=button.dataset.layoutFilter!=='all'&&card.dataset.layoutGroup!==button.dataset.layoutFilter)});
+}
 function mountCompareTray(){
   if(document.querySelector('.compare-tray'))return;
   const tray=document.createElement('aside');tray.className='compare-tray';tray.setAttribute('aria-live','polite');document.body.append(tray);
@@ -139,6 +164,7 @@ if(page==='home'){
   document.querySelector('[data-intro]').textContent=cat.intro;
   document.querySelector('[data-count]').textContent=byCategory(cat.id).length;
   document.querySelector('[data-terms]').innerHTML=byCategory(cat.id).map(termCard).join('');
+  if(cat.id==='ui-layout')mountLayoutGroups();
 }else if(page==='term'){
   const term=getTerm(document.body.dataset.id),cat=getCategory(term.cat); shell(cat.id);
   document.title=`${term.name} — 设计效果百科`;
