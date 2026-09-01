@@ -4,7 +4,7 @@ import {getExtraDemoMarkup} from './extra-demos.js';
 
 const base = location.pathname.includes('/categories/') || location.pathname.includes('/terms/') ? '../' : './';
 const demoMarkup = type => {
-  if(type.startsWith('fx-'))return getExtraDemoMarkup(type);
+  const extraMarkup=getExtraDemoMarkup(type);if(extraMarkup)return extraMarkup;
   if(['grid','bento','asym','layers'].includes(type)) return `<div class="demo d-${type}"><i></i><i></i><i></i><i></i><i></i></div>`;
   if(type==='split') return '<div class="demo d-split"><i></i><i></i></div>';
   if(['glass','abstract'].includes(type)) return `<div class="demo d-${type}"><i></i></div>`;
@@ -91,7 +91,7 @@ function relatedCSS(term){
     const rules=[...document.styleSheets].flatMap(sheet=>[...sheet.cssRules]).filter(rule=>rule.cssText?.includes(token)||rule.selectorText==='.stage .demo').map(rule=>rule.cssText);
     if(rules.length)return rules.join('\n\n');
   }catch{}
-  return `.d-${term.demo} {\n  --demo-color: #8da2ff;\n  --demo-color-2: #61e7c8;\n}`;
+  return `.d-${term.demo} {\n  --demo-color: #53d7d0;\n  --demo-color-2: #ff8066;\n}`;
 }
 function mountSourceLab(term){
   const panel=document.createElement('section');panel.className='source-lab';
@@ -151,9 +151,26 @@ document.addEventListener('click',e=>{
   const flip=e.target.closest('.d-fx-motion-flip button');if(flip){e.preventDefault();flip.classList.toggle('flipped')}
   const toggle=e.target.closest('.d-fx-motion-toggle button');if(toggle){e.preventDefault();const on=toggle.getAttribute('aria-pressed')!=='true';toggle.setAttribute('aria-pressed',on);toggle.parentElement.querySelector('b').textContent=on?'ON':'OFF'}
   const count=e.target.closest('.d-fx-motion-count button');if(count){e.preventDefault();const output=count.querySelector('b'),start=Number(output.textContent)||0,target=start+24;let value=start;const tick=()=>{value+=2;output.textContent=Math.min(value,target);if(value<target)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+  const burst=e.target.closest('.d-motion-click-burst button');if(burst){e.preventDefault();burst.classList.remove('burst');void burst.offsetWidth;burst.classList.add('burst')}
+  const particles=e.target.closest('.d-motion-click-particles button');if(particles){e.preventDefault();particles.querySelectorAll('i').forEach(item=>item.remove());for(let i=0;i<12;i++){const dot=document.createElement('i');dot.style.setProperty('--n',i);particles.append(dot)}setTimeout(()=>particles.querySelectorAll('i').forEach(item=>item.remove()),800)}
+  const ink=e.target.closest('.d-motion-click-ink button');if(ink){e.preventDefault();ink.classList.toggle('active')}
+  const indent=e.target.closest('.d-motion-click-indent button');if(indent){e.preventDefault();indent.classList.toggle('pressed')}
+  const bounce=e.target.closest('.d-motion-click-iconbounce button');if(bounce){e.preventDefault();bounce.classList.remove('bounce');void bounce.offsetWidth;bounce.classList.add('bounce')}
+  const success=e.target.closest('.d-motion-click-success button');if(success){e.preventDefault();success.classList.toggle('success');success.querySelector('b').textContent=success.classList.contains('success')?'SAVED':'SAVE'}
+  const error=e.target.closest('.d-motion-click-error label');if(error){error.classList.remove('shake');void error.offsetWidth;error.classList.add('shake')}
+  const nav=e.target.closest('.d-motion-nav-shared,.d-motion-nav-container,.d-motion-nav-circular,.d-motion-nav-blinds,.d-motion-nav-wipe,.d-motion-nav-pixel,.d-motion-nav-ink,.d-motion-nav-card,.d-motion-nav-depth,.d-motion-nav-axis');if(nav&&e.target.closest('button')){e.preventDefault();nav.classList.toggle('is-open')}
 });
 
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-magnetic');if(!box)return;const b=box.querySelector('button'),r=box.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.12}px)`});
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-tilt');if(!box)return;const card=box.firstElementChild,r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`rotateX(${-y*12}deg) rotateY(${x*12}deg)`});
 document.addEventListener('pointerout',e=>{const box=e.target.closest('.d-tilt');if(box&&!box.contains(e.relatedTarget))box.firstElementChild.style.transform=''});
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-fx-motion-spotlight');if(!box)return;const r=box.getBoundingClientRect();box.style.setProperty('--spot-x',`${((e.clientX-r.left)/r.width)*100}%`);box.style.setProperty('--spot-y',`${((e.clientY-r.top)/r.height)*100}%`)});
+document.addEventListener('pointerdown',e=>{const surface=e.target.closest('.d-motion-click-highlight button');if(surface){const r=surface.getBoundingClientRect();surface.style.setProperty('--touch-x',`${e.clientX-r.left}px`);surface.style.setProperty('--touch-y',`${e.clientY-r.top}px`);surface.classList.remove('touched');void surface.offsetWidth;surface.classList.add('touched')}const hold=e.target.closest('.d-motion-click-longpress button');if(hold){e.preventDefault();hold.classList.add('holding');hold._holdTimer=setTimeout(()=>{hold.classList.remove('holding');hold.classList.add('complete');hold.querySelector('b').textContent='DONE'},1200)}});
+document.addEventListener('pointerup',e=>{const hold=e.target.closest('.d-motion-click-longpress button');if(hold){clearTimeout(hold._holdTimer);if(!hold.classList.contains('complete'))hold.classList.remove('holding')}});
+document.addEventListener('pointercancel',e=>{const hold=e.target.closest('.d-motion-click-longpress button');if(hold){clearTimeout(hold._holdTimer);hold.classList.remove('holding')}});
+document.addEventListener('dragstart',e=>{const item=e.target.closest('[draggable="true"]');if(item){item.classList.add('dragging');e.dataTransfer?.setData('text/plain','drag')}});
+document.addEventListener('dragend',e=>{const item=e.target.closest('[draggable="true"]');if(item)item.classList.remove('dragging')});
+document.addEventListener('click',e=>{const m=e.target.closest('.d-motion-drag-marquee');if(m&&e.target.tagName==='I')e.target.classList.toggle('selected')});
+document.addEventListener('input',e=>{const otp=e.target.closest('.d-motion-form-otp');if(otp&&e.target.value)e.target.nextElementSibling?.focus();const tag=e.target.closest('.d-motion-form-tag input');if(tag&&e.inputType==='insertLineBreak'&&tag.value.trim()){const chip=document.createElement('b');chip.textContent=tag.value;tag.parentElement.querySelector('.tags').append(chip);tag.value=''}});
+document.addEventListener('click',e=>{const up=e.target.closest('.d-motion-form-upload button');if(up){let n=0;const t=setInterval(()=>{n+=20;up.querySelector('b').textContent=n+'%';if(n>=100){clearInterval(t);up.textContent='UPLOADED ✓'}},120)}});
+document.addEventListener('dragover',e=>{const d=e.target.closest('.d-motion-form-dragover');if(d){e.preventDefault();d.classList.add('drag')}});document.addEventListener('dragleave',e=>e.target.closest('.d-motion-form-dragover')?.classList.remove('drag'));document.addEventListener('drop',e=>{const d=e.target.closest('.d-motion-form-dragover');if(d){e.preventDefault();d.classList.remove('drag');d.textContent='FILE READY ✓'}});
