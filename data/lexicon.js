@@ -1,3 +1,5 @@
+import {extraTerms} from './extra-terms.js';
+
 export const categories = [
   { id: 'ui-layout', name: 'UI 布局', en: 'UI Layout', color: '#ff5c35', intro: '组织界面空间、信息层级与阅读节奏。' },
   { id: 'ui-visual', name: 'UI 视觉', en: 'UI Visual', color: '#8b5cf6', intro: '建立数字界面的材质、光影与视觉气质。' },
@@ -55,7 +57,8 @@ export const terms = [
   {id:'die-cut-cover',cat:'cover',name:'模切窗口封面',en:'Die-cut Window Cover',tags:['窗口','悬念'],summary:'通过封面开孔露出内页局部，让两层图像共同构成主题。',usage:'艺术书、品牌手册、唱片与限量出版。',principle:'窗口形状要参与叙事，并预留真实制作所需的结构强度。',demo:'diecut'},
   {id:'vertical-title-cover',cat:'cover',name:'纵向标题封面',en:'Vertical Title Cover',tags:['竖排','方向'],summary:'让标题沿垂直方向组织，改变常规阅读路径并拉动画面比例。',usage:'文学、建筑、时尚和东亚文化主题出版。',principle:'竖排方向必须明确，并与作者、期号等横排信息协调。',demo:'verticalcover'},
   {id:'chromatic-aberration',cat:'color-type',name:'色差偏移',en:'Chromatic Aberration',tags:['错位','光学'],summary:'将文字或图形的色彩通道轻微错开，制造光学失真和数字张力。',usage:'音乐、游戏、科技活动与故障美学视觉。',principle:'保留清晰主体层，色差只承担边缘能量。',demo:'chromatic'},
-  {id:'gradient-type',cat:'color-type',name:'渐变字体',en:'Gradient Typography',tags:['色彩过渡','标题'],summary:'在文字内部铺设连续色彩过渡，让字形成为主要色彩载体。',usage:'品牌标题、发布页、活动海报与数据亮点。',principle:'渐变方向应强化文字节奏，并检查背景上的最低对比度。',demo:'gradienttype'}
+  {id:'gradient-type',cat:'color-type',name:'渐变字体',en:'Gradient Typography',tags:['色彩过渡','标题'],summary:'在文字内部铺设连续色彩过渡，让字形成为主要色彩载体。',usage:'品牌标题、发布页、活动海报与数据亮点。',principle:'渐变方向应强化文字节奏，并检查背景上的最低对比度。',demo:'gradienttype'},
+  ...extraTerms
 ];
 
 export const byCategory = id => terms.filter(term => term.cat === id);

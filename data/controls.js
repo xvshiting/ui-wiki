@@ -24,4 +24,14 @@ export const demoControls={
   diecut:['color','color2','radius','scale'],verticalcover:['color','color2','scale'],chromatic:['color','color2','intensity','scale'],gradienttype:['color','color2','rotate','scale']
 };
 
-export const controlsForDemo=demo=>demoControls[demo]||['color','scale'];
+export const controlsForDemo=demo=>{
+  if(!demo.startsWith('fx-'))return demoControls[demo]||['color','scale'];
+  const noColor=new Set(['fx-layout-command','fx-visual-metal','fx-visual-wire','fx-visual-shadow','fx-graphic-vapor','fx-graphic-copy','fx-cover-negative','fx-cover-silhouette','fx-cover-object','fx-cover-archive','fx-type-triadic','fx-type-pair','fx-type-oversized']);
+  const noColor2=new Set(['fx-motion-progress','fx-motion-trail','fx-motion-spotlight','fx-motion-count','fx-graphic-construct','fx-graphic-stencil','fx-cover-archive','fx-type-condensed']);
+  const supportsGap=new Set(['fx-layout-scale','fx-layout-holy','fx-layout-zigzag','fx-layout-dashboard','fx-layout-command','fx-layout-sticky','fx-visual-wire','fx-visual-shadow','fx-motion-stagger']);
+  const keys=[];
+  if(!noColor.has(demo))keys.push('color');
+  if(!noColor.has(demo)&&!noColor2.has(demo))keys.push('color2');
+  if(supportsGap.has(demo))keys.push('gap');
+  return [...keys,'radius','rotate','scale'];
+};

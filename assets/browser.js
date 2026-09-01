@@ -1,3 +1,72 @@
+const extraTerms=[
+  {id:'modular-scale',cat:'ui-layout',name:'模块化比例',en:'Modular Scale',tags:['比例','节奏'],summary:'用统一比例序列控制模块尺寸，建立稳定而有变化的界面节奏。',usage:'设计系统、仪表盘和内容型产品。',principle:'比例差异应对应信息权重，避免只为丰富画面而变化。',demo:'fx-layout-scale'},
+  {id:'holy-grail-layout',cat:'ui-layout',name:'圣杯布局',en:'Holy Grail Layout',tags:['三栏','自适应'],summary:'以页眉、页脚和三栏主体构成经典的自适应页面骨架。',usage:'门户、文档站和信息密集型应用。',principle:'主内容优先伸缩，两侧栏应有清楚的最小宽度。',demo:'fx-layout-holy'},
+  {id:'full-bleed-layout',cat:'ui-layout',name:'满版布局',en:'Full-bleed Layout',tags:['无边界','沉浸'],summary:'让图像或色块延伸到视口边缘，削弱容器边界并增强沉浸感。',usage:'摄影、旅行、品牌故事和产品首屏。',principle:'满版背景上仍需保留安全的内容阅读区。',demo:'fx-layout-bleed'},
+  {id:'zigzag-layout',cat:'ui-layout',name:'之字形布局',en:'Zigzag Layout',tags:['交替','叙事'],summary:'让图文模块左右交替排列，引导视线沿页面连续移动。',usage:'功能介绍、案例研究和时间叙事。',principle:'交替结构要保持扫描规律，移动端应回归单列。',demo:'fx-layout-zigzag'},
+  {id:'timeline-layout',cat:'ui-layout',name:'时间轴布局',en:'Timeline Layout',tags:['顺序','节点'],summary:'沿一条主轴组织事件、版本或步骤，清楚表达先后关系。',usage:'履历、产品路线图、历史和流程说明。',principle:'节点密度必须允许标签完整阅读。',demo:'fx-layout-timeline'},
+  {id:'dashboard-layout',cat:'ui-layout',name:'仪表盘布局',en:'Dashboard Layout',tags:['指标','总览'],summary:'把关键指标、趋势和操作组合成可快速扫描的工作台。',usage:'分析平台、运营后台和业务系统。',principle:'优先呈现可行动的信息，而不是平均分配卡片。',demo:'fx-layout-dashboard'},
+  {id:'command-center-layout',cat:'ui-layout',name:'指挥中心布局',en:'Command Center Layout',tags:['密度','监控'],summary:'以高密度面板和持续状态构成面向实时决策的大屏界面。',usage:'运维、安全、物流和现场监控。',principle:'异常状态必须比常态数据更醒目。',demo:'fx-layout-command'},
+  {id:'split-card-layout',cat:'ui-layout',name:'分割卡片布局',en:'Split Card Layout',tags:['图文','对照'],summary:'在单张卡片中切分图像与信息区域，形成紧凑的叙事单元。',usage:'商品、文章、人物和地点列表。',principle:'分割比例应由内容而非固定装饰决定。',demo:'fx-layout-splitcard'},
+  {id:'sticky-scroll-layout',cat:'ui-layout',name:'粘性滚动布局',en:'Sticky Scroll Layout',tags:['固定','分步'],summary:'滚动时固定关键视觉，让旁侧内容逐段更新。',usage:'产品讲解、数据故事和长页叙事。',principle:'固定区域不能遮挡导航或困住键盘焦点。',demo:'fx-layout-sticky'},
+  {id:'radial-layout',cat:'ui-layout',name:'放射式布局',en:'Radial Layout',tags:['中心','环绕'],summary:'围绕中心焦点排列信息或操作，形成明确的向心关系。',usage:'关系图、菜单、功能总览和实验界面。',principle:'只适合少量等权项目，并提供线性替代路径。',demo:'fx-layout-radial'},
+
+  {id:'neon-glow',cat:'ui-visual',name:'霓虹辉光',en:'Neon Glow',tags:['发光','夜色'],summary:'以高饱和颜色和多层模糊光晕模拟霓虹管发光。',usage:'娱乐、音乐、游戏和夜间主题。',principle:'发光层不能取代清晰的实体轮廓。',demo:'fx-visual-neon'},
+  {id:'frosted-noise',cat:'ui-visual',name:'磨砂噪点',en:'Frosted Noise',tags:['磨砂','颗粒'],summary:'在半透明表面叠加细颗粒，形成更真实的磨砂介质。',usage:'浮层、媒体控件和氛围型面板。',principle:'噪点密度要低，避免降低文字清晰度。',demo:'fx-visual-frost'},
+  {id:'metallic-surface',cat:'ui-visual',name:'金属表面',en:'Metallic Surface',tags:['反射','材质'],summary:'用锐利高光、暗部和方向性渐变模拟拉丝金属。',usage:'硬件、汽车、奢侈品和控制面板。',principle:'高光方向必须统一，才能建立可信材质。',demo:'fx-visual-metal'},
+  {id:'paper-cut-ui',cat:'ui-visual',name:'剪纸界面',en:'Paper-cut UI',tags:['纸层','投影'],summary:'以平面色纸、切口与短阴影表现手工层叠空间。',usage:'教育、节日、儿童和文化产品。',principle:'纸层数量应有限，阴影方向保持一致。',demo:'fx-visual-paper'},
+  {id:'liquid-gradient',cat:'ui-visual',name:'液态渐变',en:'Liquid Gradient',tags:['流体','融合'],summary:'让多个色团像液体般融合、拉伸和缓慢流动。',usage:'AI、创意工具、音乐和品牌背景。',principle:'运动应慢于内容阅读节奏。',demo:'fx-visual-fluid'},
+  {id:'pixel-ui',cat:'ui-visual',name:'像素界面',en:'Pixel UI',tags:['像素','复古'],summary:'以硬边像素、有限色板和位图符号塑造复古数字气质。',usage:'游戏、开发者工具和怀旧品牌。',principle:'像素尺度应统一，避免混入随意的平滑曲线。',demo:'fx-visual-pixel'},
+  {id:'wireframe-aesthetic',cat:'ui-visual',name:'线框美学',en:'Wireframe Aesthetic',tags:['线框','结构'],summary:'主动保留低保真边框、标注和结构线，强调系统原型感。',usage:'设计工具、技术品牌和概念产品。',principle:'线框仍需通过线宽和颜色建立层级。',demo:'fx-visual-wire'},
+  {id:'glossy-ui',cat:'ui-visual',name:'高光拟物',en:'Glossy UI',tags:['高光','光泽'],summary:'使用镜面高光、饱和渐变和反射塑造光滑表面。',usage:'娱乐、收藏、按钮和复古数码视觉。',principle:'高光形状应服从物体曲面。',demo:'fx-visual-gloss'},
+  {id:'translucent-border',cat:'ui-visual',name:'透明描边',en:'Translucent Border',tags:['边缘','透光'],summary:'以半透明渐变边缘表现薄玻璃或发光薄膜。',usage:'深色主题卡片、弹窗和数据面板。',principle:'边缘亮度应帮助分层而不是制造噪声。',demo:'fx-visual-border'},
+  {id:'soft-shadow-system',cat:'ui-visual',name:'柔光阴影系统',en:'Soft Shadow System',tags:['阴影','层级'],summary:'通过低对比、多层柔影建立克制而连续的空间层级。',usage:'企业产品、卡片系统和浅色界面。',principle:'阴影级别要少，并与交互层级一一对应。',demo:'fx-visual-shadow'},
+
+  {id:'morphing-button',cat:'interaction',name:'形变按钮',en:'Morphing Button',tags:['形变','状态'],summary:'按钮在提交、加载和完成状态间连续改变尺寸与形状。',usage:'表单提交、上传和异步操作。',principle:'形变过程中必须保留状态语义。',demo:'fx-motion-morph'},
+  {id:'drag-snap',cat:'interaction',name:'拖拽吸附',en:'Drag Snap',tags:['拖拽','对齐'],summary:'对象靠近目标位置时自动吸附并给予明确反馈。',usage:'画布、排序、看板和时间轴。',principle:'吸附阈值应可预测，并允许轻松撤销。',demo:'fx-motion-snap'},
+  {id:'page-transition',cat:'interaction',name:'页面转场',en:'Page Transition',tags:['导航','连续性'],summary:'在路由切换时用共享元素或遮罩保持空间连续性。',usage:'内容详情、作品集和沉浸式应用。',principle:'转场不能延迟新页面可操作时间。',demo:'fx-motion-page'},
+  {id:'scroll-progress',cat:'interaction',name:'滚动进度',en:'Scroll Progress',tags:['进度','阅读'],summary:'将页面滚动位置映射为清晰的线性或分段进度。',usage:'长文章、教程、表单和故事页面。',principle:'进度表达必须与真实内容长度一致。',demo:'fx-motion-progress'},
+  {id:'staggered-reveal',cat:'interaction',name:'错峰揭示',en:'Staggered Reveal',tags:['序列','入场'],summary:'让一组元素依次出现，强化顺序和整体节奏。',usage:'列表、菜单、数据卡和首屏内容。',principle:'延迟间隔应短，最后元素不能等待太久。',demo:'fx-motion-stagger'},
+  {id:'cursor-trail',cat:'interaction',name:'指针轨迹',en:'Cursor Trail',tags:['指针','轨迹'],summary:'让图形或粒子短暂跟随指针路径，增强空间反馈。',usage:'创意网站、画布和音乐体验。',principle:'轨迹不可遮挡点击目标，并尊重减少动态设置。',demo:'fx-motion-trail'},
+  {id:'flip-card',cat:'interaction',name:'翻转卡片',en:'Flip Card',tags:['翻面','披露'],summary:'围绕水平或垂直轴翻转卡片，展示背面内容。',usage:'学习卡、人物卡和轻量详情。',principle:'正反面信息关系要明确，触屏需要点击触发。',demo:'fx-motion-flip'},
+  {id:'elastic-toggle',cat:'interaction',name:'弹性开关',en:'Elastic Toggle',tags:['开关','弹性'],summary:'开关滑块切换时带有轻微拉伸和回弹，强化物理手感。',usage:'设置、偏好和设备控制。',principle:'动画不能掩盖开关的最终状态。',demo:'fx-motion-toggle'},
+  {id:'spotlight-hover',cat:'interaction',name:'聚光悬停',en:'Spotlight Hover',tags:['悬停','光标'],summary:'让局部光斑跟随指针，在卡片表面揭示细节。',usage:'深色卡片、功能网格和作品集。',principle:'核心信息在没有聚光时也必须可读。',demo:'fx-motion-spotlight'},
+  {id:'count-up-motion',cat:'interaction',name:'数字递增动效',en:'Count-up Motion',tags:['数字','反馈'],summary:'让关键数值从旧值平滑过渡到新值，突出变化。',usage:'指标、交易、成绩和里程碑。',principle:'只为重要变化使用，并提供最终静态值。',demo:'fx-motion-count'},
+
+  {id:'bauhaus',cat:'graphic',name:'包豪斯构成',en:'Bauhaus Composition',tags:['几何','功能'],summary:'以基础几何、原色和理性排版构成现代主义视觉。',usage:'文化海报、展览和设计品牌。',principle:'形式简洁但结构关系必须精确。',demo:'fx-graphic-bauhaus'},
+  {id:'constructivism',cat:'graphic',name:'构成主义',en:'Constructivism',tags:['斜线','宣传'],summary:'以强对角线、几何拼接和粗重文字制造行动感。',usage:'文化活动、音乐和议题传播。',principle:'动势需要汇聚到明确的信息焦点。',demo:'fx-graphic-construct'},
+  {id:'memphis',cat:'graphic',name:'孟菲斯风格',en:'Memphis Style',tags:['图案','活力'],summary:'组合鲜艳色块、随性几何和重复图案，形成玩乐气质。',usage:'年轻品牌、活动和社交传播。',principle:'图案要围绕主信息分布，避免平均噪声。',demo:'fx-graphic-memphis'},
+  {id:'psychedelic',cat:'graphic',name:'迷幻视觉',en:'Psychedelic Design',tags:['扭曲','高饱和'],summary:'以波动字形、强烈色彩和重复曲线营造感官扩张。',usage:'音乐、节庆、时尚和实验文化。',principle:'保留至少一个稳定的阅读锚点。',demo:'fx-graphic-psyche'},
+  {id:'y2k-aesthetic',cat:'graphic',name:'千禧年美学',en:'Y2K Aesthetic',tags:['数码','未来复古'],summary:'融合金属、泡泡字、早期网页和未来主义符号。',usage:'时尚、美妆、音乐和青年品牌。',principle:'选择少数时代符号，避免变成无主题拼盘。',demo:'fx-graphic-y2k'},
+  {id:'vaporwave',cat:'graphic',name:'蒸汽波',en:'Vaporwave',tags:['怀旧','数码'],summary:'将复古电脑色彩、古典雕塑与网格空间并置。',usage:'音乐、游戏、艺术项目和社交视觉。',principle:'怀旧素材之间需要统一色调和空间逻辑。',demo:'fx-graphic-vapor'},
+  {id:'photocopy',cat:'graphic',name:'复印机质感',en:'Photocopy Texture',tags:['高反差','失真'],summary:'模拟多次复印产生的颗粒、断裂和高反差边缘。',usage:'朋克、独立出版、海报和唱片。',principle:'失真要保留主形和关键信息。',demo:'fx-graphic-copy'},
+  {id:'stencil-type',cat:'graphic',name:'模板字设计',en:'Stencil Design',tags:['切口','工业'],summary:'通过字形连接桥和硬边色块表现喷涂模板语言。',usage:'工业、运动、音乐和导视视觉。',principle:'切口位置必须兼顾结构合理与识别度。',demo:'fx-graphic-stencil'},
+  {id:'geometric-abstraction',cat:'graphic',name:'几何抽象',en:'Geometric Abstraction',tags:['形状','秩序'],summary:'以几何形、比例和颜色关系代替具象图像表达主题。',usage:'品牌、艺术出版和文化活动。',principle:'形状关系要形成可解释的视觉逻辑。',demo:'fx-graphic-geo'},
+  {id:'maximalism',cat:'graphic',name:'极繁主义',en:'Maximalism',tags:['密集','装饰'],summary:'通过多层图像、色彩和文字制造有控制的视觉过载。',usage:'时尚、音乐、节庆和青年文化。',principle:'极繁仍需通过尺度差维持主次。',demo:'fx-graphic-max'},
+
+  {id:'negative-space-cover',cat:'cover',name:'负形封面',en:'Negative Space Cover',tags:['负形','隐喻'],summary:'利用主体周围或内部的空白形成第二层图像含义。',usage:'文学、思想、商业和公益出版。',principle:'负形应在第一眼可辨，并与主题有关。',demo:'fx-cover-negative'},
+  {id:'pattern-cover',cat:'cover',name:'图案封面',en:'Pattern-led Cover',tags:['重复','识别'],summary:'以连续图案覆盖画面，通过重复建立系列识别。',usage:'系列图书、唱片、期刊和品牌手册。',principle:'标题需要与图案形成明确的层级分离。',demo:'fx-cover-pattern'},
+  {id:'silhouette-cover',cat:'cover',name:'剪影封面',en:'Silhouette Cover',tags:['轮廓','叙事'],summary:'用单一轮廓概括人物或物体，留下想象空间。',usage:'传记、悬疑、文学和电影内容。',principle:'轮廓必须有足够独特的识别特征。',demo:'fx-cover-silhouette'},
+  {id:'macro-detail-cover',cat:'cover',name:'微距局部封面',en:'Macro Detail Cover',tags:['局部','放大'],summary:'极度放大物体细节，让纹理和局部形态成为抽象画面。',usage:'科学、自然、时尚和艺术出版。',principle:'局部图像应保留与主题的联想通道。',demo:'fx-cover-macro'},
+  {id:'grid-series-cover',cat:'cover',name:'系列网格封面',en:'Grid Series Cover',tags:['系列','编码'],summary:'用固定网格和可变色图建立跨册统一的系列系统。',usage:'丛书、报告、播客和课程。',principle:'固定规则与每期变量必须清楚分工。',demo:'fx-cover-series'},
+  {id:'central-object-cover',cat:'cover',name:'中心物封面',en:'Central Object Cover',tags:['居中','单体'],summary:'将一个具象物体置于画面中心，形成直接而强烈的识别。',usage:'产品、科普、商业和概念出版。',principle:'背景应支持主体轮廓，不与其争夺注意力。',demo:'fx-cover-object'},
+  {id:'torn-paper-cover',cat:'cover',name:'撕纸封面',en:'Torn Paper Cover',tags:['撕裂','层次'],summary:'以不规则撕裂边缘揭示下层文字或图像。',usage:'纪实、文化、音乐和议题内容。',principle:'撕裂方向应参与叙事并保留标题完整。',demo:'fx-cover-torn'},
+  {id:'archival-cover',cat:'cover',name:'档案式封面',en:'Archival Cover',tags:['档案','编号'],summary:'用标签、编号、印章和资料图像营造研究档案感。',usage:'历史、摄影、研究和艺术出版。',principle:'元数据要像真实信息，而非无意义装饰。',demo:'fx-cover-archive'},
+  {id:'cinematic-cover',cat:'cover',name:'电影感封面',en:'Cinematic Cover',tags:['宽银幕','氛围'],summary:'借用电影剧照、宽幅裁切和片名式排版建立叙事氛围。',usage:'小说、播客、影像和品牌故事。',principle:'画面氛围不能牺牲小尺寸下的标题识别。',demo:'fx-cover-cinema'},
+  {id:'stamp-cover',cat:'cover',name:'邮票式封面',en:'Stamp Cover',tags:['齿孔','收藏'],summary:'用齿孔边框、面值和发行信息模拟邮票或票券。',usage:'旅行、历史、收藏和纪念出版。',principle:'票券细节应围绕核心主题建立可信系统。',demo:'fx-cover-stamp'},
+
+  {id:'analogous-colors',cat:'color-type',name:'邻近色系统',en:'Analogous Colors',tags:['和谐','色相'],summary:'选取色轮上相邻色相，形成连续、统一的色彩氛围。',usage:'品牌、插画、数据和内容专题。',principle:'用明度差建立层级，避免颜色过于接近。',demo:'fx-type-analogous'},
+  {id:'triadic-colors',cat:'color-type',name:'三角色系统',en:'Triadic Colors',tags:['三色','平衡'],summary:'使用色轮上等距的三个色相建立活跃而平衡的组合。',usage:'教育、娱乐、活动和年轻品牌。',principle:'指定一个主色，其余两色承担辅助与强调。',demo:'fx-type-triadic'},
+  {id:'split-complementary',cat:'color-type',name:'分裂互补色',en:'Split-complementary Colors',tags:['对比','协调'],summary:'以主色和其互补色两侧的颜色组成较柔和的高对比系统。',usage:'品牌、插画、海报和数据界面。',principle:'控制三色面积比例，避免同时抢夺焦点。',demo:'fx-type-splitcomp'},
+  {id:'serif-sans-pairing',cat:'color-type',name:'衬线与无衬线配对',en:'Serif–Sans Pairing',tags:['字体配对','层级'],summary:'用衬线字体的叙事感与无衬线字体的清晰度建立互补。',usage:'编辑、品牌、出版和内容产品。',principle:'两种字体应有结构共性，并明确各自职责。',demo:'fx-type-pair'},
+  {id:'condensed-type',cat:'color-type',name:'窄体排版',en:'Condensed Typography',tags:['窄体','密度'],summary:'用窄字宽在有限横向空间中制造高密度和竖向张力。',usage:'标题、海报、数据标签和体育视觉。',principle:'避免在长正文和过小字号中使用。',demo:'fx-type-condensed'},
+  {id:'oversized-type',cat:'color-type',name:'超大字排版',en:'Oversized Typography',tags:['大字','裁切'],summary:'让文字超出容器或视口，以尺度本身形成图像冲击。',usage:'首屏、海报、封面和品牌发布。',principle:'裁切后仍应保留足够的字形识别线索。',demo:'fx-type-oversized'},
+  {id:'text-mask',cat:'color-type',name:'文字图像蒙版',en:'Image-filled Type',tags:['蒙版','图像'],summary:'将图像或纹理限制在文字内部，让标题兼具内容与形状。',usage:'旅行、音乐、活动和专题标题。',principle:'选择具有大字腔和粗笔画的字体。',demo:'fx-type-mask'},
+  {id:'shadow-type',cat:'color-type',name:'长阴影字体',en:'Long-shadow Type',tags:['投影','立体'],summary:'从字形沿固定方向延伸连续阴影，形成平面立体感。',usage:'海报、活动、游戏和复古视觉。',principle:'阴影方向统一，实体字与背景保持足够对比。',demo:'fx-type-shadow'},
+  {id:'baseline-shift',cat:'color-type',name:'基线错位排版',en:'Baseline Shift Type',tags:['错位','节奏'],summary:'让字符或词组在基线上有规则地上下偏移，制造跳跃节奏。',usage:'音乐、时尚、文化和实验标题。',principle:'错位遵循可感知规则，并保留阅读顺序。',demo:'fx-type-baseline'},
+  {id:'color-block-type',cat:'color-type',name:'色块文字',en:'Color-block Type',tags:['色块','反白'],summary:'把文字放入高对比色块，以模块化方式构成标题。',usage:'导视、海报、社交卡片和信息标签。',principle:'色块尺寸要与词组结构匹配。',demo:'fx-type-block'}
+];
+
+
 const categories = [
   { id: 'ui-layout', name: 'UI 布局', en: 'UI Layout', color: '#ff5c35', intro: '组织界面空间、信息层级与阅读节奏。' },
   { id: 'ui-visual', name: 'UI 视觉', en: 'UI Visual', color: '#8b5cf6', intro: '建立数字界面的材质、光影与视觉气质。' },
@@ -55,7 +124,8 @@ const terms = [
   {id:'die-cut-cover',cat:'cover',name:'模切窗口封面',en:'Die-cut Window Cover',tags:['窗口','悬念'],summary:'通过封面开孔露出内页局部，让两层图像共同构成主题。',usage:'艺术书、品牌手册、唱片与限量出版。',principle:'窗口形状要参与叙事，并预留真实制作所需的结构强度。',demo:'diecut'},
   {id:'vertical-title-cover',cat:'cover',name:'纵向标题封面',en:'Vertical Title Cover',tags:['竖排','方向'],summary:'让标题沿垂直方向组织，改变常规阅读路径并拉动画面比例。',usage:'文学、建筑、时尚和东亚文化主题出版。',principle:'竖排方向必须明确，并与作者、期号等横排信息协调。',demo:'verticalcover'},
   {id:'chromatic-aberration',cat:'color-type',name:'色差偏移',en:'Chromatic Aberration',tags:['错位','光学'],summary:'将文字或图形的色彩通道轻微错开，制造光学失真和数字张力。',usage:'音乐、游戏、科技活动与故障美学视觉。',principle:'保留清晰主体层，色差只承担边缘能量。',demo:'chromatic'},
-  {id:'gradient-type',cat:'color-type',name:'渐变字体',en:'Gradient Typography',tags:['色彩过渡','标题'],summary:'在文字内部铺设连续色彩过渡，让字形成为主要色彩载体。',usage:'品牌标题、发布页、活动海报与数据亮点。',principle:'渐变方向应强化文字节奏，并检查背景上的最低对比度。',demo:'gradienttype'}
+  {id:'gradient-type',cat:'color-type',name:'渐变字体',en:'Gradient Typography',tags:['色彩过渡','标题'],summary:'在文字内部铺设连续色彩过渡，让字形成为主要色彩载体。',usage:'品牌标题、发布页、活动海报与数据亮点。',principle:'渐变方向应强化文字节奏，并检查背景上的最低对比度。',demo:'gradienttype'},
+  ...extraTerms
 ];
 
 const byCategory = id => terms.filter(term => term.cat === id);
@@ -88,11 +158,92 @@ const demoControls={
   diecut:['color','color2','radius','scale'],verticalcover:['color','color2','scale'],chromatic:['color','color2','intensity','scale'],gradienttype:['color','color2','rotate','scale']
 };
 
-const controlsForDemo=demo=>demoControls[demo]||['color','scale'];
+const controlsForDemo=demo=>{
+  if(!demo.startsWith('fx-'))return demoControls[demo]||['color','scale'];
+  const noColor=new Set(['fx-layout-command','fx-visual-metal','fx-visual-wire','fx-visual-shadow','fx-graphic-vapor','fx-graphic-copy','fx-cover-negative','fx-cover-silhouette','fx-cover-object','fx-cover-archive','fx-type-triadic','fx-type-pair','fx-type-oversized']);
+  const noColor2=new Set(['fx-motion-progress','fx-motion-trail','fx-motion-spotlight','fx-motion-count','fx-graphic-construct','fx-graphic-stencil','fx-cover-archive','fx-type-condensed']);
+  const supportsGap=new Set(['fx-layout-scale','fx-layout-holy','fx-layout-zigzag','fx-layout-dashboard','fx-layout-command','fx-layout-sticky','fx-visual-wire','fx-visual-shadow','fx-motion-stagger']);
+  const keys=[];
+  if(!noColor.has(demo))keys.push('color');
+  if(!noColor.has(demo)&&!noColor2.has(demo))keys.push('color2');
+  if(supportsGap.has(demo))keys.push('gap');
+  return [...keys,'radius','rotate','scale'];
+};
+
+const extraDemoMarkup={
+  'fx-layout-scale':'<div class="demo d-fx-layout-scale"><i></i><i></i><i></i><i></i></div>',
+  'fx-layout-holy':'<div class="demo d-fx-layout-holy"><header></header><aside></aside><main></main><nav></nav><footer></footer></div>',
+  'fx-layout-bleed':'<div class="demo d-fx-layout-bleed"><i></i><div><b>EDGE TO EDGE</b><span>Immersive canvas</span></div></div>',
+  'fx-layout-zigzag':'<div class="demo d-fx-layout-zigzag"><i></i><span></span><i></i><span></span></div>',
+  'fx-layout-timeline':'<div class="demo d-fx-layout-timeline"><i></i><b>01</b><b>02</b><b>03</b><span></span><span></span><span></span></div>',
+  'fx-layout-dashboard':'<div class="demo d-fx-layout-dashboard"><b>84%</b><i></i><i></i><i></i><span></span></div>',
+  'fx-layout-command':'<div class="demo d-fx-layout-command"><header>LIVE / 09:41</header><i></i><i></i><i></i><i></i><b>● ALERT</b></div>',
+  'fx-layout-splitcard':'<div class="demo d-fx-layout-splitcard"><figure></figure><section><small>STORY 08</small><b>Two fields,<br>one object.</b><i></i></section></div>',
+  'fx-layout-sticky':'<div class="demo d-fx-layout-sticky"><aside><b>STICKY</b><i></i></aside><main><span>01</span><span>02</span><span>03</span></main></div>',
+  'fx-layout-radial':'<div class="demo d-fx-layout-radial"><b>CORE</b><i></i><i></i><i></i><i></i><i></i><i></i></div>',
+
+  'fx-visual-neon':'<div class="demo d-fx-visual-neon"><b>OPEN</b><i></i></div>',
+  'fx-visual-frost':'<div class="demo d-fx-visual-frost"><i></i><section><b>FROST</b><span>Translucent surface</span></section></div>',
+  'fx-visual-metal':'<div class="demo d-fx-visual-metal"><i></i><b>AL—01</b><span>BRUSHED</span></div>',
+  'fx-visual-paper':'<div class="demo d-fx-visual-paper"><i></i><i></i><i></i><b>PAPER</b></div>',
+  'fx-visual-fluid':'<div class="demo d-fx-visual-fluid"><i></i><i></i><i></i></div>',
+  'fx-visual-pixel':'<div class="demo d-fx-visual-pixel"><b>8 BIT</b><i></i><i></i><i></i><i></i></div>',
+  'fx-visual-wire':'<div class="demo d-fx-visual-wire"><header></header><aside></aside><main><i></i><i></i><i></i></main><small>WIREFRAME / 04</small></div>',
+  'fx-visual-gloss':'<div class="demo d-fx-visual-gloss"><button type="button">GO</button><i></i></div>',
+  'fx-visual-border':'<div class="demo d-fx-visual-border"><section><b>EDGE</b><span>Light passes through</span></section></div>',
+  'fx-visual-shadow':'<div class="demo d-fx-visual-shadow"><i></i><i></i><i></i></div>',
+
+  'fx-motion-morph':'<div class="demo d-fx-motion-morph"><button type="button" data-morph>Submit</button></div>',
+  'fx-motion-snap':'<div class="demo d-fx-motion-snap"><span>DROP</span><i draggable="true"></i></div>',
+  'fx-motion-page':'<div class="demo d-fx-motion-page"><button type="button">NEXT</button><i></i><section><b>02</b></section></div>',
+  'fx-motion-progress':'<div class="demo d-fx-motion-progress"><i></i><article><b>READING</b><span></span><span></span><span></span></article></div>',
+  'fx-motion-stagger':'<div class="demo d-fx-motion-stagger"><i></i><i></i><i></i><i></i></div>',
+  'fx-motion-trail':'<div class="demo d-fx-motion-trail"><i></i><i></i><i></i><i></i><i></i><b>MOVE</b></div>',
+  'fx-motion-flip':'<div class="demo d-fx-motion-flip"><button type="button"><span>FRONT</span><b>BACK</b></button></div>',
+  'fx-motion-toggle':'<div class="demo d-fx-motion-toggle"><button type="button" aria-pressed="false"><i></i></button><b>OFF</b></div>',
+  'fx-motion-spotlight':'<div class="demo d-fx-motion-spotlight"><section><b>SPOTLIGHT</b><span>Move across the surface</span></section></div>',
+  'fx-motion-count':'<div class="demo d-fx-motion-count"><button type="button"><b>0</b><span>COUNT</span></button></div>',
+
+  'fx-graphic-bauhaus':'<div class="demo d-fx-graphic-bauhaus"><i></i><i></i><i></i><b>BAU<br>HAUS</b></div>',
+  'fx-graphic-construct':'<div class="demo d-fx-graphic-construct"><i></i><i></i><b>НАПРАВЛЕНИЕ</b><span>1923—2026</span></div>',
+  'fx-graphic-memphis':'<div class="demo d-fx-graphic-memphis"><i></i><i></i><i></i><i></i><b>PLAY</b></div>',
+  'fx-graphic-psyche':'<div class="demo d-fx-graphic-psyche"><b>WAVE</b><i></i><i></i></div>',
+  'fx-graphic-y2k':'<div class="demo d-fx-graphic-y2k"><i></i><b>Y2K</b><span>CYBER / 2000</span></div>',
+  'fx-graphic-vapor':'<div class="demo d-fx-graphic-vapor"><i></i><i></i><b>夢</b><span>VAPOR MEMORY</span></div>',
+  'fx-graphic-copy':'<div class="demo d-fx-graphic-copy"><b>COPY<br>COPY</b><i></i></div>',
+  'fx-graphic-stencil':'<div class="demo d-fx-graphic-stencil"><b>STENCIL</b><i></i><span>UNIT 07</span></div>',
+  'fx-graphic-geo':'<div class="demo d-fx-graphic-geo"><i></i><i></i><i></i><i></i></div>',
+  'fx-graphic-max':'<div class="demo d-fx-graphic-max"><b>MORE!</b><i></i><i></i><i></i><span>IS MORE IS MORE</span></div>',
+
+  'fx-cover-negative':'<div class="demo d-fx-cover-negative"><div class="poster"><i></i><b>BETWEEN<br>FORMS</b></div></div>',
+  'fx-cover-pattern':'<div class="demo d-fx-cover-pattern"><div class="poster"><i></i><b>PATTERN<br>NO. 06</b></div></div>',
+  'fx-cover-silhouette':'<div class="demo d-fx-cover-silhouette"><div class="poster"><i></i><b>THE<br>UNKNOWN</b></div></div>',
+  'fx-cover-macro':'<div class="demo d-fx-cover-macro"><div class="poster"><i></i><b>MICRO<br>WORLD</b></div></div>',
+  'fx-cover-series':'<div class="demo d-fx-cover-series"><div class="poster"><b>07</b><i></i><span>SYSTEM / SERIES</span></div></div>',
+  'fx-cover-object':'<div class="demo d-fx-cover-object"><div class="poster"><i></i><b>ONE<br>THING</b></div></div>',
+  'fx-cover-torn':'<div class="demo d-fx-cover-torn"><div class="poster"><i></i><b>UNDER<br>THE PAGE</b></div></div>',
+  'fx-cover-archive':'<div class="demo d-fx-cover-archive"><div class="poster"><small>ARCHIVE 1972—04</small><i></i><b>CASE<br>STUDY</b></div></div>',
+  'fx-cover-cinema':'<div class="demo d-fx-cover-cinema"><div class="poster"><i></i><b>LAST<br>FRAME</b><span>A FILM BY STUDIO 08</span></div></div>',
+  'fx-cover-stamp':'<div class="demo d-fx-cover-stamp"><div class="poster"><i></i><b>48</b><span>POST / EDITION</span></div></div>',
+
+  'fx-type-analogous':'<div class="demo d-fx-type-analogous"><i></i><i></i><i></i><b>HARMONY</b></div>',
+  'fx-type-triadic':'<div class="demo d-fx-type-triadic"><i></i><i></i><i></i><b>TRIAD</b></div>',
+  'fx-type-splitcomp':'<div class="demo d-fx-type-splitcomp"><i></i><i></i><i></i><b>SPLIT</b></div>',
+  'fx-type-pair':'<div class="demo d-fx-type-pair"><b>Serif</b><span>MEETS SANS</span></div>',
+  'fx-type-condensed':'<div class="demo d-fx-type-condensed"><b>NARROW</b><span>SPACE / 01</span></div>',
+  'fx-type-oversized':'<div class="demo d-fx-type-oversized"><b>BIG</b><span>TYPE AT SCALE</span></div>',
+  'fx-type-mask':'<div class="demo d-fx-type-mask"><b>IMAGE</b><i></i></div>',
+  'fx-type-shadow':'<div class="demo d-fx-type-shadow"><b>LONG</b><span>SHADOW</span></div>',
+  'fx-type-baseline':'<div class="demo d-fx-type-baseline"><b><i>B</i><i>O</i><i>U</i><i>N</i><i>C</i><i>E</i></b></div>',
+  'fx-type-block':'<div class="demo d-fx-type-block"><b><i>COLOR</i><i>BLOCK</i></b></div>'
+};
+
+const getExtraDemoMarkup=type=>extraDemoMarkup[type]||'';
 
 
 const base = location.pathname.includes('/categories/') || location.pathname.includes('/terms/') ? '../' : './';
 const demoMarkup = type => {
+  if(type.startsWith('fx-'))return getExtraDemoMarkup(type);
   if(['grid','bento','asym','layers'].includes(type)) return `<div class="demo d-${type}"><i></i><i></i><i></i><i></i><i></i></div>`;
   if(type==='split') return '<div class="demo d-split"><i></i><i></i></div>';
   if(['glass','abstract'].includes(type)) return `<div class="demo d-${type}"><i></i></div>`;
@@ -231,8 +382,15 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('.d-micro button');if(b){e.preventDefault();b.textContent=b.textContent.includes('♡')?'♥ Liked':'♡ Like'}
   const ripple=e.target.closest('.d-ripple button');if(ripple){e.preventDefault();ripple.classList.remove('is-rippling');void ripple.offsetWidth;ripple.classList.add('is-rippling')}
   const acc=e.target.closest('.d-accordion button');if(acc){e.preventDefault();acc.parentElement.classList.toggle('open');acc.querySelector('b').textContent=acc.parentElement.classList.contains('open')?'−':'＋'}
+  const morph=e.target.closest('.d-fx-motion-morph button');if(morph){e.preventDefault();morph.classList.toggle('done');morph.textContent=morph.classList.contains('done')?'':'Submit'}
+  const snap=e.target.closest('.d-fx-motion-snap');if(snap){e.preventDefault();snap.classList.toggle('snapped')}
+  const pageFx=e.target.closest('.d-fx-motion-page button');if(pageFx){e.preventDefault();pageFx.parentElement.classList.toggle('next')}
+  const flip=e.target.closest('.d-fx-motion-flip button');if(flip){e.preventDefault();flip.classList.toggle('flipped')}
+  const toggle=e.target.closest('.d-fx-motion-toggle button');if(toggle){e.preventDefault();const on=toggle.getAttribute('aria-pressed')!=='true';toggle.setAttribute('aria-pressed',on);toggle.parentElement.querySelector('b').textContent=on?'ON':'OFF'}
+  const count=e.target.closest('.d-fx-motion-count button');if(count){e.preventDefault();const output=count.querySelector('b'),start=Number(output.textContent)||0,target=start+24;let value=start;const tick=()=>{value+=2;output.textContent=Math.min(value,target);if(value<target)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
 });
 
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-magnetic');if(!box)return;const b=box.querySelector('button'),r=box.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.12}px)`});
 document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-tilt');if(!box)return;const card=box.firstElementChild,r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`rotateX(${-y*12}deg) rotateY(${x*12}deg)`});
 document.addEventListener('pointerout',e=>{const box=e.target.closest('.d-tilt');if(box&&!box.contains(e.relatedTarget))box.firstElementChild.style.transform=''});
+document.addEventListener('pointermove',e=>{const box=e.target.closest('.d-fx-motion-spotlight');if(!box)return;const r=box.getBoundingClientRect();box.style.setProperty('--spot-x',`${((e.clientX-r.left)/r.width)*100}%`);box.style.setProperty('--spot-y',`${((e.clientY-r.top)/r.height)*100}%`)});
