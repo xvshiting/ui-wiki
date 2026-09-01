@@ -40,6 +40,26 @@ const extraTerms=[
   {id:'chromatic-shadow',cat:'ui-visual',name:'色散阴影',en:'Chromatic Shadow',tags:['彩色阴影','分层'],summary:'将不同色相的硬阴影错位叠加，创造印刷套色般的空间分离。',usage:'创意品牌、活动、音乐和年轻化界面。',principle:'阴影方向和偏移量要统一，主体文字保持实体轮廓。',demo:'fx-visual-chromashadow'},
   {id:'refractive-lens',cat:'ui-visual',name:'折射透镜',en:'Refractive Lens',tags:['折射','放大'],summary:'在局部区域扭曲、放大并偏移背景内容，模拟真实透明透镜。',usage:'图片浏览、焦点提示和空间型控件。',principle:'透镜边界、放大倍率与背景位移必须相互匹配。',demo:'fx-visual-lens'},
   {id:'bioluminescent-ui',cat:'ui-visual',name:'生物荧光',en:'Bioluminescent UI',tags:['有机','荧光'],summary:'以有机脉络、深海暗色和局部冷光模拟生物发光系统。',usage:'健康科技、生态数据、游戏和沉浸式体验。',principle:'发光节点应沿结构生长，而不是随机散布。',demo:'fx-visual-biolume'},
+  {id:'edge-lit-glass',cat:'ui-visual',name:'边缘导光玻璃',en:'Edge-lit Glass',tags:['导光','玻璃'],summary:'让透明面板只在切面与边缘发光，表现光线在玻璃内部传导。',usage:'高端控制器、媒体面板和空间界面。',principle:'中心区域保持透明，亮度集中在真实可见的切边。',demo:'fx-visual-edgelit'},
+  {id:'smoked-glass',cat:'ui-visual',name:'烟熏玻璃',en:'Smoked Glass',tags:['深色玻璃','半透明'],summary:'以低透光率、冷灰反射和暗色景深模拟烟熏玻璃面板。',usage:'汽车、影音、奢华产品和深色仪表盘。',principle:'暗玻璃上的文字需要独立的高对比内容层。',demo:'fx-visual-smoked'},
+  {id:'gel-surface',cat:'ui-visual',name:'凝胶表面',en:'Gel Surface',tags:['凝胶','弹性'],summary:'用厚实透明度、内部气泡与湿润高光模拟柔软凝胶。',usage:'健康、美妆、音乐和趣味型控件。',principle:'高光与内部结构必须共同表达厚度。',demo:'fx-visual-gel'},
+  {id:'soap-bubble-ui',cat:'ui-visual',name:'皂泡界面',en:'Soap Bubble UI',tags:['薄膜','气泡'],summary:'以极薄透明膜、环形虹彩和柔软球面构成轻盈的气泡视觉。',usage:'社交、儿童、创意工具和轻量提示。',principle:'气泡轮廓应轻，虹彩只沿曲面边缘出现。',demo:'fx-visual-bubble'},
+  {id:'pearlescent-plastic',cat:'ui-visual',name:'珠光塑料',en:'Pearlescent Plastic',tags:['珠光','塑料'],summary:'将柔和塑料体积与低饱和虹彩反射结合，形成细腻珠光材质。',usage:'消费电子、美妆、生活方式和会员体系。',principle:'珠光变化应克制，保留塑料表面的连续体积。',demo:'fx-visual-pearlplastic'},
+  {id:'anodized-aluminum',cat:'ui-visual',name:'阳极氧化铝',en:'Anodized Aluminum',tags:['金属','染色'],summary:'以染色金属底材、细密拉丝与窄高光模拟阳极氧化铝。',usage:'硬件、专业工具、汽车和音频产品。',principle:'颜色必须像进入金属表层，而不是覆盖在表面的纯色。',demo:'fx-visual-anodized'},
+  {id:'sandblasted-metal',cat:'ui-visual',name:'喷砂金属',en:'Sandblasted Metal',tags:['哑光','金属'],summary:'通过均匀微颗粒与宽幅漫反射呈现低调的喷砂金属。',usage:'工业设备、相机、家电和专业控制台。',principle:'纹理应细而均匀，避免表现成石材或噪点图。',demo:'fx-visual-sandmetal'},
+  {id:'terrazzo-interface',cat:'ui-visual',name:'水磨石界面',en:'Terrazzo Interface',tags:['碎片','复合材质'],summary:'在连续基底中嵌入不规则彩色颗粒，模拟水磨石复合表面。',usage:'家居、餐饮、文化空间和生活方式品牌。',principle:'碎片尺寸与密度要形成节奏，并给内容留出安静区域。',demo:'fx-visual-terrazzo'},
+  {id:'cork-surface',cat:'ui-visual',name:'软木表面',en:'Cork Surface',tags:['自然','颗粒'],summary:'用暖色纤维颗粒和细小孔洞构成轻质、自然的软木触感。',usage:'笔记、教育、可持续品牌和工作台界面。',principle:'自然纹理不能妨碍文字与控件的识别。',demo:'fx-visual-cork'},
+  {id:'woven-fabric-ui',cat:'ui-visual',name:'织物界面',en:'Woven Fabric UI',tags:['编织','纤维'],summary:'通过经纬交织、柔和阴影和纤维色差模拟布料表面。',usage:'家居、服装、阅读和无障碍触觉隐喻。',principle:'经纬方向与纹理尺度必须保持稳定。',demo:'fx-visual-woven'},
+  {id:'frosted-crystal',cat:'ui-visual',name:'磨砂晶体',en:'Frosted Crystal',tags:['晶体','散射'],summary:'结合多面体切面、内部散射和磨砂边缘形成半透明晶体。',usage:'数据亮点、成就系统和未来感图标。',principle:'切面明暗应由统一光源决定。',demo:'fx-visual-crystal'},
+  {id:'water-ripple-surface',cat:'ui-visual',name:'水波表面',en:'Water Ripple Surface',tags:['水波','反射'],summary:'用同心波纹、折射亮带和缓慢扩散表现被触碰的水面。',usage:'触控反馈、冥想、音乐和沉浸式背景。',principle:'波纹应从明确触点产生，并随距离衰减。',demo:'fx-visual-water'},
+  {id:'heat-haze-ui',cat:'ui-visual',name:'热浪折射',en:'Heat Haze UI',tags:['热浪','扭曲'],summary:'以垂直扰动、局部模糊和色彩漂移模拟空气受热后的折射。',usage:'天气、能源、游戏和环境数据。',principle:'扭曲集中在热源上方，不能覆盖整个阅读界面。',demo:'fx-visual-heathaze'},
+  {id:'spectral-bloom',cat:'ui-visual',name:'光谱泛光',en:'Spectral Bloom',tags:['泛光','色谱'],summary:'让高亮区域向外溢出带色相分离的柔光，形成镜头般的光谱泛光。',usage:'影音、摄影、AI 和高能量状态提示。',principle:'只有最高亮度区域产生泛光，避免全屏发灰。',demo:'fx-visual-bloom'},
+  {id:'laser-line-ui',cat:'ui-visual',name:'激光线界面',en:'Laser Line UI',tags:['激光','扫描'],summary:'以极细高亮线、核心白光和长距离辉光构成精确激光轨迹。',usage:'扫描、测量、安全和未来感导航。',principle:'激光线要有明确起止点与功能语义。',demo:'fx-visual-laser'},
+  {id:'plasma-field',cat:'ui-visual',name:'等离子场',en:'Plasma Field',tags:['等离子','能量'],summary:'用多色能量云、强电离边缘和流动节点构成活跃的等离子场。',usage:'科学、音乐、游戏和生成式视觉。',principle:'能量运动应有主方向，中心信息区保持稳定。',demo:'fx-visual-plasma'},
+  {id:'starfield-depth',cat:'ui-visual',name:'星场景深',en:'Starfield Depth',tags:['星场','视差'],summary:'通过不同尺寸、亮度和虚实层次的光点建立深远空间。',usage:'航天、科技、冥想和沉浸式首屏。',principle:'星点密度要分层，避免均匀噪声般的平面感。',demo:'fx-visual-starfield'},
+  {id:'circuit-trace-ui',cat:'ui-visual',name:'电路走线',en:'Circuit Trace UI',tags:['电路','连接'],summary:'以直角走线、焊盘节点和微弱电流光表现电子电路结构。',usage:'开发者工具、硬件、网络和系统状态。',principle:'线路必须表达真实连接关系，而不是随机装饰。',demo:'fx-visual-circuit'},
+  {id:'topographic-glow',cat:'ui-visual',name:'发光等高线',en:'Topographic Glow',tags:['等高线','地图'],summary:'将连续等高线与局部辉光结合，形成具有地形深度的数据表面。',usage:'地图、运动、环境数据和空间分析。',principle:'线距变化应对应高度差，关键区域才提高亮度。',demo:'fx-visual-topoglow'},
+  {id:'ferrofluid-surface',cat:'ui-visual',name:'磁流体表面',en:'Ferrofluid Surface',tags:['磁流体','尖峰'],summary:'用黑色镜面液体与磁场驱动的尖峰阵列表现磁流体。',usage:'音乐、科学、实验品牌和高端动态背景。',principle:'尖峰应围绕磁场中心有序聚集，保持液体连续性。',demo:'fx-visual-ferro'},
 
   {id:'morphing-button',cat:'interaction',name:'形变按钮',en:'Morphing Button',tags:['形变','状态'],summary:'按钮在提交、加载和完成状态间连续改变尺寸与形状。',usage:'表单提交、上传和异步操作。',principle:'形变过程中必须保留状态语义。',demo:'fx-motion-morph'},
   {id:'drag-snap',cat:'interaction',name:'拖拽吸附',en:'Drag Snap',tags:['拖拽','对齐'],summary:'对象靠近目标位置时自动吸附并给予明确反馈。',usage:'画布、排序、看板和时间轴。',principle:'吸附阈值应可预测，并允许轻松撤销。',demo:'fx-motion-snap'},
@@ -640,8 +660,20 @@ const terms = [
   ...extraTerms
 ];
 
-const byCategory = id => terms.filter(term => term.cat === id);
-const getCategory = id => categories.find(category => category.id === id);
+const categoryParents = {
+  'color-gradient':'color-type',
+  'color-access':'color-type',
+  'type-class':'color-type',
+  'type-form':'color-type',
+  'type-layout':'color-type',
+  'type-display':'color-type',
+  'type-material':'color-type',
+  'type-motion':'color-type'
+};
+
+const categoryIdFor = id => categoryParents[id] || id;
+const byCategory = id => terms.filter(term => categoryIdFor(term.cat) === id);
+const getCategory = id => categories.find(category => category.id === categoryIdFor(id));
 const getTerm = id => terms.find(term => term.id === id);
 
 const controlDefinitions={
@@ -715,6 +747,10 @@ const demoControls={
   ,'fx-visual-velvet':['radius','scale'],'fx-visual-carbon':['color','radius','scale'],'fx-visual-meshglass':['radius','rotate','scale'],'fx-visual-lumagrid':['color','color2','scale'],'fx-visual-volume':['color','color2','rotate','scale']
   ,'fx-visual-grain':['color','color2','scale'],'fx-visual-dither':['color','color2','scale'],'fx-visual-scanline':['scale'],'fx-visual-radialglass':['radius','scale'],'fx-visual-plastic':['color','color2','radius','scale']
   ,'fx-visual-emboss':['scale'],'fx-visual-inset':['color','color2','radius','scale'],'fx-visual-chromashadow':['color','color2','scale'],'fx-visual-lens':['radius','scale'],'fx-visual-biolume':['color','color2','scale']
+  ,'fx-visual-edgelit':['color','color2','radius','scale'],'fx-visual-smoked':['color','color2','radius','scale'],'fx-visual-gel':['color','color2','radius','scale'],'fx-visual-bubble':['radius','scale'],'fx-visual-pearlplastic':['color','color2','radius','scale']
+  ,'fx-visual-anodized':['color','color2','radius','scale'],'fx-visual-sandmetal':['radius','scale'],'fx-visual-terrazzo':['color','color2','scale'],'fx-visual-cork':['radius','rotate','scale'],'fx-visual-woven':['color','radius','scale']
+  ,'fx-visual-crystal':['color','color2','scale'],'fx-visual-water':['scale'],'fx-visual-heathaze':['rotate','scale'],'fx-visual-bloom':['color','color2','scale'],'fx-visual-laser':['color','color2','rotate','scale']
+  ,'fx-visual-plasma':['color','color2','scale'],'fx-visual-starfield':['color','scale'],'fx-visual-circuit':['color','color2','scale'],'fx-visual-topoglow':['color','scale'],'fx-visual-ferro':['scale']
 };
 
 const controlsForDemo=demo=>{
@@ -772,6 +808,26 @@ const extraDemoMarkup={
   'fx-visual-chromashadow':'<div class="demo d-fx-visual-chromashadow"><b>SHIFT</b><span>RGB SHADOW</span></div>',
   'fx-visual-lens':'<div class="demo d-fx-visual-lens"><span>REFRACT REFRACT REFRACT</span><i></i><b>2×</b></div>',
   'fx-visual-biolume':'<div class="demo d-fx-visual-biolume"><i></i><i></i><i></i><i></i><b>BIO / 04</b></div>',
+  'fx-visual-edgelit':'<div class="demo d-fx-visual-edgelit"><section><b>EDGE</b><span>GUIDED LIGHT</span></section></div>',
+  'fx-visual-smoked':'<div class="demo d-fx-visual-smoked"><i></i><section><b>08:42</b><span>SMOKED GLASS</span></section></div>',
+  'fx-visual-gel':'<div class="demo d-fx-visual-gel"><i></i><i></i><b>GEL</b></div>',
+  'fx-visual-bubble':'<div class="demo d-fx-visual-bubble"><i></i><i></i><i></i><b>BUBBLE</b></div>',
+  'fx-visual-pearlplastic':'<div class="demo d-fx-visual-pearlplastic"><section><b>PEARL</b><span>SOFT SHELL</span></section></div>',
+  'fx-visual-anodized':'<div class="demo d-fx-visual-anodized"><section><b>AL 6061</b><span>ANODIZED</span><i></i></section></div>',
+  'fx-visual-sandmetal':'<div class="demo d-fx-visual-sandmetal"><section><b>MATTE</b><span>BEAD BLASTED</span></section></div>',
+  'fx-visual-terrazzo':'<div class="demo d-fx-visual-terrazzo"><i></i><i></i><i></i><i></i><i></i><b>TERRAZZO</b></div>',
+  'fx-visual-cork':'<div class="demo d-fx-visual-cork"><section><b>PIN / 04</b><span>NATURAL BOARD</span></section></div>',
+  'fx-visual-woven':'<div class="demo d-fx-visual-woven"><section><b>WOVEN</b><span>02 / TEXTILE</span></section></div>',
+  'fx-visual-crystal':'<div class="demo d-fx-visual-crystal"><i></i><b>CRYSTAL</b></div>',
+  'fx-visual-water':'<div class="demo d-fx-visual-water"><i></i><i></i><i></i><b>TOUCH</b></div>',
+  'fx-visual-heathaze':'<div class="demo d-fx-visual-heathaze"><span>HEAT / HEAT / HEAT</span><i></i><b>42°</b></div>',
+  'fx-visual-bloom':'<div class="demo d-fx-visual-bloom"><i></i><i></i><b>BLOOM</b></div>',
+  'fx-visual-laser':'<div class="demo d-fx-visual-laser"><i></i><i></i><b>SCAN 72%</b></div>',
+  'fx-visual-plasma':'<div class="demo d-fx-visual-plasma"><i></i><i></i><i></i><b>PLASMA</b></div>',
+  'fx-visual-starfield':'<div class="demo d-fx-visual-starfield"><i></i><i></i><i></i><b>DEEP FIELD</b></div>',
+  'fx-visual-circuit':'<div class="demo d-fx-visual-circuit"><i></i><i></i><i></i><b>CIRCUIT / ON</b></div>',
+  'fx-visual-topoglow':'<div class="demo d-fx-visual-topoglow"><i></i><b>ALT 840</b><span>TOPOGRAPHY</span></div>',
+  'fx-visual-ferro':'<div class="demo d-fx-visual-ferro"><i></i><i></i><i></i><i></i><i></i><b>FIELD</b></div>',
 
   'fx-motion-morph':'<div class="demo d-fx-motion-morph"><button type="button" data-morph>Submit</button></div>',
   'fx-motion-snap':'<div class="demo d-fx-motion-snap"><span>DROP</span><i draggable="true"></i></div>',
@@ -972,9 +1028,9 @@ const categoryGroups={
   {id:'experimental',name:'实验性构图',start:'freeform-canvas-layout'}
 ],
 'ui-visual':[
-  {id:'materials',name:'材质与表面',demos:['glass','neu','clay','liquid','fx-visual-frost','fx-visual-metal','fx-visual-paper','fx-visual-gloss','fx-visual-border','fx-visual-shadow','fx-visual-acrylic','fx-visual-film','fx-visual-chrome','fx-visual-ceramic','fx-visual-velvet','fx-visual-carbon','fx-visual-plastic','fx-visual-emboss','fx-visual-inset']},
-  {id:'light-color',name:'光色与渐变',demos:['mesh','aurora','holographic','fx-visual-neon','fx-visual-fluid','fx-visual-caustics','fx-visual-lumagrid','fx-visual-volume','fx-visual-grain','fx-visual-biolume']},
-  {id:'visual-systems',name:'层次与视觉系统',demos:['layers','fx-visual-pixel','fx-visual-wire','fx-visual-meshglass','fx-visual-dither','fx-visual-scanline','fx-visual-radialglass','fx-visual-chromashadow','fx-visual-lens']}
+  {id:'materials',name:'材质与表面',demos:['glass','neu','clay','liquid','fx-visual-frost','fx-visual-metal','fx-visual-paper','fx-visual-gloss','fx-visual-border','fx-visual-shadow','fx-visual-acrylic','fx-visual-film','fx-visual-chrome','fx-visual-ceramic','fx-visual-velvet','fx-visual-carbon','fx-visual-plastic','fx-visual-emboss','fx-visual-inset','fx-visual-edgelit','fx-visual-smoked','fx-visual-gel','fx-visual-bubble','fx-visual-pearlplastic','fx-visual-anodized','fx-visual-sandmetal','fx-visual-terrazzo','fx-visual-cork','fx-visual-woven','fx-visual-crystal','fx-visual-ferro']},
+  {id:'light-color',name:'光色与渐变',demos:['mesh','aurora','holographic','fx-visual-neon','fx-visual-fluid','fx-visual-caustics','fx-visual-lumagrid','fx-visual-volume','fx-visual-grain','fx-visual-biolume','fx-visual-water','fx-visual-heathaze','fx-visual-bloom','fx-visual-laser','fx-visual-plasma','fx-visual-starfield','fx-visual-topoglow']},
+  {id:'visual-systems',name:'层次与视觉系统',demos:['layers','fx-visual-pixel','fx-visual-wire','fx-visual-meshglass','fx-visual-dither','fx-visual-scanline','fx-visual-radialglass','fx-visual-chromashadow','fx-visual-lens','fx-visual-circuit']}
 ],
 'interaction':[
   {id:'interaction-basics',name:'基础反馈',start:'micro-interaction',demos:['fx-layout-palette']},

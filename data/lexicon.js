@@ -61,6 +61,18 @@ export const terms = [
   ...extraTerms
 ];
 
-export const byCategory = id => terms.filter(term => term.cat === id);
-export const getCategory = id => categories.find(category => category.id === id);
+const categoryParents = {
+  'color-gradient':'color-type',
+  'color-access':'color-type',
+  'type-class':'color-type',
+  'type-form':'color-type',
+  'type-layout':'color-type',
+  'type-display':'color-type',
+  'type-material':'color-type',
+  'type-motion':'color-type'
+};
+
+export const categoryIdFor = id => categoryParents[id] || id;
+export const byCategory = id => terms.filter(term => categoryIdFor(term.cat) === id);
+export const getCategory = id => categories.find(category => category.id === categoryIdFor(id));
 export const getTerm = id => terms.find(term => term.id === id);
