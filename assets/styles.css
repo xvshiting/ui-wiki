@@ -102,3 +102,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .recent-section{border-top:1px solid var(--line);margin-top:18px;padding-top:42px}.recent-section .term-grid{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:1180px){.recent-section .term-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.recent-section .term-grid{grid-template-columns:1fr}}
 /* Layout preview canvas */
 .term-card .preview{aspect-ratio:16/10}
+
+/* One neumorphism model for cards and detail stages. */
+.preview .d-neu,.stage .d-neu{
+  background:var(--demo-color);
+  border-radius:var(--demo-radius)!important;
+  box-shadow:
+    calc(var(--demo-intensity)*.65) calc(var(--demo-intensity)*.65) calc(var(--demo-intensity)*1.8) color-mix(in srgb,var(--demo-color),#000 38%),
+    calc(var(--demo-intensity)*-.65) calc(var(--demo-intensity)*-.65) calc(var(--demo-intensity)*1.8) color-mix(in srgb,var(--demo-color),#fff 34%);
+}
+
+/* Term page: knowledge on the left, interactive workbench on the right. */
+@media(min-width:961px){
+  .term-layout{grid-template-columns:minmax(280px,.72fr) minmax(520px,1.28fr);gap:clamp(34px,4vw,64px);align-items:start}
+  .term-layout>section:first-child{position:sticky;top:36px;max-height:calc(100vh - 72px);overflow:auto;padding-right:8px;scrollbar-width:thin}
+}
+.term-knowledge{margin-top:28px;padding:0;border-bottom:1px solid var(--line)}
+.term-knowledge .detail{padding:17px 0}
+.term-knowledge .detail p{color:#b9c7da;font-size:14px;line-height:1.65}
+.term-layout>section:nth-child(2){min-width:0}
+.term-layout>section:nth-child(2) .stage{min-height:clamp(420px,52vw,620px)}
+@media(max-width:960px){
+  .term-layout{grid-template-columns:1fr}
+  .term-layout>section:nth-child(2) .stage{min-height:420px}
+}
+@media(max-width:620px){
+  .term-knowledge{margin-top:22px}
+  .term-layout>section:nth-child(2) .stage{min-height:320px}
+}

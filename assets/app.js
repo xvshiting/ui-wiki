@@ -9,7 +9,8 @@ const COMPARE_KEY='ui-wiki-compare';
 const readList=key=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}};
 const writeList=(key,list)=>{try{localStorage.setItem(key,JSON.stringify(list))}catch{}};
 const toggleList=(key,id,limit=30)=>{const list=readList(key),next=list.includes(id)?list.filter(item=>item!==id):[id,...list].slice(0,limit);writeList(key,next);return next};
-const layoutGroups=[
+const categoryGroups={
+'ui-layout':[
   {id:'foundations',name:'基础结构',start:'grid-layout'},
   {id:'navigation',name:'导航结构',start:'top-app-bar'},
   {id:'reading',name:'阅读与内容',start:'single-column-reading-flow'},
@@ -20,11 +21,65 @@ const layoutGroups=[
   {id:'spatial',name:'地图与空间',start:'map-sidebar-layout'},
   {id:'responsive',name:'响应式布局',start:'container-query-layout'},
   {id:'experimental',name:'实验性构图',start:'freeform-canvas-layout'}
-];
-const layoutGroupFor=term=>{
-  if(term.cat!=='ui-layout')return null;
-  const list=byCategory('ui-layout'),index=list.findIndex(item=>item.id===term.id);
-  return [...layoutGroups].reverse().find(group=>index>=list.findIndex(item=>item.id===group.start))||layoutGroups[0];
+],
+'ui-visual':[
+  {id:'materials',name:'材质与表面',demos:['glass','neu','clay','liquid','fx-visual-frost','fx-visual-metal','fx-visual-paper','fx-visual-gloss','fx-visual-border','fx-visual-shadow','fx-visual-acrylic','fx-visual-film','fx-visual-chrome','fx-visual-ceramic','fx-visual-velvet','fx-visual-carbon','fx-visual-plastic','fx-visual-emboss','fx-visual-inset']},
+  {id:'light-color',name:'光色与渐变',demos:['mesh','aurora','holographic','fx-visual-neon','fx-visual-fluid','fx-visual-caustics','fx-visual-lumagrid','fx-visual-volume','fx-visual-grain','fx-visual-biolume']},
+  {id:'visual-systems',name:'层次与视觉系统',demos:['layers','fx-visual-pixel','fx-visual-wire','fx-visual-meshglass','fx-visual-dither','fx-visual-scanline','fx-visual-radialglass','fx-visual-chromashadow','fx-visual-lens']}
+],
+'interaction':[
+  {id:'interaction-basics',name:'基础反馈',start:'micro-interaction',demos:['fx-layout-palette']},
+  {id:'click-feedback',name:'点击与触发',start:'button-squish'},
+  {id:'transitions',name:'转场与导航',start:'shared-element-transition'},
+  {id:'scroll',name:'滚动与视差',start:'scroll-parallax'},
+  {id:'drag',name:'拖拽与排序',start:'drag-reorder'},
+  {id:'gestures',name:'手势与触控',start:'swipe-actions'},
+  {id:'forms',name:'表单反馈',start:'floating-label-input'},
+  {id:'lists',name:'列表与集合',start:'list-insert-motion'},
+  {id:'states',name:'状态与容错',start:'optimistic-update-feedback',demos:['fx-layout-emptystate','fx-layout-errorrecovery']},
+  {id:'pointer',name:'指针与悬停',start:'custom-cursor'},
+  {id:'physics',name:'物理与空间',start:'gravity-drop'}
+],
+'graphic':[
+  {id:'graphic-basics',name:'基础构成',start:'visual-hierarchy'},
+  {id:'style',name:'风格语言',start:'de-stijl'},
+  {id:'retro',name:'复古与未来',start:'art-nouveau'},
+  {id:'print',name:'印刷与排版',start:'screen-print'},
+  {id:'photo',name:'摄影处理',start:'solarization'},
+  {id:'glitch',name:'故障与数字质感',start:'databending'},
+  {id:'collage',name:'拼贴与混合媒介',start:'digital-scrapbook'},
+  {id:'pattern',name:'纹样与装饰',start:'checkerboard-pattern'},
+  {id:'illustration',name:'插画语言',start:'flat-illustration'},
+  {id:'information',name:'信息图形',start:'infographic-poster'},
+  {id:'web-graphics',name:'网页图形',start:'web-brutalism-graphic'}
+],
+'cover':[
+  {id:'cover-basics',name:'基础封面',start:'minimal-cover'},
+  {id:'type-covers',name:'文字主导',start:'single-word-cover'},
+  {id:'photo-covers',name:'摄影主导',start:'portrait-closeup-cover'},
+  {id:'process-covers',name:'工艺与印刷',start:'dithered-image-cover'},
+  {id:'illustrated-covers',name:'插画主导',start:'flat-illustration-cover'},
+  {id:'geometric-covers',name:'几何构成',start:'concentric-circle-cover'},
+  {id:'material-covers',name:'材质与空间',start:'foil-stamped-cover'},
+  {id:'archive-covers',name:'档案与编辑',start:'library-card-cover'},
+  {id:'spatial-covers',name:'空间场景',start:'tunnel-perspective-cover'},
+  {id:'mood-covers',name:'氛围情绪',start:'obscured-mystery-cover'},
+  {id:'series-covers',name:'系列系统',start:'color-coded-series-cover'}
+],
+'color-type':[
+  {id:'color-basics',name:'色彩基础',start:'duotone'},
+  {id:'color-relations',name:'配色关系',start:'analogous-colors'},
+  {id:'typography',name:'字体与字形',start:'condensed-type'},
+  {id:'color-systems',name:'色彩系统',start:'tetradic-colors'},
+  {id:'value-chroma',name:'明度与纯度',start:'high-value-palette'}
+]
+};
+const categoryGroupFor=term=>{
+  const groups=categoryGroups[term.cat]||[];
+  const explicit=groups.find(group=>group.demos?.includes(term.demo));
+  if(explicit)return explicit;
+  const list=byCategory(term.cat),index=list.findIndex(item=>item.id===term.id);
+  return [...groups].reverse().find(group=>group.start&&index>=list.findIndex(item=>item.id===group.start))||groups[0]||null;
 };
 const demoMarkup = type => {
   const extraMarkup=getExtraDemoMarkup(type);if(extraMarkup)return extraMarkup;
@@ -85,14 +140,15 @@ function shell(active=''){
   document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open')});
   mountCompareTray();
 }
-function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id),group=layoutGroupFor(term);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"${group?` data-layout-group="${group.id}"`:''}><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${group?`${getCategory(term.cat).name} · ${group.name}`:getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
-function mountLayoutGroups(){
+function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id),group=categoryGroupFor(term);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"${group?` data-category-group="${group.id}"`:''}><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${group?`${getCategory(term.cat).name} · ${group.name}`:getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function mountCategoryGroups(catId){
   const grid=document.querySelector('[data-terms]');if(!grid)return;
-  const bar=document.createElement('nav');bar.className='layout-groups';bar.setAttribute('aria-label','布局二级分组');
-  const counts=Object.fromEntries(layoutGroups.map(group=>[group.id,grid.querySelectorAll(`[data-layout-group="${group.id}"]`).length]));
-  bar.innerHTML=`<button class="active" type="button" data-layout-filter="all">全部 <b>${grid.children.length}</b></button>${layoutGroups.filter(group=>counts[group.id]).map(group=>`<button type="button" data-layout-filter="${group.id}">${group.name} <b>${counts[group.id]}</b></button>`).join('')}`;
+  const groups=categoryGroups[catId]||[];if(!groups.length)return;
+  const bar=document.createElement('nav');bar.className='layout-groups category-groups';bar.setAttribute('aria-label',`${getCategory(catId).name}二级分组`);
+  const counts=Object.fromEntries(groups.map(group=>[group.id,grid.querySelectorAll(`[data-category-group="${group.id}"]`).length]));
+  bar.innerHTML=`<button class="active" type="button" data-group-filter="all">全部 <b>${grid.children.length}</b></button>${groups.filter(group=>counts[group.id]).map(group=>`<button type="button" data-group-filter="${group.id}">${group.name} <b>${counts[group.id]}</b></button>`).join('')}`;
   grid.before(bar);
-  bar.addEventListener('click',event=>{const button=event.target.closest('[data-layout-filter]');if(!button)return;bar.querySelectorAll('button').forEach(item=>item.classList.toggle('active',item===button));grid.querySelectorAll('.term-card').forEach(card=>card.hidden=button.dataset.layoutFilter!=='all'&&card.dataset.layoutGroup!==button.dataset.layoutFilter)});
+  bar.addEventListener('click',event=>{const button=event.target.closest('[data-group-filter]');if(!button)return;bar.querySelectorAll('button').forEach(item=>item.classList.toggle('active',item===button));grid.querySelectorAll('.term-card').forEach(card=>card.hidden=button.dataset.groupFilter!=='all'&&card.dataset.categoryGroup!==button.dataset.groupFilter)});
 }
 function mountCompareTray(){
   if(document.querySelector('.compare-tray'))return;
@@ -170,6 +226,12 @@ function mountSourceLab(term){
   panel.querySelectorAll('[data-copy-source]').forEach(button=>button.addEventListener('click',async()=>{const source=current(),kind=button.dataset.copySource,text=kind==='html'?source.html:kind==='css'?source.css:standalonePage(term.name,source.html,source.css);await copyText(text);notify(`✓ ${kind==='page'?'完整 HTML 页面':kind.toUpperCase()} 已复制`)}));
   panel.querySelector('[data-download-source]').addEventListener('click',()=>{const source=current(),blob=new Blob([standalonePage(term.name,source.html,source.css)],{type:'text/html'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`${term.id}-ui-wiki.html`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('✓ 可独立运行的 HTML 已下载')});
 }
+function balanceTermLayout(){
+  const details=document.querySelector('.details'),tags=document.querySelector('[data-tags]');
+  if(!details||!tags)return;
+  details.classList.add('term-knowledge');
+  tags.insertAdjacentElement('afterend',details);
+}
 if(page==='home'){
   shell();
   document.querySelector('.stat b').textContent=terms.length;
@@ -185,7 +247,7 @@ if(page==='home'){
   document.querySelector('[data-intro]').textContent=cat.intro;
   document.querySelector('[data-count]').textContent=byCategory(cat.id).length;
   document.querySelector('[data-terms]').innerHTML=byCategory(cat.id).map(termCard).join('');
-  if(cat.id==='ui-layout')mountLayoutGroups();
+  mountCategoryGroups(cat.id);
 }else if(page==='term'){
   const term=getTerm(document.body.dataset.id),cat=getCategory(term.cat); shell(cat.id);
   document.title=`${term.name} — 设计效果百科`;
@@ -207,6 +269,7 @@ if(page==='home'){
   mountTermActions(term);
   mountConfigurator(term);
   mountSourceLab(term);
+  balanceTermLayout();
 }
 
 document.addEventListener('click',e=>{

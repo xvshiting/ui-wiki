@@ -65,6 +65,10 @@ export const demoControls={
   ,'fx-layout-containerquery':[],'fx-layout-priorityreflow':[],'fx-layout-mobilestack':[],'fx-layout-tabletpane':[],'fx-layout-foldable':[],'fx-layout-ultrawide':[],'fx-layout-tenfoot':[],'fx-layout-orientation':[],'fx-layout-density':[],'fx-layout-typeresponsive':[]
   ,'fx-layout-freeform':[],'fx-layout-brokengrid':[],'fx-layout-diagonal':[],'fx-layout-triangular':[],'fx-layout-concentric':[],'fx-layout-spiral':[],'fx-layout-orbital':[],'fx-layout-fan':[],'fx-layout-perspective':[],'fx-layout-isometric':[]
   ,'fx-layout-emptystate':[],'fx-layout-errorrecovery':[]
+  ,'fx-visual-caustics':['color','color2','rotate','scale'],'fx-visual-acrylic':['color','color2','radius','scale'],'fx-visual-film':['radius','rotate','scale'],'fx-visual-chrome':['radius','rotate','scale'],'fx-visual-ceramic':['color','radius','scale']
+  ,'fx-visual-velvet':['radius','scale'],'fx-visual-carbon':['color','radius','scale'],'fx-visual-meshglass':['radius','rotate','scale'],'fx-visual-lumagrid':['color','color2','scale'],'fx-visual-volume':['color','color2','rotate','scale']
+  ,'fx-visual-grain':['color','color2','scale'],'fx-visual-dither':['color','color2','scale'],'fx-visual-scanline':['scale'],'fx-visual-radialglass':['radius','scale'],'fx-visual-plastic':['color','color2','radius','scale']
+  ,'fx-visual-emboss':['scale'],'fx-visual-inset':['color','color2','radius','scale'],'fx-visual-chromashadow':['color','color2','scale'],'fx-visual-lens':['radius','scale'],'fx-visual-biolume':['color','color2','scale']
 };
 
 export const controlsForDemo=demo=>{

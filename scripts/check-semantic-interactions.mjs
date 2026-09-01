@@ -1,10 +1,11 @@
 import {readFile} from 'node:fs/promises';
 
-const [demos,app,pointerCss,physicsCss]=await Promise.all([
+const [demos,app,pointerCss,physicsCss,baseCss]=await Promise.all([
   readFile('assets/extra-demos.js','utf8'),
   readFile('assets/app.js','utf8'),
   readFile('assets/motion-pointer.css','utf8'),
-  readFile('assets/motion-physics.css','utf8')
+  readFile('assets/motion-physics.css','utf8'),
+  readFile('assets/styles.css','utf8')
 ]);
 
 const checks=[
@@ -15,7 +16,8 @@ const checks=[
   ['repulsion is driven by pointer distance',app.includes("closest('.d-motion-pointer-repel')")&&app.includes('--repel-x')&&app.includes('Math.hypot')],
   ['repulsion returns without canned animation',pointerCss.includes('.d-motion-pointer-repel button{')&&pointerCss.includes('animation:none')&&pointerCss.includes('--repel-x')],
   ['depth focus exposes two focus targets',demos.includes('data-focus="near"')&&demos.includes('data-focus="far"')],
-  ['depth focus swaps foreground and background blur',physicsCss.includes('focus-far')&&physicsCss.includes('--near-blur')&&physicsCss.includes('--far-blur')]
+  ['depth focus swaps foreground and background blur',physicsCss.includes('focus-far')&&physicsCss.includes('--near-blur')&&physicsCss.includes('--far-blur')],
+  ['neumorphism uses one shared visual model',baseCss.includes('.preview .d-neu,.stage .d-neu')&&baseCss.includes('color-mix(in srgb,var(--demo-color),#000 38%)')]
 ];
 
 const failed=checks.filter(([,pass])=>!pass).map(([name])=>name);

@@ -20,6 +20,26 @@ const extraTerms=[
   {id:'glossy-ui',cat:'ui-visual',name:'高光拟物',en:'Glossy UI',tags:['高光','光泽'],summary:'使用镜面高光、饱和渐变和反射塑造光滑表面。',usage:'娱乐、收藏、按钮和复古数码视觉。',principle:'高光形状应服从物体曲面。',demo:'fx-visual-gloss'},
   {id:'translucent-border',cat:'ui-visual',name:'透明描边',en:'Translucent Border',tags:['边缘','透光'],summary:'以半透明渐变边缘表现薄玻璃或发光薄膜。',usage:'深色主题卡片、弹窗和数据面板。',principle:'边缘亮度应帮助分层而不是制造噪声。',demo:'fx-visual-border'},
   {id:'soft-shadow-system',cat:'ui-visual',name:'柔光阴影系统',en:'Soft Shadow System',tags:['阴影','层级'],summary:'通过低对比、多层柔影建立克制而连续的空间层级。',usage:'企业产品、卡片系统和浅色界面。',principle:'阴影级别要少，并与交互层级一一对应。',demo:'fx-visual-shadow'},
+  {id:'prismatic-caustics',cat:'ui-visual',name:'棱镜焦散',en:'Prismatic Caustics',tags:['折射','光谱'],summary:'用弯曲的彩色光带模拟光线穿过透明介质后的聚焦与分色。',usage:'创意工具、音频产品和沉浸式背景。',principle:'焦散应作为局部光照线索，不能淹没内容层级。',demo:'fx-visual-caustics'},
+  {id:'acrylic-blur',cat:'ui-visual',name:'亚克力模糊',en:'Acrylic Blur',tags:['半透明','景深'],summary:'结合高透明度、背景模糊和细密噪点，模拟有厚度的亚克力面板。',usage:'侧栏、浮层、系统面板和媒体控制器。',principle:'透明面板必须通过边缘和明度差保持边界清楚。',demo:'fx-visual-acrylic'},
+  {id:'iridescent-film',cat:'ui-visual',name:'虹彩薄膜',en:'Iridescent Film',tags:['薄膜','变色'],summary:'以多向色带和镜面高光表现薄膜随视角变化的虹彩反射。',usage:'会员卡、潮流品牌和高价值数字物品。',principle:'虹彩变化要服从同一表面曲率与光源方向。',demo:'fx-visual-film'},
+  {id:'liquid-chrome',cat:'ui-visual',name:'液态铬',en:'Liquid Chrome',tags:['镜面','流体'],summary:'将高反射金属与柔软轮廓结合，形成流动且具有未来感的铬材质。',usage:'音乐、时尚、汽车和实验型界面。',principle:'强反射需要稳定的暗部轮廓来维持可识别性。',demo:'fx-visual-chrome'},
+  {id:'ceramic-glaze',cat:'ui-visual',name:'陶瓷釉面',en:'Ceramic Glaze',tags:['釉面','温润'],summary:'通过柔和体积、局部亮斑和微妙色差模拟烧制陶瓷的釉面质感。',usage:'生活方式、家居、健康和文化产品。',principle:'高光面积应小而柔，避免退化成普通塑料。',demo:'fx-visual-ceramic'},
+  {id:'velvet-surface',cat:'ui-visual',name:'丝绒表面',en:'Velvet Surface',tags:['纤维','柔光'],summary:'用方向性暗纹和边缘柔光表现丝绒吸光又泛光的表面特性。',usage:'奢侈品、影音、编辑设计和深色主题。',principle:'亮部应沿视角缓慢变化，整体仍保持深色基调。',demo:'fx-visual-velvet'},
+  {id:'carbon-fiber-ui',cat:'ui-visual',name:'碳纤维纹理',en:'Carbon Fiber UI',tags:['编织','工业'],summary:'以细密斜向编织纹理和低调反光塑造轻量、高强度的工业气质。',usage:'汽车、运动设备和性能控制台。',principle:'纹理尺度必须细密，避免抢夺数据和控件的注意力。',demo:'fx-visual-carbon'},
+  {id:'translucent-mesh',cat:'ui-visual',name:'半透明网格',en:'Translucent Mesh',tags:['网格','空间'],summary:'把透明网格、交点光斑和层间错位组合成具有深度的数字表面。',usage:'数据产品、空间计算和技术品牌背景。',principle:'网格透视与遮挡关系必须保持一致。',demo:'fx-visual-meshglass'},
+  {id:'luminous-grid',cat:'ui-visual',name:'发光网格',en:'Luminous Grid',tags:['网格','辉光'],summary:'以高对比线网和局部能量节点构建精确、持续发光的技术空间。',usage:'安全、网络、AI 和实时监控界面。',principle:'发光只用于关键线索，基础网格应保持低亮度。',demo:'fx-visual-lumagrid'},
+  {id:'volumetric-glow',cat:'ui-visual',name:'体积辉光',en:'Volumetric Glow',tags:['光束','雾化'],summary:'利用雾化光束、遮挡和亮度衰减表现具有体积的空间光。',usage:'游戏、影视、发布页和沉浸式数据场景。',principle:'光束必须有明确来源，并避开主要阅读区域。',demo:'fx-visual-volume'},
+  {id:'grainy-gradient-ui',cat:'ui-visual',name:'颗粒渐变界面',en:'Grainy Gradient UI',tags:['颗粒','色场'],summary:'在大面积渐变上加入均匀颗粒，减少数码平滑感并增强触觉气质。',usage:'品牌首屏、创意工具和编辑型界面。',principle:'颗粒应均匀且低对比，不能形成压缩噪声般的脏感。',demo:'fx-visual-grain'},
+  {id:'dithered-surface',cat:'ui-visual',name:'抖动色阶',en:'Dithered Surface',tags:['抖动','位图'],summary:'用规则像素点混合有限色阶，模拟早期屏幕与低色深图像的过渡。',usage:'复古科技、实验品牌和开发者产品。',principle:'抖动矩阵和像素尺寸应在整个界面中保持统一。',demo:'fx-visual-dither'},
+  {id:'scanline-display',cat:'ui-visual',name:'扫描线显示',en:'Scanline Display',tags:['扫描线','屏幕'],summary:'叠加水平扫描线、边缘暗角与轻微色散，模拟 CRT 显示质感。',usage:'游戏、监控、复古媒体和终端界面。',principle:'扫描线对比度要低，文字边缘仍需保持清晰。',demo:'fx-visual-scanline'},
+  {id:'radial-glass',cat:'ui-visual',name:'径向玻璃',en:'Radial Glass',tags:['透镜','环形'],summary:'以同心折射、边缘高光和中心放大构成圆形玻璃透镜。',usage:'媒体旋钮、数据焦点和空间导航。',principle:'中心与边缘的折射差异要连续，避免像普通渐变圆。',demo:'fx-visual-radialglass'},
+  {id:'soft-plastic-ui',cat:'ui-visual',name:'柔性塑料',en:'Soft Plastic UI',tags:['塑料','软质'],summary:'通过饱满轮廓、内高光与软阴影模拟可按压的半哑光塑料。',usage:'儿童、健康、智能家居和游戏化控件。',principle:'按压反馈应改变体积与阴影，而不只是缩放。',demo:'fx-visual-plastic'},
+  {id:'embossed-interface',cat:'ui-visual',name:'压印界面',en:'Embossed Interface',tags:['压印','浮雕'],summary:'使用同色高光与暗边让符号像从基材表面被压制出来。',usage:'品牌铭牌、实体设备映射和极简控制器。',principle:'浮雕深度应克制，并保证功能符号的对比度。',demo:'fx-visual-emboss'},
+  {id:'inset-panel',cat:'ui-visual',name:'内嵌面板',en:'Inset Panel',tags:['内凹','容器'],summary:'用内阴影、边缘遮蔽和背景连续性表现嵌入基底的内容区域。',usage:'仪表、输入区、播放器和设备控制界面。',principle:'内嵌层级只能表示容器或可输入区域，语义要一致。',demo:'fx-visual-inset'},
+  {id:'chromatic-shadow',cat:'ui-visual',name:'色散阴影',en:'Chromatic Shadow',tags:['彩色阴影','分层'],summary:'将不同色相的硬阴影错位叠加，创造印刷套色般的空间分离。',usage:'创意品牌、活动、音乐和年轻化界面。',principle:'阴影方向和偏移量要统一，主体文字保持实体轮廓。',demo:'fx-visual-chromashadow'},
+  {id:'refractive-lens',cat:'ui-visual',name:'折射透镜',en:'Refractive Lens',tags:['折射','放大'],summary:'在局部区域扭曲、放大并偏移背景内容，模拟真实透明透镜。',usage:'图片浏览、焦点提示和空间型控件。',principle:'透镜边界、放大倍率与背景位移必须相互匹配。',demo:'fx-visual-lens'},
+  {id:'bioluminescent-ui',cat:'ui-visual',name:'生物荧光',en:'Bioluminescent UI',tags:['有机','荧光'],summary:'以有机脉络、深海暗色和局部冷光模拟生物发光系统。',usage:'健康科技、生态数据、游戏和沉浸式体验。',principle:'发光节点应沿结构生长，而不是随机散布。',demo:'fx-visual-biolume'},
 
   {id:'morphing-button',cat:'interaction',name:'形变按钮',en:'Morphing Button',tags:['形变','状态'],summary:'按钮在提交、加载和完成状态间连续改变尺寸与形状。',usage:'表单提交、上传和异步操作。',principle:'形变过程中必须保留状态语义。',demo:'fx-motion-morph'},
   {id:'drag-snap',cat:'interaction',name:'拖拽吸附',en:'Drag Snap',tags:['拖拽','对齐'],summary:'对象靠近目标位置时自动吸附并给予明确反馈。',usage:'画布、排序、看板和时间轴。',principle:'吸附阈值应可预测，并允许轻松撤销。',demo:'fx-motion-snap'},
@@ -691,6 +711,10 @@ const demoControls={
   ,'fx-layout-containerquery':[],'fx-layout-priorityreflow':[],'fx-layout-mobilestack':[],'fx-layout-tabletpane':[],'fx-layout-foldable':[],'fx-layout-ultrawide':[],'fx-layout-tenfoot':[],'fx-layout-orientation':[],'fx-layout-density':[],'fx-layout-typeresponsive':[]
   ,'fx-layout-freeform':[],'fx-layout-brokengrid':[],'fx-layout-diagonal':[],'fx-layout-triangular':[],'fx-layout-concentric':[],'fx-layout-spiral':[],'fx-layout-orbital':[],'fx-layout-fan':[],'fx-layout-perspective':[],'fx-layout-isometric':[]
   ,'fx-layout-emptystate':[],'fx-layout-errorrecovery':[]
+  ,'fx-visual-caustics':['color','color2','rotate','scale'],'fx-visual-acrylic':['color','color2','radius','scale'],'fx-visual-film':['radius','rotate','scale'],'fx-visual-chrome':['radius','rotate','scale'],'fx-visual-ceramic':['color','radius','scale']
+  ,'fx-visual-velvet':['radius','scale'],'fx-visual-carbon':['color','radius','scale'],'fx-visual-meshglass':['radius','rotate','scale'],'fx-visual-lumagrid':['color','color2','scale'],'fx-visual-volume':['color','color2','rotate','scale']
+  ,'fx-visual-grain':['color','color2','scale'],'fx-visual-dither':['color','color2','scale'],'fx-visual-scanline':['scale'],'fx-visual-radialglass':['radius','scale'],'fx-visual-plastic':['color','color2','radius','scale']
+  ,'fx-visual-emboss':['scale'],'fx-visual-inset':['color','color2','radius','scale'],'fx-visual-chromashadow':['color','color2','scale'],'fx-visual-lens':['radius','scale'],'fx-visual-biolume':['color','color2','scale']
 };
 
 const controlsForDemo=demo=>{
@@ -728,6 +752,26 @@ const extraDemoMarkup={
   'fx-visual-gloss':'<div class="demo d-fx-visual-gloss"><button type="button">GO</button><i></i></div>',
   'fx-visual-border':'<div class="demo d-fx-visual-border"><section><b>EDGE</b><span>Light passes through</span></section></div>',
   'fx-visual-shadow':'<div class="demo d-fx-visual-shadow"><i></i><i></i><i></i></div>',
+  'fx-visual-caustics':'<div class="demo d-fx-visual-caustics"><i></i><i></i><b>PRISM</b></div>',
+  'fx-visual-acrylic':'<div class="demo d-fx-visual-acrylic"><i></i><section><b>ACRYLIC</b><span>Depth 08</span></section></div>',
+  'fx-visual-film':'<div class="demo d-fx-visual-film"><section><b>IRIDESCENT</b><span>01 / FILM</span></section></div>',
+  'fx-visual-chrome':'<div class="demo d-fx-visual-chrome"><i></i><b>CHROME</b></div>',
+  'fx-visual-ceramic':'<div class="demo d-fx-visual-ceramic"><i></i><i></i><b>GLAZE</b></div>',
+  'fx-visual-velvet':'<div class="demo d-fx-visual-velvet"><section><b>VELVET</b><span>Soft surface</span></section></div>',
+  'fx-visual-carbon':'<div class="demo d-fx-visual-carbon"><section><b>CF—01</b><span>PERFORMANCE</span></section></div>',
+  'fx-visual-meshglass':'<div class="demo d-fx-visual-meshglass"><i></i><i></i><b>MESH</b></div>',
+  'fx-visual-lumagrid':'<div class="demo d-fx-visual-lumagrid"><i></i><i></i><i></i><b>GRID / LIVE</b></div>',
+  'fx-visual-volume':'<div class="demo d-fx-visual-volume"><i></i><i></i><b>VOLUME</b></div>',
+  'fx-visual-grain':'<div class="demo d-fx-visual-grain"><section><b>GRAIN</b><span>TACTILE COLOR</span></section></div>',
+  'fx-visual-dither':'<div class="demo d-fx-visual-dither"><b>2 BIT</b><span>DITHERED FIELD</span></div>',
+  'fx-visual-scanline':'<div class="demo d-fx-visual-scanline"><b>SIGNAL</b><span>CH 08 · ONLINE</span></div>',
+  'fx-visual-radialglass':'<div class="demo d-fx-visual-radialglass"><i></i><b>08</b><span>FOCUS</span></div>',
+  'fx-visual-plastic':'<div class="demo d-fx-visual-plastic"><button type="button">PLAY</button><i></i><i></i></div>',
+  'fx-visual-emboss':'<div class="demo d-fx-visual-emboss"><b>UI</b><span>EMBOSSED</span></div>',
+  'fx-visual-inset':'<div class="demo d-fx-visual-inset"><section><b>42</b><span>SYSTEM LEVEL</span><i></i></section></div>',
+  'fx-visual-chromashadow':'<div class="demo d-fx-visual-chromashadow"><b>SHIFT</b><span>RGB SHADOW</span></div>',
+  'fx-visual-lens':'<div class="demo d-fx-visual-lens"><span>REFRACT REFRACT REFRACT</span><i></i><b>2×</b></div>',
+  'fx-visual-biolume':'<div class="demo d-fx-visual-biolume"><i></i><i></i><i></i><i></i><b>BIO / 04</b></div>',
 
   'fx-motion-morph':'<div class="demo d-fx-motion-morph"><button type="button" data-morph>Submit</button></div>',
   'fx-motion-snap':'<div class="demo d-fx-motion-snap"><span>DROP</span><i draggable="true"></i></div>',
@@ -914,7 +958,8 @@ const COMPARE_KEY='ui-wiki-compare';
 const readList=key=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}};
 const writeList=(key,list)=>{try{localStorage.setItem(key,JSON.stringify(list))}catch{}};
 const toggleList=(key,id,limit=30)=>{const list=readList(key),next=list.includes(id)?list.filter(item=>item!==id):[id,...list].slice(0,limit);writeList(key,next);return next};
-const layoutGroups=[
+const categoryGroups={
+'ui-layout':[
   {id:'foundations',name:'基础结构',start:'grid-layout'},
   {id:'navigation',name:'导航结构',start:'top-app-bar'},
   {id:'reading',name:'阅读与内容',start:'single-column-reading-flow'},
@@ -925,11 +970,65 @@ const layoutGroups=[
   {id:'spatial',name:'地图与空间',start:'map-sidebar-layout'},
   {id:'responsive',name:'响应式布局',start:'container-query-layout'},
   {id:'experimental',name:'实验性构图',start:'freeform-canvas-layout'}
-];
-const layoutGroupFor=term=>{
-  if(term.cat!=='ui-layout')return null;
-  const list=byCategory('ui-layout'),index=list.findIndex(item=>item.id===term.id);
-  return [...layoutGroups].reverse().find(group=>index>=list.findIndex(item=>item.id===group.start))||layoutGroups[0];
+],
+'ui-visual':[
+  {id:'materials',name:'材质与表面',demos:['glass','neu','clay','liquid','fx-visual-frost','fx-visual-metal','fx-visual-paper','fx-visual-gloss','fx-visual-border','fx-visual-shadow','fx-visual-acrylic','fx-visual-film','fx-visual-chrome','fx-visual-ceramic','fx-visual-velvet','fx-visual-carbon','fx-visual-plastic','fx-visual-emboss','fx-visual-inset']},
+  {id:'light-color',name:'光色与渐变',demos:['mesh','aurora','holographic','fx-visual-neon','fx-visual-fluid','fx-visual-caustics','fx-visual-lumagrid','fx-visual-volume','fx-visual-grain','fx-visual-biolume']},
+  {id:'visual-systems',name:'层次与视觉系统',demos:['layers','fx-visual-pixel','fx-visual-wire','fx-visual-meshglass','fx-visual-dither','fx-visual-scanline','fx-visual-radialglass','fx-visual-chromashadow','fx-visual-lens']}
+],
+'interaction':[
+  {id:'interaction-basics',name:'基础反馈',start:'micro-interaction',demos:['fx-layout-palette']},
+  {id:'click-feedback',name:'点击与触发',start:'button-squish'},
+  {id:'transitions',name:'转场与导航',start:'shared-element-transition'},
+  {id:'scroll',name:'滚动与视差',start:'scroll-parallax'},
+  {id:'drag',name:'拖拽与排序',start:'drag-reorder'},
+  {id:'gestures',name:'手势与触控',start:'swipe-actions'},
+  {id:'forms',name:'表单反馈',start:'floating-label-input'},
+  {id:'lists',name:'列表与集合',start:'list-insert-motion'},
+  {id:'states',name:'状态与容错',start:'optimistic-update-feedback',demos:['fx-layout-emptystate','fx-layout-errorrecovery']},
+  {id:'pointer',name:'指针与悬停',start:'custom-cursor'},
+  {id:'physics',name:'物理与空间',start:'gravity-drop'}
+],
+'graphic':[
+  {id:'graphic-basics',name:'基础构成',start:'visual-hierarchy'},
+  {id:'style',name:'风格语言',start:'de-stijl'},
+  {id:'retro',name:'复古与未来',start:'art-nouveau'},
+  {id:'print',name:'印刷与排版',start:'screen-print'},
+  {id:'photo',name:'摄影处理',start:'solarization'},
+  {id:'glitch',name:'故障与数字质感',start:'databending'},
+  {id:'collage',name:'拼贴与混合媒介',start:'digital-scrapbook'},
+  {id:'pattern',name:'纹样与装饰',start:'checkerboard-pattern'},
+  {id:'illustration',name:'插画语言',start:'flat-illustration'},
+  {id:'information',name:'信息图形',start:'infographic-poster'},
+  {id:'web-graphics',name:'网页图形',start:'web-brutalism-graphic'}
+],
+'cover':[
+  {id:'cover-basics',name:'基础封面',start:'minimal-cover'},
+  {id:'type-covers',name:'文字主导',start:'single-word-cover'},
+  {id:'photo-covers',name:'摄影主导',start:'portrait-closeup-cover'},
+  {id:'process-covers',name:'工艺与印刷',start:'dithered-image-cover'},
+  {id:'illustrated-covers',name:'插画主导',start:'flat-illustration-cover'},
+  {id:'geometric-covers',name:'几何构成',start:'concentric-circle-cover'},
+  {id:'material-covers',name:'材质与空间',start:'foil-stamped-cover'},
+  {id:'archive-covers',name:'档案与编辑',start:'library-card-cover'},
+  {id:'spatial-covers',name:'空间场景',start:'tunnel-perspective-cover'},
+  {id:'mood-covers',name:'氛围情绪',start:'obscured-mystery-cover'},
+  {id:'series-covers',name:'系列系统',start:'color-coded-series-cover'}
+],
+'color-type':[
+  {id:'color-basics',name:'色彩基础',start:'duotone'},
+  {id:'color-relations',name:'配色关系',start:'analogous-colors'},
+  {id:'typography',name:'字体与字形',start:'condensed-type'},
+  {id:'color-systems',name:'色彩系统',start:'tetradic-colors'},
+  {id:'value-chroma',name:'明度与纯度',start:'high-value-palette'}
+]
+};
+const categoryGroupFor=term=>{
+  const groups=categoryGroups[term.cat]||[];
+  const explicit=groups.find(group=>group.demos?.includes(term.demo));
+  if(explicit)return explicit;
+  const list=byCategory(term.cat),index=list.findIndex(item=>item.id===term.id);
+  return [...groups].reverse().find(group=>group.start&&index>=list.findIndex(item=>item.id===group.start))||groups[0]||null;
 };
 const demoMarkup = type => {
   const extraMarkup=getExtraDemoMarkup(type);if(extraMarkup)return extraMarkup;
@@ -990,14 +1089,15 @@ function shell(active=''){
   document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open')});
   mountCompareTray();
 }
-function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id),group=layoutGroupFor(term);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"${group?` data-layout-group="${group.id}"`:''}><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${group?`${getCategory(term.cat).name} · ${group.name}`:getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
-function mountLayoutGroups(){
+function termCard(term){const saved=readList(FAVORITES_KEY).includes(term.id),group=categoryGroupFor(term);return `<article class="term-card" data-filter="${term.name} ${term.en} ${term.tags.join(' ')}"${group?` data-category-group="${group.id}"`:''}><button class="term-favorite${saved?' is-saved':''}" data-favorite="${term.id}" type="button" aria-label="${saved?'取消收藏':'收藏'} ${term.name}" aria-pressed="${saved}">${saved?'★':'☆'}</button><div class="preview" tabindex="0" role="button" aria-label="预览 ${term.name}">${demoMarkup(term.demo)}</div><small>${group?`${getCategory(term.cat).name} · ${group.name}`:getCategory(term.cat).name}</small><h3><a class="term-card-link" href="${base}terms/${term.id}.html">${term.name}</a></h3><p>${term.en}</p><div class="tags">${term.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></article>`}
+function mountCategoryGroups(catId){
   const grid=document.querySelector('[data-terms]');if(!grid)return;
-  const bar=document.createElement('nav');bar.className='layout-groups';bar.setAttribute('aria-label','布局二级分组');
-  const counts=Object.fromEntries(layoutGroups.map(group=>[group.id,grid.querySelectorAll(`[data-layout-group="${group.id}"]`).length]));
-  bar.innerHTML=`<button class="active" type="button" data-layout-filter="all">全部 <b>${grid.children.length}</b></button>${layoutGroups.filter(group=>counts[group.id]).map(group=>`<button type="button" data-layout-filter="${group.id}">${group.name} <b>${counts[group.id]}</b></button>`).join('')}`;
+  const groups=categoryGroups[catId]||[];if(!groups.length)return;
+  const bar=document.createElement('nav');bar.className='layout-groups category-groups';bar.setAttribute('aria-label',`${getCategory(catId).name}二级分组`);
+  const counts=Object.fromEntries(groups.map(group=>[group.id,grid.querySelectorAll(`[data-category-group="${group.id}"]`).length]));
+  bar.innerHTML=`<button class="active" type="button" data-group-filter="all">全部 <b>${grid.children.length}</b></button>${groups.filter(group=>counts[group.id]).map(group=>`<button type="button" data-group-filter="${group.id}">${group.name} <b>${counts[group.id]}</b></button>`).join('')}`;
   grid.before(bar);
-  bar.addEventListener('click',event=>{const button=event.target.closest('[data-layout-filter]');if(!button)return;bar.querySelectorAll('button').forEach(item=>item.classList.toggle('active',item===button));grid.querySelectorAll('.term-card').forEach(card=>card.hidden=button.dataset.layoutFilter!=='all'&&card.dataset.layoutGroup!==button.dataset.layoutFilter)});
+  bar.addEventListener('click',event=>{const button=event.target.closest('[data-group-filter]');if(!button)return;bar.querySelectorAll('button').forEach(item=>item.classList.toggle('active',item===button));grid.querySelectorAll('.term-card').forEach(card=>card.hidden=button.dataset.groupFilter!=='all'&&card.dataset.categoryGroup!==button.dataset.groupFilter)});
 }
 function mountCompareTray(){
   if(document.querySelector('.compare-tray'))return;
@@ -1075,6 +1175,12 @@ function mountSourceLab(term){
   panel.querySelectorAll('[data-copy-source]').forEach(button=>button.addEventListener('click',async()=>{const source=current(),kind=button.dataset.copySource,text=kind==='html'?source.html:kind==='css'?source.css:standalonePage(term.name,source.html,source.css);await copyText(text);notify(`✓ ${kind==='page'?'完整 HTML 页面':kind.toUpperCase()} 已复制`)}));
   panel.querySelector('[data-download-source]').addEventListener('click',()=>{const source=current(),blob=new Blob([standalonePage(term.name,source.html,source.css)],{type:'text/html'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`${term.id}-ui-wiki.html`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('✓ 可独立运行的 HTML 已下载')});
 }
+function balanceTermLayout(){
+  const details=document.querySelector('.details'),tags=document.querySelector('[data-tags]');
+  if(!details||!tags)return;
+  details.classList.add('term-knowledge');
+  tags.insertAdjacentElement('afterend',details);
+}
 if(page==='home'){
   shell();
   document.querySelector('.stat b').textContent=terms.length;
@@ -1090,7 +1196,7 @@ if(page==='home'){
   document.querySelector('[data-intro]').textContent=cat.intro;
   document.querySelector('[data-count]').textContent=byCategory(cat.id).length;
   document.querySelector('[data-terms]').innerHTML=byCategory(cat.id).map(termCard).join('');
-  if(cat.id==='ui-layout')mountLayoutGroups();
+  mountCategoryGroups(cat.id);
 }else if(page==='term'){
   const term=getTerm(document.body.dataset.id),cat=getCategory(term.cat); shell(cat.id);
   document.title=`${term.name} — 设计效果百科`;
@@ -1112,6 +1218,7 @@ if(page==='home'){
   mountTermActions(term);
   mountConfigurator(term);
   mountSourceLab(term);
+  balanceTermLayout();
 }
 
 document.addEventListener('click',e=>{

@@ -1,0 +1,18 @@
+/* Shared card/detail visual models: the same effect keeps the same material and color logic at both scales. */
+.preview .d-hover i,.stage .d-hover i{background:linear-gradient(135deg,var(--demo-color),var(--demo-color-2));box-shadow:0 var(--demo-intensity) calc(var(--demo-intensity)*2) #0007}
+.preview .d-magnetic button,.stage .d-magnetic button{background:linear-gradient(135deg,var(--demo-color),var(--demo-color-2));color:#071020;border-color:#ffffff35}
+.preview .d-accordion button,.stage .d-accordion button{background:var(--demo-color);color:#071020}.preview .d-accordion p,.stage .d-accordion p{color:#b8c5e3}
+.preview .d-skeleton i,.stage .d-skeleton i{background:linear-gradient(90deg,var(--demo-color) 20%,var(--demo-color-2) 40%,var(--demo-color) 60%);background-size:300%}
+.preview .d-minimal .poster,.stage .d-minimal .poster{background:var(--demo-color);color:var(--demo-color-2)}
+.preview .d-typecover .poster,.stage .d-typecover .poster{background:var(--demo-color);color:var(--demo-color-2)}
+.preview .d-imagecover .poster,.stage .d-imagecover .poster{background:linear-gradient(135deg,var(--demo-color),#08101f);color:var(--demo-color-2)}
+.preview .d-imagecover i,.stage .d-imagecover i{background:var(--demo-color-2)}
+.preview .d-diagonal .poster,.stage .d-diagonal .poster{background:linear-gradient(125deg,var(--demo-color) 49%,var(--demo-color-2) 50%);color:#071020}
+.preview .d-framed .poster,.stage .d-framed .poster{background:var(--demo-color);color:var(--demo-color-2);border-color:var(--demo-color-2)}
+.preview .d-duotone,.stage .d-duotone{mix-blend-mode:normal;background:linear-gradient(135deg,var(--demo-color) 50%,var(--demo-color-2) 50%)}
+.preview .d-mono,.stage .d-mono{background:linear-gradient(135deg,var(--demo-color),color-mix(in srgb,var(--demo-color),var(--demo-color-2) 35%),var(--demo-color-2))}
+.preview .d-complementary,.stage .d-complementary{background:#0e1629}.preview .d-outline,.stage .d-outline{background:var(--demo-color-2)}
+
+/* Preview controls live in separate corners and have different visual weight. */
+.term-card .preview:after{left:10px;right:auto;top:10px;padding:4px 7px;border:1px solid rgba(139,162,255,.24);border-radius:999px;background:rgba(7,16,32,.82);color:#cdd7ff;letter-spacing:.08em;box-shadow:0 4px 14px #0005;backdrop-filter:blur(8px)}
+.term-favorite{right:10px;top:10px;z-index:5;width:32px;height:32px;border-color:rgba(255,255,255,.14);background:rgba(7,16,32,.86);box-shadow:0 5px 16px #0005;backdrop-filter:blur(8px)}
