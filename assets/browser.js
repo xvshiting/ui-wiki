@@ -286,6 +286,8 @@ const demoMarkup = type => {
 
 function shell(active=''){
   document.querySelector('[data-nav]').innerHTML=categories.map(c=>`<a class="${active===c.id?'active':''}" href="${base}categories/${c.id}.html"><span>${c.name}</span><em>${byCategory(c.id).length}</em></a>`).join('');
+  const sidebarFoot=document.querySelector('.sidebar-foot');
+  if(sidebarFoot&&!document.querySelector('.github-star'))sidebarFoot.insertAdjacentHTML('beforebegin','<a class="github-star" href="https://github.com/xvshiting/ui-wiki" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 上给设计效果百科点 Star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2.24c-3.22.7-3.9-1.37-3.9-1.37-.52-1.34-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.57-.29-5.27-1.28-5.27-5.69 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.94 10.94 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.82 1.19 3.08 0 4.42-2.71 5.39-5.29 5.68.42.36.79 1.07.79 2.16v3.2c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg><span><strong>Star on GitHub</strong><small>喜欢这个项目？支持一下</small></span><b aria-hidden="true">★</b></a>');
   const input=document.querySelector('[data-search]');
   const results=document.createElement('div'); results.className='search-results'; results.setAttribute('aria-live','polite');
   input?.closest('.search-wrap').appendChild(results);
