@@ -129,25 +129,46 @@ function mountSequenceNav(term){
   nav.innerHTML=`${previous?`<a href="../terms/${previous.id}.html"><small>← 上一个</small><b>${previous.name}</b></a>`:'<span></span>'}${next?`<a class="next" href="../terms/${next.id}.html"><small>下一个 →</small><b>${next.name}</b></a>`:'<span></span>'}`;
   document.querySelector('[data-back]').insertAdjacentElement('afterend',nav);
 }
+const formatDeclarations=style=>Array.from(style).map(name=>`  ${name}: ${style.getPropertyValue(name).trim()}${style.getPropertyPriority(name)?' !important':''};`).join('\n');
+const formatStyleRule=(rule,selectors=rule.selectorText)=>`${selectors} {\n${formatDeclarations(rule.style)}\n}`;
 function relatedCSS(term){
-  try{
-    const token=`d-${term.demo}`;
-    const rules=[...document.styleSheets].flatMap(sheet=>[...sheet.cssRules]).filter(rule=>rule.cssText?.includes(token)||rule.selectorText==='.stage .demo').map(rule=>rule.cssText);
-    if(rules.length)return rules.join('\n\n');
-  }catch{}
-  return `.d-${term.demo} {\n  --demo-color: #53d7d0;\n  --demo-color-2: #ff8066;\n}`;
+  const token=`d-${term.demo}`,keyframes=new Map(),matched=[];
+  const walk=rules=>{
+    const found=[];
+    for(const rule of rules){
+      if(rule.type===7||/^@(?:-webkit-)?keyframes/i.test(rule.cssText)){const name=rule.name||rule.cssText.match(/keyframes\s+([^\s{]+)/i)?.[1];if(name)keyframes.set(name,rule.cssText);continue}
+      if(rule.selectorText){
+        const selectors=rule.selectorText.split(',').map(item=>item.trim()).filter(item=>item.includes(token)||item==='.stage .demo'||item==='.stage .demo *'||item==='.demo');
+        if(selectors.length)found.push(formatStyleRule(rule,selectors.join(',\n')));
+        continue;
+      }
+      if(rule.cssRules){const nested=walk(rule.cssRules);if(nested.length){const header=rule.cssText.slice(0,rule.cssText.indexOf('{')).trim();found.push(`${header} {\n${nested.join('\n\n')}\n}`)}}
+    }
+    return found;
+  };
+  for(const sheet of document.styleSheets){try{matched.push(...walk(sheet.cssRules))}catch{}}
+  const base=`.stage {\n  min-height: 360px;\n  display: grid;\n  place-items: center;\n  overflow: hidden;\n  background: #0b1625;\n}\n\n.demo {\n  --demo-color: #53d7d0;\n  --demo-color-2: #ff8066;\n  --demo-radius: 16px;\n  --demo-gap: 8px;\n  --demo-scale: 1;\n  --demo-speed: 1.4s;\n  --demo-intensity: 16px;\n  --demo-rotate: 0deg;\n  width: min(82vw, 680px);\n  height: 300px;\n  position: relative;\n}`;
+  const selected=matched.join('\n\n'),animations=[...keyframes].filter(([name])=>new RegExp(`(?:animation(?:-name)?[^;}]*)\\b${name}\\b`).test(selected)).map(([,css])=>css);
+  return [base,selected,...animations].filter(Boolean).join('\n\n');
 }
+const copyText=async text=>{try{await navigator.clipboard.writeText(text)}catch{const area=document.createElement('textarea');area.value=text;document.body.append(area);area.select();document.execCommand('copy');area.remove()}};
+const standalonePage=(title,html,css)=>{const holder=document.createElement('div');holder.innerHTML=html;const sourceDemo=holder.querySelector('.demo'),liveDemo=document.querySelector('.stage .demo');if(sourceDemo&&liveDemo?.style.cssText)sourceDemo.style.cssText+=liveDemo.style.cssText;return `<!doctype html>\n<html lang="zh-CN">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <title>${title} · UI Wiki</title>\n  <style>\n    * { box-sizing: border-box; }\n    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #07111f; font-family: system-ui, sans-serif; }\n${css}\n  </style>\n</head>\n<body>\n  <main class="stage">\n${holder.innerHTML}\n  </main>\n</body>\n</html>`};
 function mountSourceLab(term){
+  if(!document.querySelector('link[data-source-lab-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=`${base}assets/source-lab.css`;link.dataset.sourceLabStyle='';document.head.append(link)}
   const panel=document.createElement('section');panel.className='source-lab';
   const originalHTML=demoMarkup(term.demo),originalCSS=relatedCSS(term);
-  panel.innerHTML=`<div class="source-head"><div><span>SOURCE PLAYGROUND</span><h3>查看并修改源代码</h3></div><div class="source-actions"><button type="button" data-reset-code>恢复</button><button class="run-code" type="button" data-run-code>运行修改</button></div></div><div class="code-tabs" role="tablist"><button class="active" type="button" data-code-tab="html">HTML</button><button type="button" data-code-tab="css">CSS</button></div><div class="code-editor active" data-code-panel="html"><textarea spellcheck="false" aria-label="HTML 源代码"></textarea></div><div class="code-editor" data-code-panel="css"><textarea spellcheck="false" aria-label="CSS 源代码"></textarea></div><p class="code-status" aria-live="polite">修改代码后点击“运行修改”，效果会在上方预览中更新。</p>`;
+  panel.innerHTML=`<div class="source-head"><div><span>SOURCE PLAYGROUND</span><h3>完整源码 · 可修改 · 可导出</h3></div><div class="source-actions"><button type="button" data-reset-code>恢复</button><button class="run-code" type="button" data-run-code>运行修改</button></div></div><div class="source-export" aria-label="源码导出"><button type="button" data-copy-source="html">复制 HTML</button><button type="button" data-copy-source="css">复制 CSS</button><button type="button" data-copy-source="page">复制完整页面</button><button type="button" data-download-source>下载 HTML</button></div><div class="code-tabs" role="tablist" aria-label="源码类型"><button class="active" type="button" role="tab" aria-selected="true" data-code-tab="html">HTML</button><button type="button" role="tab" aria-selected="false" data-code-tab="css">CSS · ${originalCSS.split('\n').length} 行</button></div><div class="code-editor active" data-code-panel="html"><textarea spellcheck="false" aria-label="HTML 源代码"></textarea></div><div class="code-editor" data-code-panel="css"><textarea spellcheck="false" aria-label="CSS 源代码"></textarea></div><p class="code-status" aria-live="polite">已包含共享变量、效果规则和相关动画关键帧。修改后点击“运行修改”。</p>`;
   panel.querySelector('[data-code-panel="html"] textarea').value=originalHTML;
   panel.querySelector('[data-code-panel="css"] textarea').value=originalCSS;
   document.querySelector('.details').insertAdjacentElement('beforebegin',panel);
-  panel.querySelectorAll('[data-code-tab]').forEach(button=>button.addEventListener('click',()=>{panel.querySelectorAll('[data-code-tab],.code-editor').forEach(el=>el.classList.remove('active'));button.classList.add('active');panel.querySelector(`[data-code-panel="${button.dataset.codeTab}"]`).classList.add('active')}));
+  panel.querySelectorAll('[data-code-tab]').forEach(button=>button.addEventListener('click',()=>{panel.querySelectorAll('[data-code-tab],.code-editor').forEach(el=>el.classList.remove('active'));panel.querySelectorAll('[data-code-tab]').forEach(tab=>tab.setAttribute('aria-selected',tab===button));button.classList.add('active');panel.querySelector(`[data-code-panel="${button.dataset.codeTab}"]`).classList.add('active')}));
+  const current=()=>({html:panel.querySelector('[data-code-panel="html"] textarea').value,css:panel.querySelector('[data-code-panel="css"] textarea').value});
+  const notify=message=>{panel.querySelector('.code-status').textContent=message;setTimeout(()=>panel.querySelector('.code-status').textContent='已包含共享变量、效果规则和相关动画关键帧。修改后点击“运行修改”。',1800)};
   const render=()=>{const html=panel.querySelector('[data-code-panel="html"] textarea').value,css=panel.querySelector('[data-code-panel="css"] textarea').value;document.querySelector('[data-demo]').innerHTML=html;let style=document.getElementById('live-demo-style');if(!style){style=document.createElement('style');style.id='live-demo-style';document.head.append(style)}style.textContent=css;panel.querySelector('.code-status').textContent='✓ 修改已应用到上方预览';setTimeout(()=>panel.querySelector('.code-status').textContent='修改代码后点击“运行修改”，效果会在上方预览中更新。',1800)};
   panel.querySelector('[data-run-code]').addEventListener('click',render);
   panel.querySelector('[data-reset-code]').addEventListener('click',()=>{panel.querySelector('[data-code-panel="html"] textarea').value=originalHTML;panel.querySelector('[data-code-panel="css"] textarea').value=originalCSS;render()});
+  panel.querySelectorAll('[data-copy-source]').forEach(button=>button.addEventListener('click',async()=>{const source=current(),kind=button.dataset.copySource,text=kind==='html'?source.html:kind==='css'?source.css:standalonePage(term.name,source.html,source.css);await copyText(text);notify(`✓ ${kind==='page'?'完整 HTML 页面':kind.toUpperCase()} 已复制`)}));
+  panel.querySelector('[data-download-source]').addEventListener('click',()=>{const source=current(),blob=new Blob([standalonePage(term.name,source.html,source.css)],{type:'text/html'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`${term.id}-ui-wiki.html`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('✓ 可独立运行的 HTML 已下载')});
 }
 if(page==='home'){
   shell();
