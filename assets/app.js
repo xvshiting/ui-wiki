@@ -129,6 +129,8 @@ if(page==='home'){
   document.querySelector('.stat b').textContent=terms.length;
   document.querySelector('[data-categories]').innerHTML=categories.map(c=>`<a class="category-card" style="--card-color:${c.color}" href="categories/${c.id}.html"><small>${c.en}</small><h3>${c.name}</h3><p>${c.intro}</p><span class="card-count">${byCategory(c.id).length} EFFECTS →</span></a>`).join('');
   document.querySelector('[data-latest]').innerHTML=terms.slice(0,6).map(termCard).join('');
+  const recent=readList(RECENT_KEY).map(id=>getTerm(id)).filter(Boolean).slice(0,6);
+  if(recent.length){const section=document.createElement('section');section.className='section recent-section';section.innerHTML=`<div class="section-head"><div><div class="eyebrow">YOUR HISTORY</div><h2>最近浏览</h2></div><p>仅保存在当前浏览器</p></div><div class="term-grid">${recent.map(termCard).join('')}</div>`;document.querySelector('.main').append(section)}
 }else if(page==='category'){
   const cat=getCategory(document.body.dataset.id); shell(cat.id);
   document.title=`${cat.name} — 设计效果百科`;
